@@ -10,8 +10,14 @@ using System.Threading.Tasks;
 namespace BrowserStackMobileAppTests
 {
     [TestFixture("parallel", "pixel")]
+    [TestFixture("parallel", "pixel-2")]
+    [TestFixture("parallel", "pixel-3")]
     [TestFixture("parallel", "galaxy-s6")]
     [TestFixture("parallel", "galaxy-s7")]
+    [TestFixture("parallel", "galaxy-s8")]
+    [TestFixture("parallel", "galaxy-s9")]
+    [TestFixture("parallel", "galaxy-note8")]
+    [TestFixture("parallel", "galaxy-note9")]
     [Parallelizable(ParallelScope.Fixtures)]
     public class WhenLaunchingTheApp : BrowserStackIntegration
     {
