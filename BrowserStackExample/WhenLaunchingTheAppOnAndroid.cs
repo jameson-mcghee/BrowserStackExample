@@ -18,10 +18,13 @@ namespace BrowserStackMobileAppTests
     [TestFixture("parallel", "galaxy-s9")]
     [TestFixture("parallel", "galaxy-note8")]
     [TestFixture("parallel", "galaxy-note9")]
+    [TestFixture("parallel", "galaxy-note4")]
+    [TestFixture("parallel", "nexus-9")]
+    [TestFixture("parallel", "galaxy-tabs4")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenLaunchingTheApp : BrowserStackIntegration
+    public class WhenLaunchingTheAppOnAndroid : BrowserStackIntegration
     {
-        public WhenLaunchingTheApp(string profile, string device) : base(profile, device){}
+        public WhenLaunchingTheAppOnAndroid(string profile, string device) : base(profile, device){}
 
         [Test]
         public void TheUserCanAccessTheHomePage()

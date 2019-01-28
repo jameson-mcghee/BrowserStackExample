@@ -71,7 +71,8 @@
     <Compile Include="BrowserStackIntegration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingleTest.cs" />
-    <Compile Include="WhenLaunchingTheApp.cs" />
+    <Compile Include="WhenLaunchingTheAppOnAndroid.cs" />
+    <Compile Include="WhenLaunchingTheAppOnApple.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
