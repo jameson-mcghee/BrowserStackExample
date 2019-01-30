@@ -25,9 +25,9 @@ namespace BrowserStackMobileAppTests
         [Test]
         public void TheUserCanAccessTheHomePage()
         {
-            //var viewElements = driver.FindElements(By.ClassName("android.widget.FrameLayout"));
-            //Thread.Sleep(TimeSpan.FromSeconds(3));
-            //Assert.IsTrue(viewElements.Any());
+            var viewElements = driver.FindElements(By.ClassName("XCUIElementTypeApplication"));
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            Assert.IsTrue(viewElements.Any());
         }
 
     }

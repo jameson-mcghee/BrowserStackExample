@@ -50,3 +50,4 @@ C:\Users\JMcghee\source\repos\BrowserStackExample\BrowserStackExample\obj\Debug\
 C:\Users\JMcghee\source\repos\BrowserStackExample\BrowserStackExample\obj\Debug\BrowserStackMobileAppTests.csproj.CopyComplete
 C:\Users\JMcghee\source\repos\BrowserStackExample\BrowserStackExample\obj\Debug\BrowserStackExample.dll
 C:\Users\JMcghee\source\repos\BrowserStackExample\BrowserStackExample\obj\Debug\BrowserStackExample.pdb
+C:\Users\JMcghee\source\repos\BrowserStackExample\BrowserStackExample\bin\Debug\Newtonsoft.Json.pdb
