@@ -3,9 +3,6 @@ using OpenQA.Selenium;
 using System;
 using System.Linq;
 using System.Threading;
-using System.Text;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BrowserStackMobileAppTests
 {

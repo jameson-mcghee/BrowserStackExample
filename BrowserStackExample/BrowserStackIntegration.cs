@@ -31,8 +31,8 @@ namespace BrowserStackMobileAppTests
 
             DesiredCapabilities capability = new DesiredCapabilities();
 
-            caps.AllKeys.ForEach(key=>capability.SetCapability(key, caps[key]));
-            devices.AllKeys.ForEach(key=>capability.SetCapability(key, devices[key]));
+            caps.AllKeys.ForEach(key => capability.SetCapability(key, caps[key]));
+            devices.AllKeys.ForEach(key => capability.SetCapability(key, devices[key]));
 
             var userName = Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME") ??
                            ConfigurationManager.AppSettings.Get("user");
