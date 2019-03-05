@@ -6,13 +6,15 @@ using BrowserStack;
 using Castle.Core.Internal;
 using NUnit.Framework;
 using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Appium.iOS;
 using OpenQA.Selenium.Remote;
 
 namespace BrowserStackMobileAppTests
 {
     public class BrowserStackIntegration
     {
-        protected AndroidDriver<AndroidElement> driver;
+        protected IOSDriver<IOSElement> iosDriver;
+        protected AndroidDriver<AndroidElement> androidDriver;
         protected string profile;
         protected string device;
         private Local browserStackLocal;
@@ -31,8 +33,8 @@ namespace BrowserStackMobileAppTests
 
             DesiredCapabilities capability = new DesiredCapabilities();
 
-            caps.AllKeys.ForEach(key => capability.SetCapability(key, caps[key]));
-            devices.AllKeys.ForEach(key => capability.SetCapability(key, devices[key]));
+            Array.ForEach(caps.AllKeys, key => capability.SetCapability(key, caps[key]));
+            Array.ForEach(devices.AllKeys, key => capability.SetCapability(key, devices[key]));
 
             var userName = Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME") ??
                            ConfigurationManager.AppSettings.Get("user");
@@ -54,13 +56,15 @@ namespace BrowserStackMobileAppTests
                     {new KeyValuePair<string, string>("key", accessKey)};
                 browserStackLocal.start(bsLocalArgs);
             }
-            driver = new AndroidDriver<AndroidElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), capability);
+            //androidDriver = new AndroidDriver<AndroidElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), capability);
+            iosDriver = new IOSDriver<IOSElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), capability);
         }
 
         [TearDown]
         public void CleanUp()
         {
-            driver.Quit();
+            //androidDriver.Quit();
+            iosDriver.Quit();
             if (browserStackLocal != null)
             {
                 browserStackLocal.stop();

@@ -22,7 +22,7 @@ namespace BrowserStackMobileAppTests
         [Test]
         public void TheUserCanAccessTheHomePage()
         {
-            var viewElements = driver.FindElements(By.ClassName("XCUIElementTypeApplication"));
+            var viewElements = androidDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
             Thread.Sleep(TimeSpan.FromSeconds(3));
             Assert.IsTrue(viewElements.Any());
         }

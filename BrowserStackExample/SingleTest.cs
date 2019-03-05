@@ -9,16 +9,26 @@ using OpenQA.Selenium.Support.UI;
 
 namespace BrowserStackMobileAppTests
 {
-    [TestFixture("single", "galaxy-s6")]
+    //[TestFixture("single", "galaxy-s6")]
+    [TestFixture("single", "iphone-8")]
     public class SingleTest : BrowserStackIntegration
     {
-        public SingleTest(string profile, string device) : base(profile, device){}
+        ////Android
+        //public SingleTest(string profile, string device) : base(profile, device) { }
+        //iOS
+        public SingleTest(string profile, string device) : base(profile, device) { }
 
         [Test]
         public void SimpleTest()
         {
 
-            var viewElements = driver.FindElements(By.ClassName("android.widget.FrameLayout"));
+            ////Android
+            //var viewElements = driver.FindElements(By.Id("android:id/content"));
+            //Thread.Sleep(TimeSpan.FromSeconds(3));
+            //Assert.IsTrue(viewElements.Any());
+
+            //iOS
+            var viewElements = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
             Thread.Sleep(TimeSpan.FromSeconds(3));
             Assert.IsTrue(viewElements.Any());
 

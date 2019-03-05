@@ -3,6 +3,9 @@ using OpenQA.Selenium;
 using System;
 using System.Linq;
 using System.Threading;
+using OpenQA.Selenium.Appium.Android;
+using OpenQA.Selenium.Remote;
+using System.Collections.Generic;
 
 namespace BrowserStackMobileAppTests
 {
@@ -26,9 +29,21 @@ namespace BrowserStackMobileAppTests
         [Test]
         public void TheUserCanAccessTheHomePage()
         {
-            var viewElements = driver.FindElements(By.ClassName("android.widget.ImageView"));
+            var homeElement = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
             Thread.Sleep(TimeSpan.FromSeconds(3));
-            Assert.IsTrue(viewElements.Any());
+            Assert.IsTrue(homeElement.Any());
+            var tryme = androidDriver.FindElement(By.CssSelector("android.widget.TextView"));
+            //((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", tryme);
+
+            //List<IWebElement> anarrayorlist = driver.FindElements(By.CssSelector("android.view.ViewGroup > android.widget.TextView"));
+            //int numberinlist = anarrayorlist.Count;
+
+            //// Get specific number item
+            //string itemno = anarrayorlist[2].Text;
+
+
+            var adElement = androidDriver.FindElements(By.Id("aw0"));
+            Assert.IsTrue(adElement.Any());
         }
 
     }
