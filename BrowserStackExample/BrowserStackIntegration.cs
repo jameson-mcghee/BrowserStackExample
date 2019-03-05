@@ -28,13 +28,27 @@ namespace BrowserStackMobileAppTests
         [SetUp]
         public void Init()
         {
-            NameValueCollection caps = ConfigurationManager.GetSection("capabilities/"+profile) as NameValueCollection;
-            NameValueCollection devices = ConfigurationManager.GetSection("environments/"+device) as NameValueCollection;
+            var androidCapabilities = GetAppCapabilities("androidCapabilities", "androidEnvironments");
+            if (androidCapabilities != null)
+                androidDriver = new AndroidDriver<AndroidElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), androidCapabilities);
+
+            var iosCapabilities = GetAppCapabilities("iosCapabilities", "iosEnvironments");
+            if (iosCapabilities != null)
+                iosDriver = new IOSDriver<IOSElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), iosCapabilities);
+
+        }
+
+        public DesiredCapabilities GetAppCapabilities(string capabilitiesSectionName, string environmentsSectionName)
+        {
+            NameValueCollection capabilities = ConfigurationManager.GetSection($"{capabilitiesSectionName}/{profile}") as NameValueCollection;
+            NameValueCollection environments = ConfigurationManager.GetSection($"{environmentsSectionName}/{device}") as NameValueCollection;
+
+            if (environments == null) return null;
 
             DesiredCapabilities capability = new DesiredCapabilities();
 
-            Array.ForEach(caps.AllKeys, key => capability.SetCapability(key, caps[key]));
-            Array.ForEach(devices.AllKeys, key => capability.SetCapability(key, devices[key]));
+            Array.ForEach(capabilities.AllKeys, key => capability.SetCapability(key, capabilities[key]));
+            Array.ForEach(environments.AllKeys, key => capability.SetCapability(key, environments[key]));
 
             var userName = Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME") ??
                            ConfigurationManager.AppSettings.Get("user");
@@ -56,15 +70,17 @@ namespace BrowserStackMobileAppTests
                     {new KeyValuePair<string, string>("key", accessKey)};
                 browserStackLocal.start(bsLocalArgs);
             }
-            //androidDriver = new AndroidDriver<AndroidElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), capability);
-            iosDriver = new IOSDriver<IOSElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), capability);
+
+            return capability;
         }
 
         [TearDown]
         public void CleanUp()
         {
-            //androidDriver.Quit();
-            iosDriver.Quit();
+            if (androidDriver != null)
+                androidDriver.Quit();
+            if (iosDriver != null)
+                iosDriver.Quit();
             if (browserStackLocal != null)
             {
                 browserStackLocal.stop();
