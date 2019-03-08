@@ -3,15 +3,16 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Threading;
 using System.Linq;
+using BrowserStackIntegration;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Support.UI;
 
-namespace BrowserStackMobileAppTests
+namespace MobileAppTests
 {
     //[TestFixture("single", "galaxy-s6")]
     [TestFixture("single", "iphone-8")]
-    public class SingleTest : BrowserStackIntegration
+    public class SingleTest : BrowserStackIntegrationImplementation
     {
         ////Android
         //public SingleTest(string profile, string device) : base(profile, device) { }

@@ -4,10 +4,11 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BrowserStackIntegration;
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
 
-namespace BrowserStackMobileAppTests
+namespace MobileAppTests
 {
     //[TestFixture("parallel", "iphone-7")] //Device is running iOS v10
     //[TestFixture("parallel", "iphone-7-plus")] //Device is running iOS v10
@@ -18,18 +19,18 @@ namespace BrowserStackMobileAppTests
     [TestFixture("parallel", "ipad-pro")]
     [TestFixture("parallel", "ipad-5th")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenLaunchingTheAppOnApple : BrowserStackIntegration
+    public class WhenLaunchingTheAppOniOS : BrowserStackIntegrationImplementation
     {
-        public WhenLaunchingTheAppOnApple(string profile, string device) : base(profile, device) { }
+        public WhenLaunchingTheAppOniOS(string profile, string device) : base(profile, device) { }
 
         [Test]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TheUserCanAccessTheHomePage()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            var viewElements = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
+            var iosHomeElement = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
             Thread.Sleep(TimeSpan.FromSeconds(3));
-            Assert.IsTrue(viewElements.Any());
+            Assert.IsTrue(iosHomeElement.Any());
         }
 
     }

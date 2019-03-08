@@ -8,17 +8,17 @@ using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.iOS;
 using OpenQA.Selenium.Remote;
 
-namespace BrowserStackMobileAppTests
+namespace BrowserStackIntegration
 {
-    public class BrowserStackIntegration
+    public class BrowserStackIntegrationImplementation
     {
-        protected IOSDriver<IOSElement> iosDriver;
-        protected AndroidDriver<AndroidElement> androidDriver;
+        public IOSDriver<IOSElement> iosDriver;
+        public AndroidDriver<AndroidElement> androidDriver;
         protected string profile;
         protected string device;
         private Local browserStackLocal;
 
-        public BrowserStackIntegration(string profile, string device)
+        public BrowserStackIntegrationImplementation(string profile, string device)
         {
             this.profile = profile;
             this.device = device;

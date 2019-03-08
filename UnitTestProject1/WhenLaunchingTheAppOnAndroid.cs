@@ -4,12 +4,13 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BrowserStackIntegration;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
 
 
-namespace BrowserStackMobileAppTests
+namespace MobileAppTests
 {
     [TestFixture("parallel", "pixel")]
     [TestFixture("parallel", "pixel-2")]
@@ -24,7 +25,7 @@ namespace BrowserStackMobileAppTests
     [TestFixture("parallel", "nexus-9")]
     [TestFixture("parallel", "galaxy-tabs4")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenLaunchingTheAppOnAndroid : BrowserStackIntegration
+    public class WhenLaunchingTheAppOnAndroid : BrowserStackIntegrationImplementation
     {
         public WhenLaunchingTheAppOnAndroid(string profile, string device) : base(profile, device){}
 
@@ -33,9 +34,9 @@ namespace BrowserStackMobileAppTests
         public async Task TheUserCanAccessTheHomePage()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            var homeElement = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
+            var androidHomeElement = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
             Thread.Sleep(TimeSpan.FromSeconds(3));
-            Assert.IsTrue(homeElement.Any());
+            Assert.IsTrue(androidHomeElement.Any());
             //var tryme = androidDriver.FindElement(By.CssSelector("android.widget.TextView"));
             ////((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", tryme);
 
