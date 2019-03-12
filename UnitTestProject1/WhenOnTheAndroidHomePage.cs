@@ -24,79 +24,28 @@ namespace MobileAppTests
     public class WhenOnTheAndroidHomePage : BrowserStackIntegrationImplementation
     {
         public WhenOnTheAndroidHomePage(string profile, string device) : base(profile, device) { }
-        private IWebDriver webDriver;
-        private bool acceptNextAlert = true;
 
         //[Test]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TheUserCanAccessTheHomePage()
 #pragma warning restore CS1998
         {
-            var androidHomeElement = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            Assert.IsTrue(androidHomeElement.Any());
+            var mainClassElement = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
             for (int second = 0; ; second++)
             {
-                if (second >= 60) Assert.Fail("timeout");
+                if (second >= 15) Assert.Fail("timeout");
                 try
                 {
-                    if (IsElementPresent(By.Id("com.android.packageinstaller:id/permission_allow_button"))) break;
+                    Assert.IsTrue(mainClassElement.Any()); break;
                 }
                 catch (Exception)
-                { }
-                Thread.Sleep(1000);
-            }
-            webDriver.FindElement(By.Id("com.android.packageinstaller:id/permission_allow_button")).Click();
-           
-
-        }
-        private bool IsElementPresent(By by)
-        {
-            try
-            {
-                webDriver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
-        private bool IsAlertPresent()
-        {
-            try
-            {
-                webDriver.SwitchTo().Alert();
-                return true;
-            }
-            catch (NoAlertPresentException)
-            {
-                return false;
-            }
-        }
-
-        private string CloseAlertAndGetItsText()
-        {
-            try
-            {
-                IAlert alert = webDriver.SwitchTo().Alert();
-                string alertText = alert.Text;
-                if (acceptNextAlert)
                 {
-                    alert.Accept();
                 }
-                else
-                {
-                    alert.Dismiss();
-                }
-                return alertText;
+                Thread.Sleep(TimeSpan.FromSeconds(3));
             }
-            finally
-            {
-                acceptNextAlert = true;
-            }
-        }
 
+
+        }
+        
     }
 }
