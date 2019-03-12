@@ -76,11 +76,14 @@
   <ItemGroup>
     <Compile Include="SingleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WhenOnTheAndroidHomePage.cs" />
     <Compile Include="WhenLaunchingTheAppOnAndroid.cs" />
     <Compile Include="WhenLaunchingTheAppOniOS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

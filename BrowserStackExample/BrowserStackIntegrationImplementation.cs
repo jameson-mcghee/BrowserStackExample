@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using BrowserStack;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.iOS;
 using OpenQA.Selenium.Remote;
@@ -17,6 +18,7 @@ namespace BrowserStackIntegration
         protected string profile;
         protected string device;
         private Local browserStackLocal;
+        public IWebDriver webDriver;
 
         public BrowserStackIntegrationImplementation(string profile, string device)
         {
@@ -34,7 +36,7 @@ namespace BrowserStackIntegration
             var iosCapabilities = GetAppCapabilities("iosCapabilities", "iosEnvironments");
             if (iosCapabilities != null)
                 iosDriver = new IOSDriver<IOSElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), iosCapabilities);
-
+                    
         }
 
         public DesiredCapabilities GetAppCapabilities(string capabilitiesSectionName, string environmentsSectionName)
@@ -56,6 +58,13 @@ namespace BrowserStackIntegration
 
             capability.SetCapability("browserstack.user", userName);
             capability.SetCapability("browserstack.key", accessKey);
+            capability.SetCapability("autoGrantPermissions", true);
+            capability.SetCapability("autoAcceptAlerts", true);
+            capability.SetCapability("browserstack.networkLogs", true);
+            capability.SetCapability("browserstack.seleniumLogs", true);
+            capability.SetCapability("browserstack.deviceLogs", true);
+            capability.SetCapability("browserstack.appiumLogs", true);
+
 
             var appId = Environment.GetEnvironmentVariable("BROWSERSTACK_APP_ID");
             if (appId != null)

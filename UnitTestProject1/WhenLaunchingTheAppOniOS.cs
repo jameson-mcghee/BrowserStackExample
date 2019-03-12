@@ -26,12 +26,23 @@ namespace MobileAppTests
         [Test]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TheUserCanAccessTheHomePage()
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+#pragma warning restore CS1998
         {
-            var iosHomeElement = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            Assert.IsTrue(iosHomeElement.Any());
+            var mainClassElement = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
+            for (int second = 0; ; second++)
+            {
+                if (second >= 15) Assert.Fail("timeout");
+                try
+                {
+                    Assert.IsTrue(mainClassElement.Any()); break;
+                }
+                catch (Exception)
+                {
+                }
+                Thread.Sleep(TimeSpan.FromSeconds(3));
+            }
         }
+
 
     }
 }

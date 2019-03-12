@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BrowserStackIntegration;
+using System.Text;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
@@ -27,29 +28,29 @@ namespace MobileAppTests
     [Parallelizable(ParallelScope.Fixtures)]
     public class WhenLaunchingTheAppOnAndroid : BrowserStackIntegrationImplementation
     {
-        public WhenLaunchingTheAppOnAndroid(string profile, string device) : base(profile, device){}
+        public WhenLaunchingTheAppOnAndroid(string profile, string device) : base(profile, device) { }
 
         [Test]
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TheUserCanAccessTheHomePage()
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+#pragma warning restore CS1998
         {
-            var androidHomeElement = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            Assert.IsTrue(androidHomeElement.Any());
-            //var tryme = androidDriver.FindElement(By.CssSelector("android.widget.TextView"));
-            ////((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", tryme);
+            var mainClassElement = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
 
-            ////List<IWebElement> anarrayorlist = driver.FindElements(By.CssSelector("android.view.ViewGroup > android.widget.TextView"));
-            ////int numberinlist = anarrayorlist.Count;
+            for (int second = 0; ; second++)
+            {
+                if (second >= 15) Assert.Fail("timeout");
+                try
+                {
+                    Assert.IsTrue(mainClassElement.Any()); break;
+                }
+                catch (Exception)
+                {
+                }
+                Thread.Sleep(TimeSpan.FromSeconds(3));
+            }
+            
 
-            ////// Get specific number item
-            ////string itemno = anarrayorlist[2].Text;
-
-
-            //var adElement = androidDriver.FindElements(By.Id("aw0"));
-            //Assert.IsTrue(adElement.Any());
-        }
-
+          }
     }
 }
