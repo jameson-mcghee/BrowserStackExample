@@ -9,7 +9,7 @@ using System.Text;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 namespace MobileAppTests
 {
@@ -44,8 +44,13 @@ namespace MobileAppTests
                 {
                     Assert.IsTrue(mainClassElement.Any()); break;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    string message = $"App is not launching. {ex}";
+                    //Log.Error(message);
+                    Debug.WriteLine(message); //this line will output to the debug console, what you usually see when debugging in th "Output" window in the bottom of visual studio
+                    //Debug.ReadLine(); //this will keep your program from automatically closing. Not 100% sure this will work in the debugger though. You can also just put a break point at the closing brace of the catch block
+                    Console.WriteLine(message); //this line will output to the console window if the program has one
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(3));
             }
