@@ -2,12 +2,13 @@
 using OpenQA.Selenium;
 using System;
 using System.Linq;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using BrowserStackIntegration;
 using OpenQA.Selenium.Remote;
 using System.Collections.Generic;
-using System.Diagnostics;
+
 
 namespace MobileAppTests
 {
@@ -25,14 +26,12 @@ namespace MobileAppTests
         public WhenLaunchingTheAppOniOS(string profile, string device) : base(profile, device) { }
 
         [Test]
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task TheUserCanAccessTheHomePage()
-#pragma warning restore CS1998
         {
             var mainClassElement = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
-            //var allowAccessButton = iosDriver.FindElements(By.ClassName("XCUIElementTypeButton"));
-            
 
+            ApproveiOSAlerts();
+            Thread.Sleep(TimeSpan.FromSeconds(3));
             for (int second = 0; ; second++)
             {
                 if (second >= 15) Assert.Fail("timeout");

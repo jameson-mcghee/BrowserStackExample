@@ -30,6 +30,7 @@
 
 //            //iOS
 //            var viewElements = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
+//            ApproveiOSAlerts();
 //            Thread.Sleep(TimeSpan.FromSeconds(3));
 //            Assert.IsTrue(viewElements.Any());
 

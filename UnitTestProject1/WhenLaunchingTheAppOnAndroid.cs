@@ -61,8 +61,6 @@ namespace MobileAppTests
         {
             //var introScreenAd = androidDriver.FindElements(By.Id("aw0"));
 
-            var test = androidDriver.FindElement(By.a)
-
             for (int second = 0; ; second++)
             {
                 if (second >= 40) Assert.Fail("Introscreen Ad not present");

@@ -26,6 +26,19 @@ namespace BrowserStackIntegration
             this.device = device;
         }
 
+        public void ApproveiOSAlerts()
+        {
+            try
+            {
+                while (true)
+                    iosDriver.SwitchTo().Alert().Accept();
+            }
+            catch (Exception e)
+            {
+                //no more alerts
+            }
+        }
+
         [SetUp]
         public void Init()
         {

@@ -31,11 +31,8 @@ namespace MobileAppTests
         public async Task TheBannerAdIsPresent()
         {
             var bannerAdElement = androidDriver.FindElements(By.ClassName("	android.webkit.WebView"));
-            var breakingNewsTitle = androidDriver.FindElement(By.CssSelector());
 
-            Assert
-
-            Assert.IsTrue(Regex.IsMatch(androidDriver.FindElement(By.("BODY")).Text, "^[\\s\\S]*css=input\\[text='BREAKING NEWS'\\][\\s\\S]*$"));
+            //Assert.IsTrue(Regex.IsMatch(androidDriver.FindElement(By.("BODY")).Text, "^[\\s\\S]*css=input\\[text='BREAKING NEWS'\\][\\s\\S]*$"));
 
             for (int second = 0; ; second++)
             {
