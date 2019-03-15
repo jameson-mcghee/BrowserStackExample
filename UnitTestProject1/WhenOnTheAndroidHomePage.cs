@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BrowserStackIntegration;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace MobileAppTests
 {
@@ -27,25 +28,28 @@ namespace MobileAppTests
         public WhenOnTheAndroidHomePage(string profile, string device) : base(profile, device) { }
 
         //[Test]
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task TheUserCanAccessTheHomePage()
-#pragma warning restore CS1998
+        public async Task TheBannerAdIsPresent()
         {
-            var mainClassElement = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
+            var bannerAdElement = androidDriver.FindElements(By.ClassName("	android.webkit.WebView"));
+            var breakingNewsTitle = androidDriver.FindElement(By.CssSelector());
+
+            Assert
+
+            Assert.IsTrue(Regex.IsMatch(androidDriver.FindElement(By.("BODY")).Text, "^[\\s\\S]*css=input\\[text='BREAKING NEWS'\\][\\s\\S]*$"));
+
             for (int second = 0; ; second++)
             {
-                if (second >= 15) Assert.Fail("timeout");
+                if (second >= 15) Assert.Fail("The banner ad is not present");
                 try
                 {
-                    Assert.IsTrue(mainClassElement.Any()); break;
+                    Assert.IsTrue(bannerAdElement.Any()); break;
                 }
                 catch (Exception ex)
                 {
-                    string message = $"App is not launching. {ex}";
-                    //Log.Error(message);
-                    Debug.WriteLine(message); //this line will output to the debug console, what you usually see when debugging in th "Output" window in the bottom of visual studio
-                    //Debug.ReadLine(); //this will keep your program from automatically closing. Not 100% sure this will work in the debugger though. You can also just put a break point at the closing brace of the catch block
-                    Console.WriteLine(message); //this line will output to the console window if the program has one
+                    string message = $"The banner ad is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(3));
             }
