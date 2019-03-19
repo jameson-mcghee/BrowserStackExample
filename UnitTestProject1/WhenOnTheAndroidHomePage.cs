@@ -4,9 +4,8 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BrowserStackIntegration;
 using System.Diagnostics;
-using System.Text.RegularExpressions;
+using BrowserStackIntegration;
 
 namespace MobileAppTests
 {
@@ -32,8 +31,6 @@ namespace MobileAppTests
         {
             var bannerAdElement = androidDriver.FindElements(By.ClassName("	android.webkit.WebView"));
 
-            //Assert.IsTrue(Regex.IsMatch(androidDriver.FindElement(By.("BODY")).Text, "^[\\s\\S]*css=input\\[text='BREAKING NEWS'\\][\\s\\S]*$"));
-
             for (int second = 0; ; second++)
             {
                 if (second >= 15) Assert.Fail("The banner ad is not present");
@@ -49,10 +46,9 @@ namespace MobileAppTests
                     Console.WriteLine(message);
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(3));
+
             }
 
-
         }
-        
     }
 }

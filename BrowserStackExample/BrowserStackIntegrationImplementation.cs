@@ -39,6 +39,32 @@ namespace BrowserStackIntegration
             }
         }
 
+        public bool IsAndroidElementPresent(By by)
+        {
+            try
+            {
+                androidDriver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+        public bool IsiOSElementPresent(By by)
+        {
+            try
+            {
+                iosDriver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
         [SetUp]
         public void Init()
         {

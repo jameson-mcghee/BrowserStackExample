@@ -6,9 +6,6 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using BrowserStackIntegration;
-using OpenQA.Selenium.Remote;
-using System.Collections.Generic;
-
 
 namespace MobileAppTests
 {
@@ -47,6 +44,58 @@ namespace MobileAppTests
                     Console.WriteLine(message);
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(3));
+
+            }
+        }
+
+        //[Test]
+        public async Task TheIntroBannerIsGenerated()
+        {
+            var goodEveningBannerElement = iosDriver.FindElementByAccessibilityId("AccessibilityIDHere");
+            string goodEveningBannerText = iosDriver.FindElementByAccessibilityId("AccessibilityIDHere").Text;
+
+            ApproveiOSAlerts();
+
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            for (int second = 0; ; second++)
+            {
+                if (second >= 15) Assert.Fail("timeout");
+                try
+                {
+                    Assert.IsTrue(goodEveningBannerElement.Displayed); break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"App is not launching. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+            }
+            Assert.IsTrue(goodEveningBannerText.Contains("Good Evening"), goodEveningBannerText + "Good Evening Banner does not contain 'Good Evening'.");
+
+        }
+
+        [Test]
+        public async Task TheIntroScreenAdIsPresent()
+        {
+            ApproveiOSAlerts();
+            for (int second = 0; ; second++)
+            {
+                if (second >= 15) Assert.Fail("Introscreen Ad not present.");
+                try
+                {
+                    if (IsiOSElementPresent(By.ClassName("	XCUIElementTypeLink"))) ; break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"Introscreen Ad not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Thread.Sleep(TimeSpan.FromSeconds(5));
+
             }
         }
 

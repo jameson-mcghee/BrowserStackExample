@@ -4,12 +4,8 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using BrowserStackIntegration;
 using System.Diagnostics;
-using System.Text;
-using OpenQA.Selenium.Appium.Android;
-using OpenQA.Selenium.Remote;
-using System.Collections.Generic;
+using BrowserStackIntegration;
 
 namespace MobileAppTests
 {
@@ -53,20 +49,45 @@ namespace MobileAppTests
                     Console.WriteLine(message); //this line will output to the console window if the program has one
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(1));
+
             }
+        }
+
+        //[Test]
+        public async Task TheIntroBannerIsGenerated()
+        {
+            var goodEveningBannerElement = androidDriver.FindElementByAccessibilityId("Content-DescHere");
+            string goodEveningBannerText = androidDriver.FindElementByAccessibilityId("Content-DescHere").Text;
+
+            Thread.Sleep(TimeSpan.FromSeconds(3));
+            for (int second = 0; ; second++)
+            {
+                if (second >= 15) Assert.Fail("timeout");
+                try
+                {
+                    Assert.IsTrue(goodEveningBannerElement.Displayed); break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"App is not launching. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+            }
+            Assert.IsTrue(goodEveningBannerText.Contains("Good Evening"), goodEveningBannerText + "Good Evening Banner does not contain 'Good Evening'.");
+
         }
 
         [Test]
         public async Task TheIntroScreenAdIsPresent()
         {
-            //var introScreenAd = androidDriver.FindElements(By.Id("aw0"));
-
             for (int second = 0; ; second++)
             {
                 if (second >= 40) Assert.Fail("Introscreen Ad not present");
                 try
                 {
-                    if (IsElementPresent(By.Id("aw0"))); break;
+                    if (IsAndroidElementPresent(By.Id("aw0"))); break;
                 }
                 catch (Exception ex)
                 {
@@ -76,19 +97,9 @@ namespace MobileAppTests
                     Console.WriteLine(message);
                 }
                 Thread.Sleep(TimeSpan.FromSeconds(5));
+
             }
         }
-        private bool IsElementPresent(By by)
-        {
-            try
-            {
-                androidDriver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
+
     }
 }
