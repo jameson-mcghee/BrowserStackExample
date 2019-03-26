@@ -1,11 +1,12 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
 using System;
-using System.Linq;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using BrowserStackIntegration;
+using System.Linq;
+using System.Text.RegularExpressions;
+using OpenQA.Selenium;
 
 namespace MobileAppTests
 {
@@ -23,69 +24,102 @@ namespace MobileAppTests
         public WhenLaunchingTheAppOniOS(string profile, string device) : base(profile, device) { }
 
         [Test]
-        public async Task TheUserCanAccessTheHomePage()
+        public async Task TheUserCanAccessTheSplashScreen()
         {
-            var mainClassElement = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
+            var splashScreenElement = iosDriver.FindElementByName("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+            
+            await ApproveiOSAlerts();
 
-            ApproveiOSAlerts();
             Thread.Sleep(TimeSpan.FromSeconds(3));
             for (int second = 0; ; second++)
             {
-                if (second >= 15) Assert.Fail("timeout");
+                if (second >= 20)
                 try
                 {
-                    Assert.IsTrue(mainClassElement.Any()); break;
+                    Assert.IsTrue(splashScreenElement.Displayed, splashScreenElement + "Intro Banner is not being displayed."); break;
                 }
                 catch (Exception ex)
                 {
-                    string message = $"App is not launching. {ex}";
+                    string message = $"Splashscreen is not being displayed. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Thread.Sleep(TimeSpan.FromSeconds(3));
-
             }
         }
 
         //[Test]
         public async Task TheIntroBannerIsGenerated()
         {
-            var goodEveningBannerElement = iosDriver.FindElementByAccessibilityId("AccessibilityIDHere");
-            string goodEveningBannerText = iosDriver.FindElementByAccessibilityId("AccessibilityIDHere").Text;
+            var introBannerElement = iosDriver.FindElementByAccessibilityId("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+            var sponsoredByElement = iosDriver.FindElementByAccessibilityId("Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+            string sponsoredByText = iosDriver.FindElementByAccessibilityId("Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
+            string introBannerText = iosDriver.FindElementByAccessibilityId("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
 
             ApproveiOSAlerts();
 
             Thread.Sleep(TimeSpan.FromSeconds(3));
             for (int second = 0; ; second++)
             {
-                if (second >= 15) Assert.Fail("timeout");
+                if (second >= 20)
                 try
                 {
-                    Assert.IsTrue(goodEveningBannerElement.Displayed); break;
+                    Assert.IsTrue(introBannerElement.Displayed, introBannerElement + "Intro Banner is not being displayed.");
+                    Assert.IsTrue(sponsoredByElement.Displayed, sponsoredByElement + "'Sponsored By' is not being displayed."); break;
                 }
                 catch (Exception ex)
                 {
-                    string message = $"App is not launching. {ex}";
+                    string message = $"Intro Banner and/or 'Sponsored by' messages are not being displayed. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
             }
-            Assert.IsTrue(goodEveningBannerText.Contains("Good Evening"), goodEveningBannerText + "Good Evening Banner does not contain 'Good Evening'.");
+            Assert.IsTrue(introBannerText.Contains("Good "), introBannerText + "Intro Banner does not contain 'Good ***'.");
+            Assert.IsTrue(sponsoredByText.Contains("Sponsored By"), sponsoredByText + "Intro Screen does not contain 'Sponsored By'.");
 
         }
 
-        [Test]
-        public async Task TheIntroScreenAdIsPresent()
+        //[Test]
+        public async Task TheSponsoredByTextIsPresent()
         {
-            ApproveiOSAlerts();
+            var sponsoredByElement = iosDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+            string sponsoredByText = iosDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
+
+            await ApproveiOSAlerts();
+
+            Thread.Sleep(TimeSpan.FromSeconds(3));
             for (int second = 0; ; second++)
             {
-                if (second >= 15) Assert.Fail("Introscreen Ad not present.");
+                if (second >= 15) Assert.Fail("'Sponsored By' is not being displayed.");
                 try
                 {
-                    if (IsiOSElementPresent(By.ClassName("	XCUIElementTypeLink"))) ; break;
+                    Assert.IsTrue(sponsoredByElement.Displayed); break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"'Sponsored By' is not being displayed. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+            }
+            Assert.IsTrue(sponsoredByText.Contains("Sponsored By"), sponsoredByText + "Intro Screen does not contain 'Sponsored By'.");
+
+        }
+
+        //[Test]
+        public async Task TheIntroScreenAdIsPresent()
+        {
+            var bannerAdElement = androidDriver.FindElementByName("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+
+            await ApproveiOSAlerts();
+            for (int second = 0; ; second++)
+            {
+                if (second >= 20) Assert.Fail("Introscreen Ad not present.");
+                try
+                {
+                    Assert.IsTrue(bannerAdElement.Displayed); break;
                 }
                 catch (Exception ex)
                 {
@@ -94,10 +128,10 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Thread.Sleep(TimeSpan.FromSeconds(5));
-
             }
+
         }
+
 
     }
 }

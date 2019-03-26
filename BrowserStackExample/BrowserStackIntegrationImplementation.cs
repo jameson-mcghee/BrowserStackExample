@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Reflection;
+using System.Threading.Tasks;
 using BrowserStack;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -26,7 +28,8 @@ namespace BrowserStackIntegration
             this.device = device;
         }
 
-        public void ApproveiOSAlerts()
+
+        public async Task ApproveiOSAlerts()
         {
             try
             {
@@ -75,9 +78,9 @@ namespace BrowserStackIntegration
             var iosCapabilities = GetAppCapabilities("iosCapabilities", "iosEnvironments");
             if (iosCapabilities != null)
                 iosDriver = new IOSDriver<IOSElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), iosCapabilities);
-                    
-        }
 
+        }
+                
         public DesiredCapabilities GetAppCapabilities(string capabilitiesSectionName, string environmentsSectionName)
         {
             NameValueCollection capabilities = ConfigurationManager.GetSection($"{capabilitiesSectionName}/{profile}") as NameValueCollection;
