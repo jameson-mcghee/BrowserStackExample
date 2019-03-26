@@ -11,6 +11,8 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.MultiTouch;
+using OpenQA.Selenium.Support.Extensions;
 
 namespace MobileAppTests
 {
@@ -51,6 +53,8 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
+
+                await Task.Delay(1000); //wait one second
             }
             
         }
@@ -90,9 +94,10 @@ namespace MobileAppTests
                 if (second >= 30) Assert.Fail("The Home Page ads are not present.");
                 try
                 {
-                    IList<IWebElement> homePageAdElements = webDriver.FindElements(By.Name("module|3|advertisementModule|ad|||"));
-                    //IReadOnlyCollection <AppiumWebElement> homePageAdElements = androidDriver.FindElementsByAccessibilityId("module|3|advertisementModule|ad|||");
-                    ((IJavaScriptExecutor)androidDriver).ExecuteScript("arguments[0].scrollIntoView();", homePageAdElements);
+                    var appSize = androidDriver.Manage().Window.Size;
+                    TouchAction action = new TouchAction(androidDriver);
+                    action.Press(1, 1).MoveTo(1, appSize.Height-10).Release().Perform();
+                    var homePageAdElements = androidDriver.FindElementsByAccessibilityId("module|3|advertisementModule|ad|||");
                     Assert.IsTrue(homePageAdElements.Any());
                     break;
                 }
@@ -103,9 +108,9 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
+
+                await Task.Delay(1000); //wait one second
             }
-
-
         }
 
         //[Test]
