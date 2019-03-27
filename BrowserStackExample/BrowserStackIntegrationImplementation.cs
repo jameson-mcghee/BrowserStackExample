@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
-using System.Reflection;
-using System.Threading.Tasks;
 using BrowserStack;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -28,46 +26,6 @@ namespace BrowserStackIntegration
             this.device = device;
         }
 
-
-        public async Task ApproveiOSAlerts()
-        {
-            try
-            {
-                while (true)
-                    iosDriver.SwitchTo().Alert().Accept();
-            }
-            catch (Exception e)
-            {
-                //no more alerts
-            }
-        }
-
-        public bool IsAndroidElementPresent(By by)
-        {
-            try
-            {
-                androidDriver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
-        public bool IsiOSElementPresent(By by)
-        {
-            try
-            {
-                iosDriver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
         [SetUp]
         public void Init()
         {
@@ -78,7 +36,6 @@ namespace BrowserStackIntegration
             var iosCapabilities = GetAppCapabilities("iosCapabilities", "iosEnvironments");
             if (iosCapabilities != null)
                 iosDriver = new IOSDriver<IOSElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), iosCapabilities);
-
         }
                 
         public DesiredCapabilities GetAppCapabilities(string capabilitiesSectionName, string environmentsSectionName)

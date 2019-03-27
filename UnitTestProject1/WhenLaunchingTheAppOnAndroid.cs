@@ -1,12 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics;
 using BrowserStackIntegration;
-using OpenQA.Selenium;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace MobileAppTests
 {
@@ -23,121 +18,38 @@ namespace MobileAppTests
     [TestFixture("parallel", "nexus-9")]
     [TestFixture("parallel", "galaxy-tabs4")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenLaunchingTheAppOnAndroid : BrowserStackIntegrationImplementation
+    public class WhenLaunchingTheAppOnAndroid : DayPartingScreen
     {
         public WhenLaunchingTheAppOnAndroid(string profile, string device) : base(profile, device) { }
 
-        //[Test]
-        public async Task TheUserCanAccessTheSplashScreen()
+        [Test]
+        public async Task TheUserCanAccessTheDayPartingScreen()
         {
-
-            for (int second = 0; ; second++)
-            {
-                if (second >= 30) Assert.Fail("Splashscreen is not being displayed.");
-                try
-                    {
-                        var splashScreenElement = androidDriver.FindElementByAccessibilityId("");
-                        Assert.IsTrue(splashScreenElement.Displayed, splashScreenElement + "Splashscreen is not being displayed."); break;
-                    }
-                    catch (Exception ex)
-                    {
-                        string message = $"Splashscreen is not being displayed. {ex}";
-                        Debug.WriteLine(message);
-                        //Debug.ReadLine();
-                        Console.WriteLine(message);
-                    }
-            }
-        }
-
-        //[Test]
-        public async Task TheIntroBannerIsGenerated()
-        {
-
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            for (int second = 0; ; second++)
-            {
-                if (second >= 30) Assert.Fail("Intro Banner and/or 'Sponsored by' messages are not being displayed.");
-                try
-                    {
-                        var introBannerElement = androidDriver.FindElementByAccessibilityId("");
-                        var sponsoredByElement = androidDriver.FindElementByAccessibilityId("");
-
-                        Assert.IsTrue(introBannerElement.Displayed, introBannerElement + "Intro Banner is not being displayed.");
-                        Assert.IsTrue(sponsoredByElement.Displayed, sponsoredByElement + "'Sponsored By' is not being displayed."); break;
-                    }
-                    catch (Exception ex)
-                    {
-                        string message = $"Intro Banner and/or 'Sponsored by' messages are not being displayed. {ex}";
-                        Debug.WriteLine(message);
-                        //Debug.ReadLine();
-                        Console.WriteLine(message);
-                    }
-            }
-
-            try
-            {
-                string sponsoredByText = androidDriver.FindElementByAccessibilityId("Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
-                string introBannerText = androidDriver.FindElementByAccessibilityId("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
-
-                Assert.IsTrue(introBannerText.Contains("Good "), introBannerText + "Intro Banner does not contain 'Good ***'.");
-                Assert.IsTrue(sponsoredByText.Contains("Sponsored By"), sponsoredByText + "Intro Screen does not contain 'Sponsored By'.");
-            }
-            catch (Exception ex)
-            {
-                string message = $"Intro Banner and/or 'Sponsored by' messages are not being displayed. {ex}";
-                Debug.WriteLine(message);
-                //Debug.ReadLine();
-                Console.WriteLine(message);
-            }
+            await AndroidUserCanAccessTheDayPartingScreen();
+            Assert.IsTrue(androidDriver.FindElementByAccessibilityId
+                ("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Displayed);
 
         }
 
-        //[Test]
-        public async Task TheSponsoredByTextIsPresent()
+        [Test]
+        public async Task TheDayPartingBannerIsGenerated()
         {
-            var sponsoredByElement = androidDriver.FindElementByAccessibilityId("AccessibilityIDHere");
-            string sponsoredByText = androidDriver.FindElementByAccessibilityId("AccessibilityIDHere").Text;
+            await AndroidDayPartingBannerIsGenerated();
 
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            for (int second = 0; ; second++)
-            {
-                if (second >= 15) Assert.Fail("'Sponsored By' is not being displayed.");
-                try
-                {
-                    Assert.IsTrue(sponsoredByElement.Displayed); break;
-                }
-                catch (Exception ex)
-                {
-                    string message = $"'Sponsored By' is not being displayed. {ex}";
-                    Debug.WriteLine(message);
-                    //Debug.ReadLine();
-                    Console.WriteLine(message);
-                }
-            }
-            Assert.IsTrue(sponsoredByText.Contains("Sponsored By"), sponsoredByText + "Intro Screen does not contain 'Sponsored By'.");
+            string sponsoredByElement = androidDriver.FindElementByAccessibilityId("Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
+            string dayPartingBannerElement = androidDriver.FindElementByAccessibilityId("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
 
+            Assert.IsTrue(sponsoredByElement.Any());
+            Assert.IsTrue(dayPartingBannerElement.Any());
+            Assert.IsTrue(dayPartingBannerElement.Contains("Good "), dayPartingBannerElement + "Day Parting Banner does not contain 'Good ***'.");
+            Assert.IsTrue(sponsoredByElement.Contains("Sponsored By"), sponsoredByElement + "'Sponsored by' message does not contain 'Sponsored By'.");
         }
 
-        //[Test]
-        public async Task TheSplashScreenAdIsPresent()
+        [Test]
+        public async Task TheDayPartingScreenAdIsPresent()
         {
-
-            for (int second = 0; ; second++)
-            {
-                if (second >= 30) Assert.Fail("Splashscreen Ad is not being displayed.");
-                try
-                {
-                    var splashScreenAdElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                    Assert.IsTrue(splashScreenAdElement.Displayed, splashScreenAdElement + "Splashscreen Ad is not being displayed."); break;
-                }
-                catch (Exception ex)
-                {
-                    string message = $"Splashscreen Ad is not being displayed. {ex}";
-                    Debug.WriteLine(message);
-                    //Debug.ReadLine();
-                    Console.WriteLine(message);
-                }
-            }
+            await AndroidDayPartingScreenAdIsPresent();
+            Assert.IsTrue(androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Displayed);
         }
 
     }

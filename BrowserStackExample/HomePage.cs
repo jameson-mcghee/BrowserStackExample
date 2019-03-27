@@ -1,43 +1,102 @@
-﻿using OpenQA.Selenium.Appium;
-using System;
-using System.Collections.Generic;
-using OpenQA.Selenium.Appium.Interfaces;
-using OpenQA.Selenium.Support.PageObjects;
+﻿using System;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using OpenQA.Selenium;
-using BrowserStackIntegration;
+using NUnit.Framework;
+using System.Diagnostics;
+using OpenQA.Selenium.Appium.Android;
+using System.Collections.ObjectModel;
 
 namespace BrowserStackIntegration
 {
-    public class HomePage
+    public class HomePage : GlobalMethods
     {
-        
+        public HomePage(string profile, string device) : base(profile, device){}
 
-        public HomePage()
+        //ANDROID
+        public async Task HomePageIsPresent()
         {
-            //
-        }
 
-
-        public IList <IWebElement> InPageAds (IWebDriver driver)
-        {
-            try
+            for (int i = 0;  ; i++)
             {
-                IList<IWebElement> adlistHomePage = driver.FindElements(By.Name("module|3|advertisementModule|ad|||")); //     driver.androidDriver.FindElementsByName("//*"));
-                return adlistHomePage;
-            }
-            catch (Exception e)
-            {
-                driver.Close();
-                throw new Exception("Can't find it. " + " " + e);
+                if (i >= 45) Assert.Fail("The Home page is not present.");
+                try
+                {
+                    var homePageElement = androidDriver.FindElementByAccessibilityId("component-home-pageWrapper-contentList");
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Home page is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
             }
         }
 
-        private By ByAccessibilityId(string v)
+        public async Task HomePageBannerAdIsPresent()
         {
-            throw new NotImplementedException();
+            await HomePageIsPresent();
+            for (int i = 0; ; i++)
+            {
+                if (i >= 20) Assert.Fail("The Home Page banner ad is not present.");
+                try
+                {
+                    var homePageBannerAdElement = androidDriver.FindElementByAccessibilityId("non-module|-3|ad|advertisementModule|0|manually placed in page-wrapper|");
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Home Page banner ad is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
+            }
         }
+
+        public async Task ModuleHomePageAdsArePresent()
+        {
+            await HomePageIsPresent();
+
+            dynamic screenConfig = null; //do your getScreenConfig call to the API
+
+            Assert.IsTrue(screenConfig?.metadata?.count != null);
+            int screenConfigCount = int.Parse(screenConfig?.metadata?.count?.ToString());
+
+            for (int i = 0; ; i++)
+            {
+                ScrollDown();
+
+                if (i >= 120) Assert.Fail("The Home Page module ads are not present.");
+                try
+                {
+                    ReadOnlyCollection<AndroidElement> adlistHomePage = androidDriver.FindElementsByAccessibilityId("module|3|advertisementModule|ad|||");
+                    int adList = adlistHomePage.Count();
+
+                    var bottomPageElement = androidDriver.FindElementByAccessibilityId("");
+                    Assert.IsTrue(bottomPageElement.Displayed);
+                    Assert.IsTrue(screenConfigCount == adList);
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Home Page module ads are not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
+            }
+        }
+
+
+
+        //IOS
+
+
+
     }
 }

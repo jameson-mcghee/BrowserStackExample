@@ -67,6 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BrowserStackIntegrationImplementation.cs" />
+    <Compile Include="DayPartingScreen.cs" />
+    <Compile Include="GlobalMethods.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
