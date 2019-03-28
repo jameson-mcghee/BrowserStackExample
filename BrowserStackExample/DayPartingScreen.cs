@@ -17,7 +17,7 @@ namespace BrowserStackIntegration
                 if (i >= 15) Assert.Fail("Intro Banner is not being displayed.");
                     try
                     {
-                        var dayPartingScreenElement = androidDriver.FindElementByAccessibilityId("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+                        var dayPartingScreenElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
                         return;
                     }
                     catch (Exception ex)
@@ -38,8 +38,8 @@ namespace BrowserStackIntegration
                 if (i >= 15) Assert.Fail("Day Parting Banner and/or 'Sponsored by' messages are not being displayed.");
                 try
                 {
-                    var dayPartingBannerElement = androidDriver.FindElementByAccessibilityId("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                    var sponsoredByElement = androidDriver.FindElementByAccessibilityId("Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+                    var dayPartingBannerElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+                    var sponsoredByElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
                     return;
                 }
                 catch (Exception ex)
@@ -54,10 +54,10 @@ namespace BrowserStackIntegration
         }
         public async Task AndroidDayPartingScreenAdIsPresent()
         {
-            await AndroidUserCanAccessTheDayPartingScreen();
+            //await AndroidUserCanAccessTheDayPartingScreen();
             for (int i = 0; ; i++)
             {
-                if (i >= 15) Assert.Fail("The Day Parting Screen Ad is not present.");
+                if (i >= 25) Assert.Fail("The Day Parting Screen Ad is not present.");
                 try
                 {
                     var dayPartingAdElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
@@ -101,7 +101,8 @@ namespace BrowserStackIntegration
         }
         public async Task IOSDayPartingBannerIsGenerated()
         {
-            await IOSUserCanAccessTheDayPartingScreen();
+            await ApproveiOSAlerts();
+            //await IOSUserCanAccessTheDayPartingScreen();
             for (int i = 0; ; i++)
             {
                 if (i >= 15) Assert.Fail("Day Parting Banner and/or 'Sponsored by' messages are not being displayed.");
@@ -123,7 +124,8 @@ namespace BrowserStackIntegration
         }
         public async Task IOSDayPartingScreenAdIsPresent()
         {
-            await IOSUserCanAccessTheDayPartingScreen();
+            await ApproveiOSAlerts();
+            //await IOSUserCanAccessTheDayPartingScreen();
             for (int i = 0; ; i++)
             {
                 if (i >= 15) Assert.Fail("The Day Parting Screen Ad is not present.");

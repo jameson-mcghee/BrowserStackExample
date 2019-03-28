@@ -11,18 +11,6 @@ namespace BrowserStackIntegration
         public GlobalMethods(string profile, string device) : base(profile, device){}
 
         //IOS ONLY
-        public async Task ApproveiOSAlerts()
-        {
-            try
-            {
-                while (true)
-                    iosDriver.SwitchTo().Alert().Accept();
-            }
-            catch (Exception e)
-            {
-                //no more alerts
-            }
-        }
         public bool IsiOSElementPresent(By by)
         {
             try

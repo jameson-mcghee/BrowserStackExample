@@ -7,13 +7,13 @@ namespace MobileAppTests
     [TestFixture("parallel", "pixel")]
     [TestFixture("parallel", "pixel-2")]
     [TestFixture("parallel", "pixel-3")]
-    [TestFixture("parallel", "galaxy-s6")]
     [TestFixture("parallel", "galaxy-s7")]
     [TestFixture("parallel", "galaxy-s8")]
     [TestFixture("parallel", "galaxy-s9")]
     [TestFixture("parallel", "galaxy-note8")]
     [TestFixture("parallel", "galaxy-note9")]
     [TestFixture("parallel", "galaxy-note4")]
+    //[TestFixture("parallel", "galaxy-s6")] //App or one of the otherApps cannot be run on version 5.0.
     //[TestFixture("parallel", "nexus-9")] //tablet
     //[TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]

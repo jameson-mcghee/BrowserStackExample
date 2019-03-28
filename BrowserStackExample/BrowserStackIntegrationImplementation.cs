@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Threading.Tasks;
 using BrowserStack;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -24,6 +25,19 @@ namespace BrowserStackIntegration
         {
             this.profile = profile;
             this.device = device;
+        }
+
+        public async Task ApproveiOSAlerts()
+        {
+            try
+            {
+                while (true)
+                    iosDriver.SwitchTo().Alert().Accept();
+            }
+            catch (Exception e)
+            {
+                //no more alerts
+            }
         }
 
         [SetUp]

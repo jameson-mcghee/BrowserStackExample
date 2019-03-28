@@ -8,36 +8,36 @@ namespace MobileAppTests
     [TestFixture("parallel", "pixel")]
     [TestFixture("parallel", "pixel-2")]
     [TestFixture("parallel", "pixel-3")]
-    [TestFixture("parallel", "galaxy-s6")]
     [TestFixture("parallel", "galaxy-s7")]
     [TestFixture("parallel", "galaxy-s8")]
     [TestFixture("parallel", "galaxy-s9")]
     [TestFixture("parallel", "galaxy-note8")]
     [TestFixture("parallel", "galaxy-note9")]
     [TestFixture("parallel", "galaxy-note4")]
-    [TestFixture("parallel", "nexus-9")]
-    [TestFixture("parallel", "galaxy-tabs4")]
+    //[TestFixture("parallel", "galaxy-s6")] //App or one of the otherApps cannot be run on version 5.0.
+    //[TestFixture("parallel", "nexus-9")] //Tablet
+    //[TestFixture("parallel", "galaxy-tabs4")] //Tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class WhenLaunchingTheAppOnAndroid : DayPartingScreen
     {
         public WhenLaunchingTheAppOnAndroid(string profile, string device) : base(profile, device) { }
 
-        [Test]
+        //[Test]
         public async Task TheUserCanAccessTheDayPartingScreen()
         {
             await AndroidUserCanAccessTheDayPartingScreen();
             Assert.IsTrue(androidDriver.FindElementByAccessibilityId
-                ("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Displayed);
+                ("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Displayed);
 
         }
 
-        [Test]
+        //[Test]
         public async Task TheDayPartingBannerIsGenerated()
         {
             await AndroidDayPartingBannerIsGenerated();
 
-            string sponsoredByElement = androidDriver.FindElementByAccessibilityId("Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
-            string dayPartingBannerElement = androidDriver.FindElementByAccessibilityId("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
+            string sponsoredByElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
+            string dayPartingBannerElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
 
             Assert.IsTrue(sponsoredByElement.Any());
             Assert.IsTrue(dayPartingBannerElement.Any());

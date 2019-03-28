@@ -16,7 +16,7 @@ namespace MobileAppTests
     {
         public WhenLaunchingTheAppOniOS(string profile, string device) : base(profile, device) { }
 
-        [Test]
+        //[Test]
         public async Task TheUserCanAccessTheDayPartingScreen()
         {
             await IOSUserCanAccessTheDayPartingScreen();
@@ -25,13 +25,13 @@ namespace MobileAppTests
 
         }
 
-        [Test]
+        //[Test]
         public async Task TheDayPartingBannerIsGenerated()
         {
             await IOSDayPartingBannerIsGenerated();
 
             string sponsoredByElement = iosDriver.FindElementByName("Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
-            string dayPartingBannerElement = iosDriver.FindElementByName("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
+            string dayPartingBannerElement = iosDriver.FindElementByName("Good {*} Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Text;
 
             Assert.IsTrue(sponsoredByElement.Any());
             Assert.IsTrue(dayPartingBannerElement.Any());
