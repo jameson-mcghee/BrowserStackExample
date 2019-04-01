@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BrowserStackIntegration
 {
-    public class DayPartingScreen : GlobalMethods
+    public class DayPartingScreen : GoogleAnalytics
     {
         public DayPartingScreen(string profile, string device) : base(profile, device){}
 

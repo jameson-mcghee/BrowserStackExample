@@ -91,6 +91,10 @@
       <Project>{f2c27c1d-6382-4a9b-bfc1-7d76d22380c8}</Project>
       <Name>BrowserStackIntegration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GoogleAnalytics\GoogleAnalytics.csproj">
+      <Project>{ed33379d-868d-46ec-a93a-988ca80ab87d}</Project>
+      <Name>GoogleAnalytics</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

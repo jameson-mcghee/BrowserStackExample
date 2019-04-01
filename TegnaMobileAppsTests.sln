@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrowserStackIntegration", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileAppTests", "UnitTestProject1\MobileAppTests.csproj", "{4D927585-DC49-4023-B9AA-7B9FDC2A80B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleAnalytics", "GoogleAnalytics\GoogleAnalytics.csproj", "{ED33379D-868D-46EC-A93A-988CA80AB87D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4D927585-DC49-4023-B9AA-7B9FDC2A80B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D927585-DC49-4023-B9AA-7B9FDC2A80B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D927585-DC49-4023-B9AA-7B9FDC2A80B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED33379D-868D-46EC-A93A-988CA80AB87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED33379D-868D-46EC-A93A-988CA80AB87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED33379D-868D-46EC-A93A-988CA80AB87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED33379D-868D-46EC-A93A-988CA80AB87D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
