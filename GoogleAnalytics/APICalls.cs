@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Http;
-using System.IO;
 using System.Configuration;
-using NUnit.Framework;
-using Newtonsoft.Json;
+using System.Net;
 using System.Net.Http.Headers;
-using System.Diagnostics;
+using Newtonsoft.Json;
 
-namespace BrowserStackIntegration
+namespace GoogleAnalytics
 {
-    public class GoogleAnalytics : BrowserStackIntegrationImplementation
+    public class APICalls
     {
-        public GoogleAnalytics(string profile, string device) : base(profile, device){}
 
         public static string UserName => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME") ??
                            ConfigurationManager.AppSettings.Get("user");
         public static string AccessKey => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY") ??
                         ConfigurationManager.AppSettings.Get("key");
-                
+
         public static async Task<dynamic> GetSessionResponseAsync(string url)
         {
             try
@@ -38,15 +36,12 @@ namespace BrowserStackIntegration
             }
             catch (Exception ex)
             {
-                string message = $"GetResponseAsync - Error getting response from " + url + ".Ex: " + ex;
-                Debug.WriteLine(message);
-                //Debug.ReadLine();
-                Console.WriteLine(message);
+                //_logger.Error("GetResponseAsync - Error getting response from " + url + ". Ex: " + ex);
                 throw;
             }
         }
-                
-        public async Task GetNetworkLogs()
+
+        static async Task Main(string[] args)
         {
 
             // Get the response.
@@ -54,7 +49,7 @@ namespace BrowserStackIntegration
 
             if (responseSession.Count == 0)
             {
-                throw new Exception("No session information in the API response.");
+                //fail message
             }
 
             dynamic sessionLog = responseSession[0].automation_session;
@@ -62,16 +57,14 @@ namespace BrowserStackIntegration
 
             if (string.IsNullOrEmpty(sessionId?.ToString()))
             {
-                throw new Exception("No Session ID in the API response.");
+                //fail message
             }
 
             dynamic responseNetwork = await GetSessionResponseAsync("https://api-cloud.browserstack.com/app-automate/builds/<build-id>/sessions/" + sessionId + "/networklogs");
             if (responseNetwork.Count == 0)
             {
-                throw new Exception("No Network Log data in the API response.");
+                //fail message
             }
-                       
         }
-
     }
 }

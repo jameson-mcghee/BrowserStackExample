@@ -8,7 +8,7 @@ namespace MobileAppTests
     //[TestFixture("parallel", "iphone-8")]
     //[TestFixture("parallel", "iphone-8-plus")]
     //[TestFixture("parallel", "iphone-se")]
-    //[TestFixture("parallel", "iphone-xs")]
+    [TestFixture("parallel", "iphone-xs")]
     //[TestFixture("parallel", "ipad-pro")]
     //[TestFixture("parallel", "ipad-5th")]
     [Parallelizable(ParallelScope.Fixtures)]
@@ -39,7 +39,7 @@ namespace MobileAppTests
             Assert.IsTrue(sponsoredByElement.Contains("Sponsored By"), sponsoredByElement + "'Sponsored by' message does not contain 'Sponsored By'.");
         }
 
-        //[Test]
+        [Test]
         public async Task TheDayPartingScreenAdIsPresent()
         {
             await IOSDayPartingScreenAdIsPresent();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrowserStackIntegration
 {
-    public class GlobalMethods : BrowserStackIntegrationImplementation
+    public class GlobalMethods : GoogleAnalytics
     {
         public GlobalMethods(string profile, string device) : base(profile, device){}
 
@@ -21,6 +21,19 @@ namespace BrowserStackIntegration
             catch (NoSuchElementException)
             {
                 return false;
+            }
+        }
+
+        public async Task ApproveiOSAlerts()
+        {
+            try
+            {
+                while (true)
+                    iosDriver.SwitchTo().Alert().Accept();
+            }
+            catch (Exception e)
+            {
+                //no more alerts
             }
         }
 

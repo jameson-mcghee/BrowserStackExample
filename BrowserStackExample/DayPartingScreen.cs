@@ -3,9 +3,10 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
+
 namespace BrowserStackIntegration
 {
-    public class DayPartingScreen : GoogleAnalytics
+    public class DayPartingScreen : GlobalMethods
     {
         public DayPartingScreen(string profile, string device) : base(profile, device){}
 
@@ -18,7 +19,7 @@ namespace BrowserStackIntegration
                     try
                     {
                         var dayPartingScreenElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                        return;
+                        break;
                     }
                     catch (Exception ex)
                     {
@@ -40,7 +41,7 @@ namespace BrowserStackIntegration
                 {
                     var dayPartingBannerElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
                     var sponsoredByElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                    return;
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +62,7 @@ namespace BrowserStackIntegration
                 try
                 {
                     var dayPartingAdElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                    return;
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -79,15 +80,14 @@ namespace BrowserStackIntegration
         //IOS
         public async Task IOSUserCanAccessTheDayPartingScreen()
         {
-            await ApproveiOSAlerts();
-
             for (int i = 0; ; i++)
             {
+                await ApproveiOSAlerts();
                 if (i >= 15) Assert.Fail("Intro Banner is not being displayed.");
                 try
                 {
                     var dayPartingScreenElement = iosDriver.FindElementByName("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                    return;
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -101,16 +101,16 @@ namespace BrowserStackIntegration
         }
         public async Task IOSDayPartingBannerIsGenerated()
         {
-            await ApproveiOSAlerts();
             //await IOSUserCanAccessTheDayPartingScreen();
             for (int i = 0; ; i++)
             {
+                await ApproveiOSAlerts();
                 if (i >= 15) Assert.Fail("Day Parting Banner and/or 'Sponsored by' messages are not being displayed.");
                 try
                 {
                     var dayPartingBannerElement = iosDriver.FindElementByName("Good Morning Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
                     var sponsoredByElement = iosDriver.FindElementByName("Sponsored By non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                    return;
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -124,15 +124,15 @@ namespace BrowserStackIntegration
         }
         public async Task IOSDayPartingScreenAdIsPresent()
         {
-            await ApproveiOSAlerts();
             //await IOSUserCanAccessTheDayPartingScreen();
             for (int i = 0; ; i++)
             {
+                await ApproveiOSAlerts();
                 if (i >= 15) Assert.Fail("The Day Parting Screen Ad is not present.");
                 try
                 {
                     var dayPartingAdElement = iosDriver.FindElementByName("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                    return;
+                    break;
                 }
                 catch (Exception ex)
                 {

@@ -22,7 +22,7 @@ namespace BrowserStackIntegration
                 try
                 {
                     var homePageElement = androidDriver.FindElementByAccessibilityId("component-home-pageWrapper-contentList");
-                    return;
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -44,7 +44,7 @@ namespace BrowserStackIntegration
                 try
                 {
                     var homePageBannerAdElement = androidDriver.FindElementByAccessibilityId("non-module|-3|ad|advertisementModule|0|manually placed in page-wrapper|");
-                    return;
+                    break;
                 }
                 catch (Exception ex)
                 {

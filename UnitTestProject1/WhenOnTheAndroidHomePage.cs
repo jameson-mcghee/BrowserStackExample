@@ -1,6 +1,10 @@
 ﻿using NUnit.Framework;
 using BrowserStackIntegration;
 using System.Threading.Tasks;
+using FluentAssertions;
+using Newtonsoft.Json;
+using System.Net.Http;
+
 
 namespace MobileAppTests
 {
@@ -21,6 +25,11 @@ namespace MobileAppTests
     {     
         public WhenOnTheAndroidHomePage(string profile, string device) : base(profile, device) { }
 
+        const string URL1 = "GAURL1";
+        const string URL2 = "GAURL2";
+        const string URL3 = "GAURL3";
+        const string URL4 = "GAURL4";
+
         [Test]
         public async Task TheHomePageIsPresent()
         {
@@ -40,6 +49,16 @@ namespace MobileAppTests
         public async Task TheModuleHomePageAdsArePresent()
         {
             await ModuleHomePageAdsArePresent();
+        }
+        //[Test]
+        public async Task TheGoogleAnalyticsCallsAreCorrect()
+        {
+            await HomePageIsPresent();
+            await GetNetworkLogs();
+            //Figure out how to pass the network logs from the GetNetworkLogs() method into this method
+            //Stub out the comparison of the network logs to URL1-4
+            //var doesUrlExist = failingUrl.Contains(URL1);
+            //doesUrlExist.Should().BeTrue();
         }
 
     }

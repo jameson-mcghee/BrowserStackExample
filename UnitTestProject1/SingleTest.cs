@@ -5,6 +5,8 @@ using System.Threading;
 using System.Linq;
 using BrowserStackIntegration;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace MobileAppTests
 {
@@ -18,9 +20,28 @@ namespace MobileAppTests
         [Test]
         public void SimpleTestAndroid()
         {
-            var viewElements = androidDriver.FindElements(By.Id("android:id/content"));
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            Assert.IsTrue(viewElements.Any());
+
+            for (int i = 0; ; i++)
+            {
+                if (i >= 15) Assert.Fail("Assert Fail Message.");
+                try
+                {
+                    var viewElements = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
+                    Assert.IsTrue(viewElements.Any());
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"Try/Catch Message. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
+            }
+            //var viewElements = androidDriver.FindElements(By.Id("android:id/content"));
+            //Thread.Sleep(TimeSpan.FromSeconds(3));
+            //Assert.IsTrue(viewElements.Any());
                         
         }
         //[Test]

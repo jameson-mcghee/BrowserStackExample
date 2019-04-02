@@ -55,7 +55,9 @@ namespace MobileAppTests
         [Test]
         public async Task TheGoogleAnalyticsCallsArePresent()
         {
-            await GetNetworkData();
+            await TheDayPartingScreenAdIsPresent();
+            await GetNetworkLogs();
+
         }
     }
 }
