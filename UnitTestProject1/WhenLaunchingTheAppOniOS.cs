@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using BrowserStackIntegration;
 using System.Linq;
+using System;
+using System.Diagnostics;
+using OpenQA.Selenium;
 
 namespace MobileAppTests
 {
@@ -42,8 +45,25 @@ namespace MobileAppTests
         [Test]
         public async Task TheDayPartingScreenAdIsPresent()
         {
-            await IOSDayPartingScreenAdIsPresent();
-            Assert.IsTrue(iosDriver.FindElementByName("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Displayed);
+            for (int i = 0; ; i++)
+            {
+                await ApproveiOSAlerts();
+                if (i >= 15) Assert.Fail("The Day Parting Screen Ad is not present.");
+                try
+                {
+                    var dayPartingAdElement = iosDriver.FindElementByName("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
+                    //if (IsiOSElementPresent(By.Name("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|")))
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Day Parting Screen Ad is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
+            }
         }
 
 

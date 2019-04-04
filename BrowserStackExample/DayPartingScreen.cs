@@ -122,28 +122,5 @@ namespace BrowserStackIntegration
                 Wait(1);
             }
         }
-        public async Task IOSDayPartingScreenAdIsPresent()
-        {
-            //await IOSUserCanAccessTheDayPartingScreen();
-            for (int i = 0; ; i++)
-            {
-                await ApproveiOSAlerts();
-                if (i >= 15) Assert.Fail("The Day Parting Screen Ad is not present.");
-                try
-                {
-                    var dayPartingAdElement = iosDriver.FindElementByName("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    string message = $"The Day Parting Screen Ad is not present. {ex}";
-                    Debug.WriteLine(message);
-                    //Debug.ReadLine();
-                    Console.WriteLine(message);
-                }
-                Wait(1);
-            }
-        }
-
     }
 }

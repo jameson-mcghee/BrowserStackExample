@@ -60,7 +60,7 @@ namespace BrowserStackIntegration
             capability.SetCapability("browserstack.key", accessKey);
             capability.SetCapability("autoGrantPermissions", true);
             capability.SetCapability("autoAcceptAlerts", true);
-            capability.SetCapability("browserstack.networkLogs", true);
+            capability.SetCapability("browserstack.networkLogs", false);
             capability.SetCapability("browserstack.seleniumLogs", true);
             capability.SetCapability("browserstack.deviceLogs", true);
             capability.SetCapability("browserstack.appiumLogs", true);

@@ -11,11 +11,11 @@ namespace BrowserStackIntegration
         public GlobalMethods(string profile, string device) : base(profile, device){}
 
         //IOS ONLY
-        public bool IsiOSElementPresent(By by)
+        public bool IsiOSElementPresent(string by)
         {
             try
             {
-                iosDriver.FindElement(by);
+                iosDriver.FindElementByName(by);
                 return true;
             }
             catch (NoSuchElementException)
@@ -38,11 +38,11 @@ namespace BrowserStackIntegration
         }
 
         //ANDROID ONLY
-        public bool IsAndroidElementPresent(By by)
+        public bool IsAndroidElementPresent(string by)
         {
             try
             {
-                androidDriver.FindElement(by);
+                androidDriver.FindElementByAccessibilityId(by);
                 return true;
             }
             catch (NoSuchElementException)
@@ -53,6 +53,8 @@ namespace BrowserStackIntegration
 
 
         //BOTH OPERATING SYSTEMS
+
+        //Gestures
         public void ScrollDown()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
@@ -103,6 +105,8 @@ namespace BrowserStackIntegration
             .Perform();
             Wait(1);
         }
+
+        //In-Test Commands
         public void Wait(int waitTime)
         {
             Thread.Sleep(TimeSpan.FromSeconds(waitTime));
