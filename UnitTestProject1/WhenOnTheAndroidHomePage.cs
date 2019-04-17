@@ -97,7 +97,7 @@ namespace MobileAppTests
         [Test]
         public async Task GetStationAppConfigTest()
         {
-            await GetPageConfigID();
+            await GetHomePageScreenConfig();
         }
 
     }
