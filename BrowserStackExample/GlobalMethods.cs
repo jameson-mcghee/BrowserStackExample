@@ -37,6 +37,59 @@ namespace BrowserStackIntegration
             }
         }
 
+        //Gestures
+        public void ScrollDownOnIOS()
+        {
+            int screenHeight = iosDriver.Manage().Window.Size.Height;
+            int screenWidth = iosDriver.Manage().Window.Size.Width;
+
+            TouchAction action = new TouchAction(iosDriver);
+            action.Press(screenWidth * 0.5, screenHeight * 0.5)
+            .Wait(1000)
+            .MoveTo(screenHeight * 0.1, screenWidth * 0.1)
+            .Release()
+            .Perform();
+        }
+        public void ScrollUpOnIOS()
+        {
+            int screenHeight = iosDriver.Manage().Window.Size.Height;
+            int screenWidth = iosDriver.Manage().Window.Size.Width;
+
+            TouchAction action = new TouchAction(iosDriver);
+            action.Press(screenWidth * 0.2, screenHeight * 0.2)
+            .Wait(1000)
+            .MoveTo(screenHeight * 0.6, screenWidth * 0.6)
+            .Release()
+            .Perform();
+        }
+        public void SwipeRightToLeftOnIOS()
+        {
+            int screenHeight = iosDriver.Manage().Window.Size.Height;
+            int screenWidth = iosDriver.Manage().Window.Size.Width;
+
+            TouchAction action = new TouchAction(iosDriver);
+            action.Press(screenWidth * 0.8, screenHeight * 0.5)
+            .Wait(1000)
+            .MoveTo(screenWidth * 0.2, screenHeight * 0.5)
+            .Release()
+            .Perform();
+            Wait(1);
+        }
+        public void SwipeLeftToRightOnIOS()
+        {
+            int screenHeight = iosDriver.Manage().Window.Size.Height;
+            int screenWidth = iosDriver.Manage().Window.Size.Width;
+
+            TouchAction action = new TouchAction(iosDriver);
+            action.Press(screenWidth * 0.2, screenHeight * 0.5)
+            .Wait(1000)
+            .MoveTo(screenWidth * 0.8, screenHeight * 0.5)
+            .Release()
+            .Perform();
+            Wait(1);
+        }
+
+
         //ANDROID ONLY
         public bool IsAndroidElementPresent(string by)
         {
@@ -51,11 +104,8 @@ namespace BrowserStackIntegration
             }
         }
 
-
-        //BOTH OPERATING SYSTEMS
-
         //Gestures
-        public void ScrollDown()
+        public void ScrollDownOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;
@@ -67,7 +117,7 @@ namespace BrowserStackIntegration
             .Release()
             .Perform();
         }
-        public void ScrollUp()
+        public void ScrollUpOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;
@@ -79,7 +129,7 @@ namespace BrowserStackIntegration
             .Release()
             .Perform();
         }
-        public void SwipeLeft()
+        public void SwipeRightToLeftOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;
@@ -92,7 +142,7 @@ namespace BrowserStackIntegration
             .Perform();
             Wait(1);
         }
-        public void SwipeRight()
+        public void SwipeLeftToRightOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;

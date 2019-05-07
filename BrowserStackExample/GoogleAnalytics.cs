@@ -70,7 +70,6 @@ namespace BrowserStackIntegration
             {
                 throw new Exception("No Network Log data in the API response.");
             }
-                       
         }
 
     }

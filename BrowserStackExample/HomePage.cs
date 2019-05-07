@@ -21,28 +21,8 @@ namespace BrowserStackIntegration
 
 
         //ANDROID
-        public async Task HomePageIsPresent()
-        {
 
-            for (int i = 0;  ; i++)
-            {
-                if (i >= 45) Assert.Fail("The Home page is not present.");
-                try
-                {
-                    if (IsAndroidElementPresent("component-home-pageWrapper-contentList"))
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    string message = $"The Home page is not present. {ex}";
-                    Debug.WriteLine(message);
-                    //Debug.ReadLine();
-                    Console.WriteLine(message);
-                }
-                Wait(1);
-            }
-        }
-
+            //Obtain the Page Config ID
         public static async Task<dynamic> StationAppConfigRequest(string url)
         {
             try
@@ -65,26 +45,60 @@ namespace BrowserStackIntegration
                 throw;
             }
         }
+        
+        public async Task GetPageConfigID()
+        {
+            dynamic responseStationAppConfig = await StationAppConfigRequest
+                ("https://api-stage.tegna-tv.com/mobile/configuration-ro/getStationAppConfig/51/mobile?subscription-key=fdd842925eb6445f85adb84b30d22838");
+            //Site ID is provided in this URL
+
+            if (responseStationAppConfig.Count == 0)
+            {
+                throw new Exception("No Station App Config information in the API response.");
+            }
+
+            dynamic navigation = responseStationAppConfig.metadata.navigation;
+
+            List<string> pageConfigIDs = new List<string>();
+            List<string> pageNames = new List<string>();
+
+            foreach (dynamic item in navigation)
+            {
+                string pageName = item.name?.ToString();
+                string pageConfigID = item.pageConfigId?.ToString();
+
+                if (string.IsNullOrEmpty(pageName))
+                {
+                    throw new Exception("No Page Name in the API response.");
+                }
+                if (string.IsNullOrEmpty(pageConfigID))
+                {
+                    throw new Exception("No Page Config ID in the API response.");
+                }
+                pageConfigIDs.Add(pageConfigID);
+                pageNames.Add(pageName);
+            }
+            Assert.IsNotNull(pageConfigIDs);
+            Assert.IsNotNull(pageNames);
+        }
 
         public static async Task<dynamic> HomePageScreenConfigRequest(string url)
         {
+            
             try
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
                     httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
-                    var postBody = new List<KeyValuePair<string, string>>();
-                    postBody.Add(new KeyValuePair<string, string>("siteId", "51"));
-                    postBody.Add(new KeyValuePair<string, string>("deviceId", "12345"));
-                    postBody.Add(new KeyValuePair<string, string>("applicationId", "67890"));
-                    postBody.Add(new KeyValuePair<string, string>("pageConfigId", "a355d696-faff-4544-9dde-510e966f700e"));
-                    var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = new FormUrlEncodedContent(postBody) };
-                    //var request = new RestRequest(Method.POST);
-                    //request.AddXmlBody("siteId", "51");
-                    //request.AddXmlBody("deviceId", "12345");
-                    //request.AddXmlBody("applicationId", "67890");
-                    //request.AddXmlBody("pageConfigId", "a355d696-faff-4544-9dde-510e966f700e");
-                    var response = await httpClient.SendAsync(request);
+                    var postBody = new Dictionary<string, string>
+                    {
+                        { "siteId", "51"},
+                        { "deviceId", "12345" },
+                        { "applicationId", "67890" },
+                        { "pageConfigId", "a355d696-faff-4544-9dde-510e966f700e" }
+                    };
+                    var content = new StringContent(JsonConvert.SerializeObject(postBody), Encoding.UTF8, "application/json");
+                    var response = await httpClient.PostAsync(url, content);
                     var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                     return JsonConvert.DeserializeObject(responseString);
                 }
@@ -98,47 +112,12 @@ namespace BrowserStackIntegration
                 Console.WriteLine(message);
                 throw;
             }
+            
         }
-
-
-        public async Task GetPageConfigID()
-        {
-            dynamic responseStationAppConfig = await StationAppConfigRequest
-                ("https://api-stage.tegna-tv.com/mobile/configuration-ro/getStationAppConfig/51/mobile?subscription-key=fdd842925eb6445f85adb84b30d22838");
-            //Site ID is provided in this URL
-
-            if (responseStationAppConfig.Count == 0)
-            {
-                throw new Exception("No Station App Config information in the API response.");
-            }
-
-            dynamic navigation = responseStationAppConfig.metadata.navigation;
-            foreach (dynamic item in navigation)
-            {
-                dynamic pageName = item.name;
-                dynamic pageConfigID = item.pageConfigId;
-
-                if (string.IsNullOrEmpty(pageName?.ToString()))
-                {
-                    throw new Exception("No Page Name in the API response.");
-                }
-                if (string.IsNullOrEmpty(pageConfigID?.ToString()))
-                {
-                    throw new Exception("No Page Config ID in the API response.");
-                }
-
-                Console.WriteLine(pageName);
-                Console.WriteLine(pageConfigID);
-
-            }
-        }
-
-
 
         public async Task GetHomePageScreenConfig()
         {
-            //await GetPageConfigID();
-            // Get the response.
+            
             dynamic responseScreenConfig = await HomePageScreenConfigRequest
                 ("https://api-stage.tegna-tv.com/mobile/configuration-ro/getScreenConfig?subscription-key=fdd842925eb6445f85adb84b30d22838");
 
@@ -147,35 +126,33 @@ namespace BrowserStackIntegration
                 throw new Exception("No Screen Config information in the API response.");
             }
 
+            dynamic pageConfigList = responseScreenConfig.modules;
+
+            int adCount = 0;
+            foreach (dynamic item in pageConfigList)
+            {
+                if (item.name?.ToString() == "advertisementModule")
+                {
+                    adCount++;
+                }
+            }
+            Assert.IsNotNull(adCount);
+
         }
 
-            public async Task ModuleHomePageAdsArePresent()
+        public async Task AndroidHomePageIsPresent()
         {
-            await HomePageIsPresent();
-
-            dynamic screenConfig = null; //do your getScreenConfig call to the API
-
-            Assert.IsTrue(screenConfig?.metadata?.count != null);
-            int screenConfigCount = int.Parse(screenConfig?.metadata?.count?.ToString());
-
             for (int i = 0; ; i++)
             {
-                ScrollDown();
-
-                if (i >= 120) Assert.Fail("The Home Page module ads are not present.");
+                if (i >= 20) Assert.Fail("The Home page is not present.");
                 try
                 {
-                    ReadOnlyCollection<AndroidElement> adlistHomePage = androidDriver.FindElementsByAccessibilityId("module|3|advertisementModule|ad|||");
-                    int adList = adlistHomePage.Count();
-
-                    var bottomPageElement = androidDriver.FindElementByAccessibilityId("");
-                    Assert.IsTrue(bottomPageElement.Displayed);
-                    Assert.IsTrue(screenConfigCount == adList);
-                    break;
+                    if (IsAndroidElementPresent("page||home-wrapper||||"))
+                        break;
                 }
                 catch (Exception ex)
                 {
-                    string message = $"The Home Page module ads are not present. {ex}";
+                    string message = $"The Home page is not present. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
@@ -184,11 +161,66 @@ namespace BrowserStackIntegration
             }
         }
 
+        //
+
+        //public async Task ModuleHomePageAdsArePresent()
+        //{
+        //    await HomePageIsPresentOnAndroid();
+
+        //    dynamic screenConfig = null; //do your getScreenConfig call to the API
+
+        //    Assert.IsTrue(screenConfig?.metadata?.count != null);
+        //    int screenConfigCount = int.Parse(screenConfig?.metadata?.count?.ToString());
+
+        //    for (int i = 0; ; i++)
+        //    {
+        //        ScrollDown();
+
+        //        if (i >= 120) Assert.Fail("The Home Page module ads are not present.");
+        //        try
+        //        {
+        //            ReadOnlyCollection<AndroidElement> adlistHomePage = androidDriver.FindElementsByAccessibilityId("module|3|advertisementModule|ad|||");
+        //            int adList = adlistHomePage.Count();
+
+        //            var bottomPageElement = androidDriver.FindElementByAccessibilityId("");
+        //            Assert.IsTrue(bottomPageElement.Displayed);
+        //            Assert.IsTrue(screenConfigCount == adList);
+        //            break;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            string message = $"The Home Page module ads are not present. {ex}";
+        //            Debug.WriteLine(message);
+        //            //Debug.ReadLine();
+        //            Console.WriteLine(message);
+        //        }
+        //        Wait(1);
+        //    }
+        //}
+
 
 
         //IOS
 
-
-
+        public async Task IOSHomePageIsPresent()
+        {
+            for (int i = 0; ; i++)
+            {
+                if (i >= 20) Assert.Fail("The Home page is not present.");
+                try
+                {
+                    if (IsiOSElementPresent("page||home-wrapper||||"))
+                        break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Home page is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
+            }
+        }
     }
 }

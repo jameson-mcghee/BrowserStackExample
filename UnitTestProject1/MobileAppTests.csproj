@@ -66,8 +66,14 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json.Schema, Version=3.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Schema.3.0.10\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="RestAssured, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestAssured.1.0.0\lib\netstandard2.0\RestAssured.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=106.6.9.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.6.9\lib\net452\RestSharp.dll</HintPath>
@@ -93,11 +99,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Headspring\Enumeration.cs" />
     <Compile Include="SingleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WhenOnTheAndroidHomePage.cs" />
     <Compile Include="WhenLaunchingTheAppOnAndroid.cs" />
     <Compile Include="WhenLaunchingTheAppOniOS.cs" />
+    <Compile Include="WhenOnTheAndroidWatchPage.cs" />
+    <Compile Include="WhenOnTheAndroidWeatherPage.cs" />
+    <Compile Include="WhenOnTheiOSHomePage.cs" />
+    <Compile Include="WhenOnTheiOSWatchPage.cs" />
+    <Compile Include="WhenOnTheiOSWeatherPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -113,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Headspring\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

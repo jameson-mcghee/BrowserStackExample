@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using BrowserStackIntegration;
 using System.Linq;
+using System.Diagnostics;
+using System;
+using System.Threading;
 
 namespace MobileAppTests
 {
@@ -10,7 +13,7 @@ namespace MobileAppTests
     //[TestFixture("parallel", "pixel-3")]
     //[TestFixture("parallel", "galaxy-s7")]
     //[TestFixture("parallel", "galaxy-s8")]
-    //[TestFixture("parallel", "galaxy-s9")]
+    [TestFixture("parallel", "galaxy-s9")]
     //[TestFixture("parallel", "galaxy-note8")]
     //[TestFixture("parallel", "galaxy-note9")]
     //[TestFixture("parallel", "galaxy-note4")]
@@ -45,14 +48,29 @@ namespace MobileAppTests
             Assert.IsTrue(sponsoredByElement.Contains("Sponsored By"), sponsoredByElement + "'Sponsored by' message does not contain 'Sponsored By'.");
         }
 
-        //[Test]
+        [Test]
         public async Task TheDayPartingScreenAdIsPresent()
         {
-            await AndroidDayPartingScreenAdIsPresent();
-            Assert.IsTrue(androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Displayed);
+            for (int i = 0; ; i++)
+            {
+                if (i >= 40) Assert.Fail("The Day Parting Screen Ad is not present.");
+                try
+                {
+                    if (IsAndroidElementPresent("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|"))
+                        break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Day Parting Screen Ad is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Thread.Sleep(TimeSpan.FromMilliseconds(250));
+            }
         }
 
-        [Test]
+        //[Test]
         public async Task TheGoogleAnalyticsCallsArePresent()
         {
             await TheDayPartingScreenAdIsPresent();
