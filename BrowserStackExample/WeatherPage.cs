@@ -15,12 +15,16 @@ namespace BrowserStackIntegration
         //Android
         public async Task AndroidWeatherPageIsPresent()
         {
+            await AndroidHomePageIsPresent();
+
             for (int i = 0; ; i++)
             {
-                if (i >= 20) Assert.Fail("The Weather Page is not present.");
+                await SwipeRightToLeftOnAndroid();
+
+                if (i >= 5) Assert.Fail("The Weather Page is not present.");
                 try
                 {
-                    if (IsAndroidElementPresent("page||weather-page-wrapper||||"))
+                    if (IsAndroidElementPresent("page||weather-wrapper||||"))
                         break;
                 }
                 catch (Exception ex)
@@ -37,12 +41,16 @@ namespace BrowserStackIntegration
         //iOS
         public async Task IOSWeatherPageIsPresent()
         {
+            await IOSHomePageIsPresent();
+
             for (int i = 0; ; i++)
             {
-                if (i >= 20) Assert.Fail("The Weather Page is not present.");
+                await SwipeRightToLeftOnIOS();
+
+                if (i >= 5) Assert.Fail("The Weather Page is not present.");
                 try
                 {
-                    if (IsiOSElementPresent("page||weather-page-wrapper||||"))
+                    if (IsiOSElementPresent("page||weather-wrapper||||"))
                         break;
                 }
                 catch (Exception ex)

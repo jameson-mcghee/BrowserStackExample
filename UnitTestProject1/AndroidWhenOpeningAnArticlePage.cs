@@ -24,34 +24,51 @@ namespace MobileAppTests
     ////[TestFixture("parallel", "nexus-9")] //tablet
     ////[TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenOnTheAndroidWeatherPage : WeatherPage
+    public class AndroidWhenOpeningAnArticlePage : ArticlePage
     {
-        public WhenOnTheAndroidWeatherPage(string profile, string device) : base(profile, device) { }
+        public AndroidWhenOpeningAnArticlePage(string profile, string device) : base(profile, device) { }
 
         [Test]
-        public async Task TheWeatherPageIsPresent()
+        public async Task TheArticlePageIsPresent()
         {
             await AndroidHomePageIsPresent();
-
-            SwipeRightToLeftOnAndroid();
-            if (IsAndroidElementPresent("page || weather - page - wrapper ||||"))
+            if(IsAndroidElementPresent("module|first"))
             {
-                Assert.Pass();
+                androidDriver.FindElementByAccessibilityId("module|first").Click();
             }
             else
             {
-                Assert.Fail("The Weather Page is not present.");
+                Assert.Fail("The element for the first article on the Home Page cannot be found.");
             }
-            
+
+            for (int i = 0; ; i++)
+            {
+                if (i >= 10) Assert.Fail("The Article Page is not present.");
+                try
+                {
+                    if (IsAndroidElementPresent("page||article-page-wrapper||||"))
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Article Page is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
+            }
         }
 
         [Test]
-        public async Task TheWeatherPageBannerAdIsPresent()
+        public async Task TheArticlePageBannerAdIsPresent()
         {
-            await AndroidWeatherPageIsPresent();
+            await AndroidArticlePageIsPresent();
             for (int i = 0; ; i++)
             {
-                if (i >= 10) Assert.Fail("The Weather Page banner ad is not present.");
+                if (i >= 10) Assert.Fail("The Article Page banner ad is not present.");
                 try
                 {
                     if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
@@ -59,7 +76,7 @@ namespace MobileAppTests
                 }
                 catch (Exception ex)
                 {
-                    string message = $"The Weather Page banner ad is not present. {ex}";
+                    string message = $"The Article Page banner ad is not present. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
@@ -71,16 +88,16 @@ namespace MobileAppTests
         [Test]
         public async Task ConfirmAdModulesArePresentAndCount()
         {
-            await AndroidWeatherPageIsPresent();
+            await AndroidArticlePageIsPresent();
 
             int adModuleCount = 0;
 
             for (int i = 0; ; i++)
             {
-                if (i >= 90) Assert.Fail("Could not find the last element on the Weather Page prior to time out.");
+                if (i >= 120) Assert.Fail("Could not find the last element on the Watch Page prior to time out.");
                 try
                 {
-                    ScrollDownOnAndroid();
+                    await ScrollDownOnAndroid();
 
                     if (IsAndroidElementPresent("module|advertisement"))
                     {
@@ -93,7 +110,7 @@ namespace MobileAppTests
                 }
                 catch (Exception ex)
                 {
-                    string message = $"Could not find the last element on the Weather Page. {ex}";
+                    string message = $"Could not find the last element on the Watch Page. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
@@ -101,7 +118,7 @@ namespace MobileAppTests
                 Wait(1);
             }
 
-            Console.Write("Number of ad modules on the Weather Page: " + adModuleCount);
+            Console.Write("Number of ad modules on the Watch Page: " + adModuleCount);
         }
     }
 }

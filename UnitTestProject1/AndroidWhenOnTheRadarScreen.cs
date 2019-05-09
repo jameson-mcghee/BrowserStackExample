@@ -24,41 +24,35 @@ namespace MobileAppTests
     ////[TestFixture("parallel", "nexus-9")] //tablet
     ////[TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenOnTheAndroidWatchPage : WatchPage
+    public class AndroidWhenOnTheRadarScreen : RadarScreen
     {
-        public WhenOnTheAndroidWatchPage(string profile, string device) : base(profile, device) { }
+        public AndroidWhenOnTheRadarScreen(string profile, string device) : base(profile, device) { }
 
         [Test]
-        public async Task TheWatchPageIsPresent()
+        public async Task TheRadarScreenIsPresent()
         {
             await AndroidWeatherPageIsPresent();
-
-            SwipeRightToLeftOnAndroid();
-            if (IsAndroidElementPresent("page||watch-page-wrapper||||"))
+            if(IsAndroidElementPresent("button|||explore-radars||weather page|"))
             {
-                Assert.Pass();
+                androidDriver.FindElementByAccessibilityId("button|||explore-radars||weather page|").Click();
             }
             else
             {
-                Assert.Fail("The Watch Page is not present.");
+                Assert.Fail("Explore Radars button is not present.");
             }
-        }
 
-        [Test]
-        public async Task TheWatchPageBannerAdIsPresent()
-        {
-            await AndroidWatchPageIsPresent();
             for (int i = 0; ; i++)
             {
-                if (i >= 10) Assert.Fail("The Watch Page banner ad is not present.");
+
+                if (i >= 5) Assert.Fail("The Radar Screen is not present.");
                 try
                 {
-                    if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
+                    if (IsAndroidElementPresent("page||radar-viewer||||"))
                         break;
                 }
                 catch (Exception ex)
                 {
-                    string message = $"The Watch Page banner ad is not present. {ex}";
+                    string message = $"The Radar Screen is not present. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
@@ -68,39 +62,26 @@ namespace MobileAppTests
         }
 
         [Test]
-        public async Task ConfirmAdModulesArePresentAndCount()
+        public async Task TheRadarScreenBannerAdIsPresent()
         {
-            await AndroidWatchPageIsPresent();
-
-            int adModuleCount = 0;
-
+            await AndroidRadarScreenIsPresent();
             for (int i = 0; ; i++)
             {
-                if (i >= 120) Assert.Fail("Could not find the last element on the Watch Page prior to time out.");
+                if (i >= 10) Assert.Fail("The Radar Screen banner ad is not present.");
                 try
                 {
-                    ScrollDownOnAndroid();
-
-                    if (IsAndroidElementPresent("module|advertisement"))
-                    {
-                        adModuleCount++;
-                    }
-                    if (IsAndroidElementPresent("module|last"))
-                    {
+                    if (IsAndroidElementPresent("ad|-2|non-module|advertisementModule|0|manually placed in radar-viewer|"))
                         break;
-                    }
                 }
                 catch (Exception ex)
                 {
-                    string message = $"Could not find the last element on the Watch Page. {ex}";
+                    string message = $"The Radar Screen banner ad is not present. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 Wait(1);
             }
-
-            Console.Write("Number of ad modules on the Watch Page: " + adModuleCount);
         }
     }
 }

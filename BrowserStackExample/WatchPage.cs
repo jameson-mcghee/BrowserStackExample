@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +17,28 @@ namespace BrowserStackIntegration
         {
             await AndroidWeatherPageIsPresent();
 
-            SwipeRightToLeftOnAndroid();
-            if (IsAndroidElementPresent("page||watch-page-wrapper||||"))
+            for (int i = 0; ; i++)
             {
-                Assert.Pass();
-            }
-            else
-            {
-                Assert.Fail("The Watch Page is not present.");
+                await ScrollDownOnAndroid();
+                Wait(1);
+                await SwipeRightToLeftOnAndroid();
+
+                if (i >= 5) Assert.Fail("The Watch Page is not present.");
+                try
+                {
+                    if (IsAndroidElementPresent("page||watch-wrapper||||"))
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Watch Page is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+
             }
         }
 
@@ -32,14 +47,28 @@ namespace BrowserStackIntegration
         {
             await IOSWeatherPageIsPresent();
 
-            SwipeRightToLeftOnIOS();
-            if (IsiOSElementPresent("page||watch-page-wrapper||||"))
+            for (int i = 0; ; i++)
             {
-                Assert.Pass();
-            }
-            else
-            {
-                Assert.Fail("The Watch Page is not present.");
+                await ScrollDownOnIOS();
+                Wait(1);
+                await SwipeRightToLeftOnIOS();
+
+                if (i >= 5) Assert.Fail("The Watch Page is not present.");
+                try
+                {
+                    if (IsiOSElementPresent("page||watch-wrapper||||"))
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Watch Page is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+
             }
         }
     }

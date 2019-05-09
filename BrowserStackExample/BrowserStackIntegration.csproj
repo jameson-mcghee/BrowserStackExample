@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticlePage.cs" />
     <Compile Include="BrowserStackIntegrationImplementation.cs" />
     <Compile Include="DayPartingScreen.cs" />
     <Compile Include="GlobalMethods.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Headspring\Enumeration.cs" />
     <Compile Include="HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RadarScreen.cs" />
     <Compile Include="WatchPage.cs" />
     <Compile Include="WeatherPage.cs" />
   </ItemGroup>

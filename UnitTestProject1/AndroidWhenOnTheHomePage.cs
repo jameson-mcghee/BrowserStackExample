@@ -11,17 +11,27 @@ using OpenQA.Selenium.Appium;
 
 namespace MobileAppTests
 {
-    //[TestFixture("parallel", "iphone-8")]
-    //[TestFixture("parallel", "iphone-8-plus")]
-    //[TestFixture("parallel", "iphone-se")]
-    [TestFixture("parallel", "iphone-xs")]
-    //[TestFixture("parallel", "ipad-pro")]
-    //[TestFixture("parallel", "ipad-5th")]
+    //[TestFixture("parallel", "pixel")]
+    //[TestFixture("parallel", "pixel-2")]
+    //[TestFixture("parallel", "pixel-3")]
+    //[TestFixture("parallel", "galaxy-s7")]
+    //[TestFixture("parallel", "galaxy-s8")]
+    [TestFixture("parallel", "galaxy-s9")]
+    //[TestFixture("parallel", "galaxy-note8")]
+    //[TestFixture("parallel", "galaxy-note9")]
+    //[TestFixture("parallel", "galaxy-note4")]
+    ////[TestFixture("parallel", "galaxy-s6")] //App or one of the otherApps cannot be run on version 5.0.
+    ////[TestFixture("parallel", "nexus-9")] //tablet
+    ////[TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenOnTheiOSHomePage : HomePage
+    public class AndroidWhenOnTheHomePage : HomePage
     {
-        public WhenOnTheiOSHomePage(string profile, string device) : base(profile, device) { }
+        public AndroidWhenOnTheHomePage(string profile, string device) : base(profile, device) { }
 
+        //const string URL1 = "GAURL1";
+        //const string URL2 = "GAURL2";
+        //const string URL3 = "GAURL3";
+        //const string URL4 = "GAURL4";
 
         [Test]
         public async Task TheHomePageIsPresent()
@@ -31,7 +41,7 @@ namespace MobileAppTests
                 if (i >= 20) Assert.Fail("The Home page is not present.");
                 try
                 {
-                    if (IsiOSElementPresent("page||home-page-wrapper||||"))
+                    if (IsAndroidElementPresent("page||home-wrapper||||"))
                         break;
                 }
                 catch (Exception ex)
@@ -48,14 +58,13 @@ namespace MobileAppTests
         [Test]
         public async Task TheHomePageBannerAdIsPresent()
         {
-            await IOSHomePageIsPresent();
+            await AndroidHomePageIsPresent();
             for (int i = 0; ; i++)
             {
-                await ApproveiOSAlerts();
                 if (i >= 10) Assert.Fail("The Home Page banner ad is not present.");
                 try
                 {
-                    if (IsiOSElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
+                    if(IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
                         break;
                 }
                 catch (Exception ex)
@@ -72,7 +81,7 @@ namespace MobileAppTests
         [Test]
         public async Task ConfirmAdModulesArePresentAndCount()
         {
-            await IOSHomePageIsPresent();
+            await AndroidHomePageIsPresent();
 
             int adModuleCount = 0;
 
@@ -81,13 +90,14 @@ namespace MobileAppTests
                 if (i >= 260) Assert.Fail("Could not find the last element on the Home Page prior to time out.");
                 try
                 {
-                    ScrollDownOnIOS();
+                    await ScrollDownOnAndroid();
+                    Wait(1);
 
-                    if (IsiOSElementPresent("module|advertisement"))
+                    if (IsAndroidElementPresent("module|advertisement"))
                     {
                         adModuleCount++;
                     }
-                    if (IsiOSElementPresent("module|last"))
+                    if (IsAndroidElementPresent("module|last"))
                     {
                         break;
                     }
@@ -99,10 +109,37 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
             }
 
             Console.Write("Number of ad modules on the Home Page: " + adModuleCount);
+        }
+
+        [Test]
+        public async Task GetStationAppConfigTest()
+        {
+            await GetHomePageScreenConfig();
+        }
+
+        [Test]
+        public async Task GetStationID()
+        {
+            await GetPageConfigID();
+        }
+
+        //[Test]
+        public async Task TheNumberOfAdModulesOnTheHomePageIsCorrect()
+        {
+           //await ModuleHomePageAdsArePresent();
+        }
+        //[Test]
+        public async Task TheGoogleAnalyticsCallsAreCorrect()
+        {
+            await AndroidHomePageIsPresent();
+            await GetNetworkLogs();
+            //Figure out how to pass the network logs from the GetNetworkLogs() method into this method
+            //Stub out the comparison of the network logs to URL1-4
+            //var doesUrlExist = failingUrl.Contains(URL1);
+            //doesUrlExist.Should().BeTrue();
         }
     }
 }

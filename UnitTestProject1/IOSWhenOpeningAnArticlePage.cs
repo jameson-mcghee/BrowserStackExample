@@ -18,33 +18,51 @@ namespace MobileAppTests
     //[TestFixture("parallel", "ipad-pro")]
     //[TestFixture("parallel", "ipad-5th")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenOnTheIOSWatchPage : WatchPage
+    public class IOSWhenOpeningAnArticlePage : ArticlePage
     {
-        public WhenOnTheIOSWatchPage(string profile, string device) : base(profile, device) { }
+        public IOSWhenOpeningAnArticlePage(string profile, string device) : base(profile, device) { }
 
         [Test]
-        public async Task TheWatchPageIsPresent()
+        public async Task TheArticlePageIsPresent()
         {
-            await IOSWeatherPageIsPresent();
-
-            SwipeRightToLeftOnIOS();
-            if (IsiOSElementPresent("page||watch-page-wrapper||||"))
+            await IOSHomePageIsPresent();
+            if (IsiOSElementPresent("module|first"))
             {
-                Assert.Pass();
+                iosDriver.FindElementByAccessibilityId("module|first").Click();
             }
             else
             {
-                Assert.Fail("The Watch Page is not present.");
+                Assert.Fail("The element for the first article on the Home Page cannot be found.");
+            }
+
+            for (int i = 0; ; i++)
+            {
+                if (i >= 10) Assert.Fail("The Article Page is not present.");
+                try
+                {
+                    if (IsiOSElementPresent("page||article-page-wrapper||||"))
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Article Page is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
             }
         }
 
         [Test]
-        public async Task TheWatchPageBannerAdIsPresent()
+        public async Task TheArticlePageBannerAdIsPresent()
         {
-            await IOSWatchPageIsPresent();
+            await IOSArticlePageIsPresent();
             for (int i = 0; ; i++)
             {
-                if (i >= 10) Assert.Fail("The Watch Page banner ad is not present.");
+                if (i >= 10) Assert.Fail("The Article Page banner ad is not present.");
                 try
                 {
                     if (IsiOSElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
@@ -52,7 +70,7 @@ namespace MobileAppTests
                 }
                 catch (Exception ex)
                 {
-                    string message = $"The Watch Page banner ad is not present. {ex}";
+                    string message = $"The Article Page banner ad is not present. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
@@ -64,7 +82,7 @@ namespace MobileAppTests
         [Test]
         public async Task ConfirmAdModulesArePresentAndCount()
         {
-            await IOSWatchPageIsPresent();
+            await IOSArticlePageIsPresent();
 
             int adModuleCount = 0;
 
@@ -73,7 +91,7 @@ namespace MobileAppTests
                 if (i >= 120) Assert.Fail("Could not find the last element on the Watch Page prior to time out.");
                 try
                 {
-                    ScrollDownOnIOS();
+                    await ScrollDownOnAndroid();
 
                     if (IsiOSElementPresent("module|advertisement"))
                     {

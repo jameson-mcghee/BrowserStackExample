@@ -16,9 +16,9 @@ namespace MobileAppTests
     //[TestFixture("parallel", "ipad-pro")]
     //[TestFixture("parallel", "ipad-5th")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenLaunchingTheAppOniOS : DayPartingScreen
+    public class IOSWhenLaunchingTheApp : DayPartingScreen
     {
-        public WhenLaunchingTheAppOniOS(string profile, string device) : base(profile, device) { }
+        public IOSWhenLaunchingTheApp(string profile, string device) : base(profile, device) { }
 
         //[Test]
         public async Task TheUserCanAccessTheDayPartingScreen()

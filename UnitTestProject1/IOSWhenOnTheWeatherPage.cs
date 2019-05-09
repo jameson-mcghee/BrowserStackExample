@@ -18,23 +18,33 @@ namespace MobileAppTests
     //[TestFixture("parallel", "ipad-pro")]
     //[TestFixture("parallel", "ipad-5th")]
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenOnTheIOSWeatherPage : WeatherPage
+    public class IOSWhenOnTheWeatherPage : WeatherPage
     {
-        public WhenOnTheIOSWeatherPage(string profile, string device) : base(profile, device) { }
+        public IOSWhenOnTheWeatherPage(string profile, string device) : base(profile, device) { }
 
         [Test]
         public async Task TheWeatherPageIsPresent()
         {
             await IOSHomePageIsPresent();
 
-            SwipeRightToLeftOnIOS();
-            if (IsiOSElementPresent("page || weather - page - wrapper ||||"))
+            for (int i = 0; ; i++)
             {
-                Assert.Pass();
-            }
-            else
-            {
-                Assert.Fail("The Weather Page is not present.");
+                await SwipeRightToLeftOnIOS();
+
+                if (i >= 5) Assert.Fail("The Weather Page is not present.");
+                try
+                {
+                    if (IsiOSElementPresent("page||weather-wrapper||||"))
+                        break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"The Weather Page is not present. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
             }
 
         }
@@ -74,7 +84,7 @@ namespace MobileAppTests
                 if (i >= 90) Assert.Fail("Could not find the last element on the Weather Page prior to time out.");
                 try
                 {
-                    ScrollDownOnIOS();
+                    await ScrollDownOnIOS();
 
                     if (IsiOSElementPresent("module|advertisement"))
                     {

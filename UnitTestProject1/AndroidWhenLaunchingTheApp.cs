@@ -21,16 +21,30 @@ namespace MobileAppTests
     ////[TestFixture("parallel", "nexus-9")] //Tablet
     ////[TestFixture("parallel", "galaxy-tabs4")] //Tablet
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenLaunchingTheAppOnAndroid : DayPartingScreen
+    public class AndroidWhenLaunchingTheApp : DayPartingScreen
     {
-        public WhenLaunchingTheAppOnAndroid(string profile, string device) : base(profile, device) { }
+        public AndroidWhenLaunchingTheApp(string profile, string device) : base(profile, device) { }
 
-        //[Test]
+        [Test]
         public async Task TheUserCanAccessTheDayPartingScreen()
         {
-            await AndroidUserCanAccessTheDayPartingScreen();
-            Assert.IsTrue(androidDriver.FindElementByAccessibilityId
-                ("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|").Displayed);
+            for (int i = 0; ; i++)
+            {
+                if (i >= 15) Assert.Fail("Day Parting Screen is not being displayed.");
+                try
+                {
+                    if (IsAndroidElementPresent("page||splash-screen-wrapper||||"))
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    string message = $"Day Parting Screen is not being displayed. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
+            }
 
         }
 
@@ -53,10 +67,10 @@ namespace MobileAppTests
         {
             for (int i = 0; ; i++)
             {
-                if (i >= 40) Assert.Fail("The Day Parting Screen Ad is not present.");
+                if (i >= 10) Assert.Fail("The Day Parting Screen Ad is not present.");
                 try
                 {
-                    if (IsAndroidElementPresent("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|"))
+                    if (IsAndroidElementPresent("ad|-4|non-module|advertisementModule|0|manually placed in splash-screen|"))
                         break;
                 }
                 catch (Exception ex)
@@ -66,7 +80,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Thread.Sleep(TimeSpan.FromMilliseconds(250));
+                Wait(1);
             }
         }
 

@@ -24,52 +24,55 @@ namespace MobileAppTests
     ////[TestFixture("parallel", "nexus-9")] //tablet
     ////[TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
-    public class WhenOnTheAndroidHomePage : HomePage
-    {     
-        public WhenOnTheAndroidHomePage(string profile, string device) : base(profile, device) { }
-
-        //const string URL1 = "GAURL1";
-        //const string URL2 = "GAURL2";
-        //const string URL3 = "GAURL3";
-        //const string URL4 = "GAURL4";
+    public class AndroidWhenOnTheWatchPage : WatchPage
+    {
+        public AndroidWhenOnTheWatchPage(string profile, string device) : base(profile, device) { }
 
         [Test]
-        public async Task TheHomePageIsPresent()
+        public async Task TheWatchPageIsPresent()
         {
+            await AndroidWeatherPageIsPresent();
+
             for (int i = 0; ; i++)
             {
-                if (i >= 20) Assert.Fail("The Home page is not present.");
+                await ScrollDownOnAndroid();
+                Wait(1);
+                await SwipeRightToLeftOnAndroid();
+
+                if (i >= 5) Assert.Fail("The Watch Page is not present.");
                 try
                 {
-                    if (IsAndroidElementPresent("page||home-page-wrapper||||"))
+                    if (IsAndroidElementPresent("page||watch-wrapper||||"))
+                    {
                         break;
+                    }
                 }
                 catch (Exception ex)
                 {
-                    string message = $"The Home page is not present. {ex}";
+                    string message = $"The Watch Page is not present. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                
             }
         }
 
         [Test]
-        public async Task TheHomePageBannerAdIsPresent()
+        public async Task TheWatchPageBannerAdIsPresent()
         {
-            await AndroidHomePageIsPresent();
+            await AndroidWatchPageIsPresent();
             for (int i = 0; ; i++)
             {
-                if (i >= 10) Assert.Fail("The Home Page banner ad is not present.");
+                if (i >= 10) Assert.Fail("The Watch Page banner ad is not present.");
                 try
                 {
-                    if(IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
+                    if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
                         break;
                 }
                 catch (Exception ex)
                 {
-                    string message = $"The Home Page banner ad is not present. {ex}";
+                    string message = $"The Watch Page banner ad is not present. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
@@ -81,16 +84,16 @@ namespace MobileAppTests
         [Test]
         public async Task ConfirmAdModulesArePresentAndCount()
         {
-            await AndroidHomePageIsPresent();
+            await AndroidWatchPageIsPresent();
 
             int adModuleCount = 0;
 
             for (int i = 0; ; i++)
             {
-                if (i >= 260) Assert.Fail("Could not find the last element on the Home Page prior to time out.");
+                if (i >= 120) Assert.Fail("Could not find the last element on the Watch Page prior to time out.");
                 try
                 {
-                    ScrollDownOnAndroid();
+                    await ScrollDownOnAndroid();
 
                     if (IsAndroidElementPresent("module|advertisement"))
                     {
@@ -103,7 +106,7 @@ namespace MobileAppTests
                 }
                 catch (Exception ex)
                 {
-                    string message = $"Could not find the last element on the Home Page. {ex}";
+                    string message = $"Could not find the last element on the Watch Page. {ex}";
                     Debug.WriteLine(message);
                     //Debug.ReadLine();
                     Console.WriteLine(message);
@@ -111,35 +114,7 @@ namespace MobileAppTests
                 Wait(1);
             }
 
-            Console.Write("Number of ad modules on the Home Page: " + adModuleCount);
-        }
-
-        //[Test]
-        public async Task TheNumberOfAdModulesOnTheHomePageIsCorrect()
-        {
-           //await ModuleHomePageAdsArePresent();
-        }
-        //[Test]
-        public async Task TheGoogleAnalyticsCallsAreCorrect()
-        {
-            await AndroidHomePageIsPresent();
-            await GetNetworkLogs();
-            //Figure out how to pass the network logs from the GetNetworkLogs() method into this method
-            //Stub out the comparison of the network logs to URL1-4
-            //var doesUrlExist = failingUrl.Contains(URL1);
-            //doesUrlExist.Should().BeTrue();
-        }
-
-        [Test]
-        public async Task GetStationAppConfigTest()
-        {
-            await GetHomePageScreenConfig();
-        }
-
-        [Test]
-        public async Task GetStationID()
-        {
-            await GetPageConfigID();
+            Console.Write("Number of ad modules on the Watch Page: " + adModuleCount);
         }
     }
 }

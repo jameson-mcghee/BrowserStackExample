@@ -77,6 +77,7 @@ namespace BrowserStackIntegration
                 }
                 pageConfigIDs.Add(pageConfigID);
                 pageNames.Add(pageName);
+                Console.WriteLine(pageName + ": " + pageConfigID);
             }
             Assert.IsNotNull(pageConfigIDs);
             Assert.IsNotNull(pageNames);
@@ -95,7 +96,7 @@ namespace BrowserStackIntegration
                         { "siteId", "51"},
                         { "deviceId", "12345" },
                         { "applicationId", "67890" },
-                        { "pageConfigId", "a355d696-faff-4544-9dde-510e966f700e" }
+                        { "pageConfigId", "23cf3231-ec01-48df-b6c6-9dcd4fd336e8" }
                     };
                     var content = new StringContent(JsonConvert.SerializeObject(postBody), Encoding.UTF8, "application/json");
                     var response = await httpClient.PostAsync(url, content);
@@ -117,14 +118,10 @@ namespace BrowserStackIntegration
 
         public async Task GetHomePageScreenConfig()
         {
-            
             dynamic responseScreenConfig = await HomePageScreenConfigRequest
                 ("https://api-stage.tegna-tv.com/mobile/configuration-ro/getScreenConfig?subscription-key=fdd842925eb6445f85adb84b30d22838");
 
-            if (responseScreenConfig.Count == 0)
-            {
-                throw new Exception("No Screen Config information in the API response.");
-            }
+            Assert.IsNotNull(responseScreenConfig, "No screen config information in the API response. ");
 
             dynamic pageConfigList = responseScreenConfig.modules;
 
@@ -136,8 +133,8 @@ namespace BrowserStackIntegration
                     adCount++;
                 }
             }
-            Assert.IsNotNull(adCount);
-
+            Assert.IsNotNull(adCount, "Advertisement Module count in the screen config is null. ");
+            Console.WriteLine("The screen config ad module count is: " + adCount);
         }
 
         public async Task AndroidHomePageIsPresent()
@@ -161,7 +158,6 @@ namespace BrowserStackIntegration
             }
         }
 
-        //
 
         //public async Task ModuleHomePageAdsArePresent()
         //{

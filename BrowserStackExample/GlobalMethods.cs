@@ -38,31 +38,31 @@ namespace BrowserStackIntegration
         }
 
         //Gestures
-        public void ScrollDownOnIOS()
+        public async Task ScrollDownOnIOS()
         {
             int screenHeight = iosDriver.Manage().Window.Size.Height;
             int screenWidth = iosDriver.Manage().Window.Size.Width;
 
             TouchAction action = new TouchAction(iosDriver);
-            action.Press(screenWidth * 0.5, screenHeight * 0.5)
+            action.Press(screenWidth * 0.5, screenHeight * 0.8)
             .Wait(1000)
-            .MoveTo(screenHeight * 0.1, screenWidth * 0.1)
+            .MoveTo(screenWidth * 0.5, screenHeight * 0.1)
             .Release()
             .Perform();
         }
-        public void ScrollUpOnIOS()
+        public async Task ScrollUpOnIOS()
         {
             int screenHeight = iosDriver.Manage().Window.Size.Height;
             int screenWidth = iosDriver.Manage().Window.Size.Width;
 
             TouchAction action = new TouchAction(iosDriver);
-            action.Press(screenWidth * 0.2, screenHeight * 0.2)
+            action.Press(screenWidth * 0.5, screenHeight * 0.2)
             .Wait(1000)
-            .MoveTo(screenHeight * 0.6, screenWidth * 0.6)
+            .MoveTo(screenWidth * 0.5, screenHeight * 0.8)
             .Release()
             .Perform();
         }
-        public void SwipeRightToLeftOnIOS()
+        public async Task SwipeRightToLeftOnIOS()
         {
             int screenHeight = iosDriver.Manage().Window.Size.Height;
             int screenWidth = iosDriver.Manage().Window.Size.Width;
@@ -75,7 +75,7 @@ namespace BrowserStackIntegration
             .Perform();
             Wait(1);
         }
-        public void SwipeLeftToRightOnIOS()
+        public async Task SwipeLeftToRightOnIOS()
         {
             int screenHeight = iosDriver.Manage().Window.Size.Height;
             int screenWidth = iosDriver.Manage().Window.Size.Width;
@@ -104,32 +104,45 @@ namespace BrowserStackIntegration
             }
         }
 
+        public async Task ApproveAndroidAlerts()
+        {
+            try
+            {
+                while (true)
+                    androidDriver.SwitchTo().Alert().Accept();
+            }
+            catch (Exception e)
+            {
+                //no more alerts
+            }
+        }
+
         //Gestures
-        public void ScrollDownOnAndroid()
+        public async Task ScrollDownOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;
 
             TouchAction action = new TouchAction(androidDriver);
-            action.Press(screenWidth * 0.5, screenHeight * 0.5)
+            action.Press(screenWidth * 0.5, screenHeight * 0.75)
             .Wait(1000)
-            .MoveTo(screenHeight * 0.1, screenWidth * 0.1)
+            .MoveTo(screenWidth * 0.5, screenHeight * 0.1)
             .Release()
             .Perform();
         }
-        public void ScrollUpOnAndroid()
+        public async Task ScrollUpOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;
 
             TouchAction action = new TouchAction(androidDriver);
-            action.Press(screenWidth * 0.2, screenHeight * 0.2)
+            action.Press(screenWidth * 0.5, screenHeight * 0.2)
             .Wait(1000)
-            .MoveTo(screenHeight * 0.6, screenWidth * 0.6)
+            .MoveTo(screenWidth * 0.5, screenHeight * 0.85)
             .Release()
             .Perform();
         }
-        public void SwipeRightToLeftOnAndroid()
+        public async Task SwipeRightToLeftOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;
@@ -142,7 +155,7 @@ namespace BrowserStackIntegration
             .Perform();
             Wait(1);
         }
-        public void SwipeLeftToRightOnAndroid()
+        public async Task SwipeLeftToRightOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;

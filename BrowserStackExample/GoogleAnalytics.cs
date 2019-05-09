@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
-using System.IO;
 using System.Configuration;
 using NUnit.Framework;
 using Newtonsoft.Json;
@@ -50,26 +47,23 @@ namespace BrowserStackIntegration
         {
 
             // Get the response.
-            dynamic responseSession = await GetSessionResponseAsync("https://api-cloud.browserstack.com/app-automate/builds/0085f3aa4b2d24d533398891ebf5b05f97fe8286/sessions.json?limit=1");
-
-            if (responseSession.Count == 0)
-            {
-                throw new Exception("No session information in the API response.");
-            }
+            dynamic responseSession = await GetSessionResponseAsync
+                ("https://api-cloud.browserstack.com/app-automate/builds/0085f3aa4b2d24d533398891ebf5b05f97fe8286/sessions.json?limit=1");
+            Assert.Greater(responseSession, 0, "No session information in the API response. ");
 
             dynamic sessionLog = responseSession[0].automation_session;
             dynamic sessionId = sessionLog.hashed_id;
 
+            //Assert.IsNotNull(sessionId, "No Session ID in the API response. ");
+            //Is the above Assertion the same as the below if statement?
             if (string.IsNullOrEmpty(sessionId?.ToString()))
             {
                 throw new Exception("No Session ID in the API response.");
             }
 
-            dynamic responseNetwork = await GetSessionResponseAsync("https://api-cloud.browserstack.com/app-automate/builds/<build-id>/sessions/" + sessionId + "/networklogs");
-            if (responseNetwork.Count == 0)
-            {
-                throw new Exception("No Network Log data in the API response.");
-            }
+            dynamic responseNetwork = await GetSessionResponseAsync
+                ("https://api-cloud.browserstack.com/app-automate/builds/<build-id>/sessions/" + sessionId + "/networklogs");
+            Assert.Greater(responseNetwork, 0, "No Network Log data in the API response. ");
         }
 
     }
