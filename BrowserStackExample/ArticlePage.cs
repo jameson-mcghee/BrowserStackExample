@@ -18,7 +18,7 @@ namespace BrowserStackIntegration
             await AndroidHomePageIsPresent();
             if (IsAndroidElementPresent("module|first"))
             {
-                androidDriver.FindElementByAccessibilityId("module|first").Click();
+                await AndroidClickCommand("module|first");
             }
             else
             {
@@ -52,7 +52,7 @@ namespace BrowserStackIntegration
             await IOSHomePageIsPresent();
             if (IsiOSElementPresent("module|first"))
             {
-                iosDriver.FindElementByAccessibilityId("module|first").Click();
+                await IOSClickCommand("module|first");
             }
             else
             {

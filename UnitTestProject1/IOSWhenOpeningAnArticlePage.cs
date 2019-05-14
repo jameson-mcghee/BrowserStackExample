@@ -28,7 +28,7 @@ namespace MobileAppTests
             await IOSHomePageIsPresent();
             if (IsiOSElementPresent("module|first"))
             {
-                iosDriver.FindElementByAccessibilityId("module|first").Click();
+                await IOSClickCommand("module|first");
             }
             else
             {

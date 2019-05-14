@@ -99,7 +99,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidWhenOnTheSettingsScreen.cs" />
+    <Compile Include="AndroidWhenOnTheTopicPage.cs" />
+    <Compile Include="AndroidWhenUsingTheNavigationPanel.cs" />
     <Compile Include="Headspring\Enumeration.cs" />
+    <Compile Include="IOSWhenOnTheSettingsScreen.cs" />
+    <Compile Include="IOSWhenOnTheTopicPage.cs" />
+    <Compile Include="IOSWhenUsingTheNavigationPanel.cs" />
     <Compile Include="SingleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AndroidWhenOpeningAnArticlePage.cs" />

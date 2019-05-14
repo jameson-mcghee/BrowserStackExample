@@ -34,7 +34,7 @@ namespace MobileAppTests
             await AndroidWeatherPageIsPresent();
             if(IsAndroidElementPresent("button|||explore-radars||weather page|"))
             {
-                androidDriver.FindElementByAccessibilityId("button|||explore-radars||weather page|").Click();
+                await AndroidClickCommand("button|||explore-radars||weather page|");
             }
             else
             {

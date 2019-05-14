@@ -26,9 +26,9 @@ namespace MobileAppTests
         public async Task TheRadarScreenIsPresent()
         {
             await IOSWeatherPageIsPresent();
-            if (IsAndroidElementPresent("button|||explore-radars||weather page|"))
+            if (IsiOSElementPresent("button|||explore-radars||weather page|"))
             {
-                iosDriver.FindElementByAccessibilityId("button|||explore-radars||weather page|").Click();
+                await IOSClickCommand("button|||explore-radars||weather page|");
             }
             else
             {

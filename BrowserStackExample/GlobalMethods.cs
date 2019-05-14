@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.MultiTouch;
 using System;
 using System.Threading;
@@ -23,7 +24,22 @@ namespace BrowserStackIntegration
                 return false;
             }
         }
-
+        public async Task IOSClickCommand(string by)
+        {
+            iosDriver.FindElementByName(by).Click();
+            return;
+        }
+        public async Task IOSTypeTextCommand(string by, string text)
+        {
+            iosDriver.FindElementByName(by).Clear();
+            iosDriver.FindElementByName(by).SendKeys(text);
+            return;
+        }
+        public async Task IOSAssertText(string by, string text)
+        {
+            Assert.AreEqual(text, iosDriver.FindElementByName(by).Text);
+            return;
+        }
         public async Task ApproveiOSAlerts()
         {
             try
@@ -89,7 +105,6 @@ namespace BrowserStackIntegration
             Wait(1);
         }
 
-
         //ANDROID ONLY
         public bool IsAndroidElementPresent(string by)
         {
@@ -103,7 +118,22 @@ namespace BrowserStackIntegration
                 return false;
             }
         }
-
+        public async Task AndroidClickCommand(string by)
+        {
+            androidDriver.FindElementByAccessibilityId(by).Click();
+            return;
+        }
+        public async Task AndroidTypeTextCommand(string by, string text)
+        {
+            androidDriver.FindElementByAccessibilityId(by).Clear();
+            androidDriver.FindElementByAccessibilityId(by).SendKeys(text);
+            return;
+        }
+        public async Task AndroidAssertText(string by, string text)
+        {
+            Assert.AreEqual(text, androidDriver.FindElementByAccessibilityId(by).Text);
+            return;
+        }
         public async Task ApproveAndroidAlerts()
         {
             try
@@ -169,13 +199,13 @@ namespace BrowserStackIntegration
             Wait(1);
         }
 
-        //In-Test Commands
+        //Universal Commands
         public void Wait(int waitTime)
         {
             Thread.Sleep(TimeSpan.FromSeconds(waitTime));
         }
 
-
+        //
 
     }
 }

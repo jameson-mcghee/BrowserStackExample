@@ -34,7 +34,7 @@ namespace MobileAppTests
             await AndroidHomePageIsPresent();
             if(IsAndroidElementPresent("module|first"))
             {
-                androidDriver.FindElementByAccessibilityId("module|first").Click();
+                await AndroidClickCommand("module|first");
             }
             else
             {

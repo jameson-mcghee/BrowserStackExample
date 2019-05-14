@@ -96,6 +96,7 @@
     <Compile Include="GoogleAnalytics.cs" />
     <Compile Include="Headspring\Enumeration.cs" />
     <Compile Include="HomePage.cs" />
+    <Compile Include="NavigationBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RadarScreen.cs" />
     <Compile Include="WatchPage.cs" />
