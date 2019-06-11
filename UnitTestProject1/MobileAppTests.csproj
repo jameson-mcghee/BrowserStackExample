@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidWhenInTheFTUE.cs" />
     <Compile Include="AndroidWhenOnTheSettingsScreen.cs" />
     <Compile Include="AndroidWhenOnTheTopicPage.cs" />
     <Compile Include="AndroidWhenUsingTheNavigationPanel.cs" />

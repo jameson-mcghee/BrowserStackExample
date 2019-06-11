@@ -92,6 +92,7 @@
     <Compile Include="ArticlePage.cs" />
     <Compile Include="BrowserStackIntegrationImplementation.cs" />
     <Compile Include="DayPartingScreen.cs" />
+    <Compile Include="FirstTimeUserExperience.cs" />
     <Compile Include="GlobalMethods.cs" />
     <Compile Include="GoogleAnalytics.cs" />
     <Compile Include="Headspring\Enumeration.cs" />
