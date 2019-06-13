@@ -114,5 +114,8 @@ namespace MobileAppTests
 
             Console.Write("Number of ad modules on the Watch Page: " + adModuleCount);
         }
+
+        //TODO: Article Page: Compare the screenConfig modules from the IOSArticlePageScreenConfigRequest() method to those on the Article Page
+
     }
 }

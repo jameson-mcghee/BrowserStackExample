@@ -8,6 +8,10 @@ using System;
 using System.Diagnostics;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
+using System.Drawing.Imaging;
+using OpenQA.Selenium.Appium.MultiTouch;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace MobileAppTests
 {
@@ -56,7 +60,6 @@ namespace MobileAppTests
         [Test]
         public async Task TheUserCanNavigateTheFTUEUsingTheButtons()
         {
-            await AndroidUsersCanAccessTheFTUE();
             await AndroidUsersCanAccessTheFTUEHomePage();
             await AndroidClickFTUENextButton();
             await AndroidUsersCanAccessTheFTUETopicFollowPage();
@@ -71,7 +74,6 @@ namespace MobileAppTests
         [Test]
         public async Task TheUserCanNavigateTheFTUEBySwiping()
         {
-            await AndroidUsersCanAccessTheFTUE();
             await AndroidUsersCanAccessTheFTUEHomePage();
             await SwipeRightToLeftOnAndroid();
             await AndroidClickFTUENextButton();
@@ -86,6 +88,33 @@ namespace MobileAppTests
         }
 
         //[Test]
+        public async Task TheUserCanAddALocationInTheFTUE()
+        {
+            await AndroidUsersCanAccessTheFTUEHomePage();
+            await AndroidClickFTUENextButton();
+            await AndroidUsersCanAccessTheFTUETopicFollowPage();
+            await AndroidClickFTUENextButton();
+            await AndroidUsersCanAccessTheFTUETopicPickerPage();
+            await AndroidClickFTUENextButton();
+            await AndroidUsersCanAccessTheFTUELocationPage();
+            await AndroidTypeTextCommand("input||non-module|ftue-location|||", "Oak Ridge");
 
+            //TODO: Confirm if this will work
+            var textFieldLocation = androidDriver.FindElementByAccessibilityId("input||non-module|ftue-location|||").Location;
+            var textFieldSize = androidDriver.FindElementByAccessibilityId("input||non-module|ftue-location|||").Size;
+            int textFieldSizeWidth = textFieldSize.Width;
+            int textFieldSizeHeight = textFieldSize.Height;
+            int textFieldYCoord = textFieldLocation.Y;
+            int textFieldXCoord = textFieldLocation.X;
+
+            TouchAction action = new TouchAction(androidDriver);
+            action.Press ((textFieldXCoord + textFieldSizeWidth) * 0.5, (textFieldYCoord - textFieldSizeHeight) - 10)
+            .Wait(500)
+            .Release()
+            .Perform();
+
+            await AndroidClickFTUENextButton();
+            await AndroidClickFTUEGetStartedButton();
+        }
     }
 }

@@ -46,6 +46,8 @@ namespace BrowserStackIntegration
             }
         }
 
+        //TODO: Create an ArticlePageScreenConfigRequest() method for Android and iOS
+        
         //iOS
         public async Task IOSArticlePageIsPresent()
         {

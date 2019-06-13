@@ -107,5 +107,8 @@ namespace MobileAppTests
 
             Console.Write("Number of ad modules on the Weather Page: " + adModuleCount);
         }
+
+        //TODO: Weather Page: Compare the screenConfig modules from the IOSWeatherPageScreenConfigRequest() method to those on the Weather Page
+
     }
 }

@@ -42,6 +42,8 @@ namespace BrowserStackIntegration
             }
         }
 
+        //TODO: Create WatchPageScreenConfigRequest() method for Android and iOS
+
         //iOS
         public async Task IOSWatchPageIsPresent()
         {

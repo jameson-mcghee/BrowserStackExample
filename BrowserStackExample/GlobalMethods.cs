@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.MultiTouch;
 using System;
+using System.Drawing.Imaging;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -50,6 +51,22 @@ namespace BrowserStackIntegration
             catch (Exception e)
             {
                 //no more alerts
+            }
+        }
+        public async Task IOSCaptureScreenShot()
+        {
+            string userName = Environment.UserName;
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+            try
+            {
+                Screenshot image = ((ITakesScreenshot)iosDriver).GetScreenshot();
+                image.SaveAsFile("C:/Users/" + userName + "/Desktop/Screenshots/iOS Screenshot " + unixTimestamp + ".png", ImageFormat.Png);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Assert.Fail("Screenshot creation failed with Exception: " + ex);
             }
         }
 
@@ -144,6 +161,22 @@ namespace BrowserStackIntegration
             catch (Exception e)
             {
                 //no more alerts
+            }
+        }
+        public async Task AndroidCaptureScreenShot()
+        {
+            string userName = Environment.UserName;
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+            try
+            {
+                Screenshot image = ((ITakesScreenshot)androidDriver).GetScreenshot();
+                image.SaveAsFile("C:/Users/" + userName + "/Desktop/Screenshots/Android Screenshot " + unixTimestamp + ".png", ImageFormat.Png);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Assert.Fail("Screenshot creation failed with Exception: " + ex);
             }
         }
 

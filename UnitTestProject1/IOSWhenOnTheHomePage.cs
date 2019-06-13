@@ -104,5 +104,8 @@ namespace MobileAppTests
 
             Console.Write("Number of ad modules on the Home Page: " + adModuleCount);
         }
+
+        //TODO: Home Page: Compare the screenConfig modules from the HomePageScreenConfigRequest() method to those on the Home Page
+
     }
 }

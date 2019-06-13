@@ -37,6 +37,7 @@ namespace BrowserStackIntegration
 
         public async Task AndroidUsersCanAccessTheFTUEHomePage()
         {
+            await AndroidUsersCanAccessTheFTUE();
             for (int i = 0; ; i++)
             {
                 if (i >= 3) Assert.Fail("FTUE Home page is not being displayed.");
@@ -113,7 +114,14 @@ namespace BrowserStackIntegration
                 {
                     if (IsAndroidElementPresent("component||non-module|ftue-location|||"))
                     {
-                        return;
+                        if (IsAndroidElementPresent("input||non-module|ftue-location|||"))
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            Assert.Fail("The 'Add Location' input field is not present on the FTUE Location Page.");
+                        }
                     }
                 }
                 catch (Exception ex)

@@ -38,6 +38,8 @@ namespace BrowserStackIntegration
             }
         }
 
+        //TODO: Create a WeatherPageScreenConfigRequest() method for Android and iOS
+
         //iOS
         public async Task IOSWeatherPageIsPresent()
         {
