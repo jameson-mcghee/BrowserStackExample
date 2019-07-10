@@ -64,8 +64,9 @@ namespace MobileAppTests
             await AndroidClickFTUENextButton();
             await AndroidUsersCanAccessTheFTUETopicFollowPage();
             await AndroidClickFTUENextButton();
-            await AndroidUsersCanAccessTheFTUETopicPickerPage();
+            await AndroidUsersCanAccessTheFTUELocationPage();
             await AndroidClickFTUENextButton();
+            await AndroidClickFTUEPreviousButton();
             await AndroidUsersCanAccessTheFTUELocationPage();
             await AndroidClickFTUENextButton();
             await AndroidClickFTUEGetStartedButton();
@@ -76,14 +77,11 @@ namespace MobileAppTests
         {
             await AndroidUsersCanAccessTheFTUEHomePage();
             await SwipeRightToLeftOnAndroid();
-            await AndroidClickFTUENextButton();
             await AndroidUsersCanAccessTheFTUETopicFollowPage();
             await SwipeRightToLeftOnAndroid();
-            await AndroidUsersCanAccessTheFTUETopicPickerPage();
-            await SwipeRightToLeftOnAndroid();
             await AndroidUsersCanAccessTheFTUELocationPage();
-            await AndroidClickFTUEPreviousButton();
-            await AndroidUsersCanAccessTheFTUETopicPickerPage();
+            await SwipeRightToLeftOnIOS();
+            await AndroidUsersCanAccessTheFTUETopicFollowPage();
             await AndroidClickFTUECloseButton();
         }
 
@@ -94,12 +92,10 @@ namespace MobileAppTests
             await AndroidClickFTUENextButton();
             await AndroidUsersCanAccessTheFTUETopicFollowPage();
             await AndroidClickFTUENextButton();
-            await AndroidUsersCanAccessTheFTUETopicPickerPage();
-            await AndroidClickFTUENextButton();
             await AndroidUsersCanAccessTheFTUELocationPage();
             await AndroidTypeTextCommand("input||non-module|ftue-location|||", "Oak Ridge");
 
-            //TODO: Confirm if this will work
+            //TODO: Confirm if this will work on Android
             var textFieldLocation = androidDriver.FindElementByAccessibilityId("input||non-module|ftue-location|||").Location;
             var textFieldSize = androidDriver.FindElementByAccessibilityId("input||non-module|ftue-location|||").Size;
             int textFieldSizeWidth = textFieldSize.Width;

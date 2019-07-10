@@ -102,8 +102,10 @@
     <Compile Include="AndroidWhenInTheFTUE.cs" />
     <Compile Include="AndroidWhenOnTheSettingsScreen.cs" />
     <Compile Include="AndroidWhenOnTheTopicPage.cs" />
+    <Compile Include="AndroidWhenOpeningPushNotifications.cs" />
     <Compile Include="AndroidWhenUsingTheNavigationPanel.cs" />
     <Compile Include="Headspring\Enumeration.cs" />
+    <Compile Include="IOSWhenInTheFTUE.cs" />
     <Compile Include="IOSWhenOnTheSettingsScreen.cs" />
     <Compile Include="IOSWhenOnTheTopicPage.cs" />
     <Compile Include="IOSWhenUsingTheNavigationPanel.cs" />

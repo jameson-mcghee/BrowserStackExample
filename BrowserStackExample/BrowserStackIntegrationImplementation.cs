@@ -36,7 +36,7 @@ namespace BrowserStackIntegration
 
             var iosCapabilities = GetAppCapabilities("iosCapabilities", "iosEnvironments");
             if (iosCapabilities != null)
-                iosDriver = new IOSDriver<IOSElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), iosCapabilities);
+                iosDriver = new IOSDriver<IOSElement>(new Uri("http://" + ConfigurationManager.AppSettings.Get("server") + "/wd/hub/"), iosCapabilities, TimeSpan.FromSeconds(90));
         }
                 
         public DesiredCapabilities GetAppCapabilities(string capabilitiesSectionName, string environmentsSectionName)
@@ -65,7 +65,7 @@ namespace BrowserStackIntegration
             capability.SetCapability("browserstack.deviceLogs", true);
             capability.SetCapability("browserstack.appiumLogs", true);
             capability.SetCapability("waitForQuiescence", false);
-
+            //capability.SetCapability("browserstack.resignApp", false);
 
             var appId = Environment.GetEnvironmentVariable("BROWSERSTACK_APP_ID");
             if (appId != null)

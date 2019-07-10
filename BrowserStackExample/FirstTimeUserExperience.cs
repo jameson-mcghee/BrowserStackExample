@@ -13,10 +13,10 @@ namespace BrowserStackIntegration
         //ANDROID
         public async Task AndroidUsersCanAccessTheFTUE()
         {
-            await AndroidUserCanAccessTheDayPartingScreen();
+            //await AndroidUserCanAccessTheDayPartingScreen();
             for (int i = 0; ; i++)
             {
-                if (i >= 5) Assert.Fail("FTUE is not being displayed.");
+                if (i >= 15) Assert.Fail("FTUE is not being displayed.");
                 try
                 {
                     if (IsAndroidElementPresent("page||ftue||||"))
@@ -82,28 +82,30 @@ namespace BrowserStackIntegration
             }
         }
 
-        public async Task AndroidUsersCanAccessTheFTUETopicPickerPage()
-        {
-            for (int i = 0; ; i++)
-            {
-                if (i >= 3) Assert.Fail("FTUE Topic Picker page is not being displayed.");
-                try
-                {
-                    if (IsAndroidElementPresent("component||non-module|ftue-topicPicker|||"))
-                    {
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    string message = $"FTUE Topic Picker page is not being displayed. {ex}";
-                    Debug.WriteLine(message);
-                    //Debug.ReadLine();
-                    Console.WriteLine(message);
-                }
-                Wait(1);
-            }
-        }
+        //Note: The Topic Picker Page was removed from the app
+
+        //public async Task AndroidUsersCanAccessTheFTUETopicPickerPage()
+        //{
+        //    for (int i = 0; ; i++)
+        //    {
+        //        if (i >= 3) Assert.Fail("FTUE Topic Picker page is not being displayed.");
+        //        try
+        //        {
+        //            if (IsAndroidElementPresent("component||non-module|ftue-topicPicker|||"))
+        //            {
+        //                return;
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            string message = $"FTUE Topic Picker page is not being displayed. {ex}";
+        //            Debug.WriteLine(message);
+        //            //Debug.ReadLine();
+        //            Console.WriteLine(message);
+        //        }
+        //        Wait(1);
+        //    }
+        //}
 
         public async Task AndroidUsersCanAccessTheFTUELocationPage()
         {
@@ -234,10 +236,11 @@ namespace BrowserStackIntegration
         //iOS
         public async Task IOSUsersCanAccessTheFTUE()
         {
-            await IOSUserCanAccessTheDayPartingScreen();
+            //await IOSUserCanAccessTheDayPartingScreen();
             for (int i = 0; ; i++)
             {
-                if (i >= 5) Assert.Fail("FTUE is not being displayed.");
+                await ApproveiOSAlerts();
+                if (i >= 15) Assert.Fail("FTUE is not being displayed.");
                 try
                 {
                     if (IsiOSElementPresent("page||ftue||||"))
@@ -255,7 +258,7 @@ namespace BrowserStackIntegration
                 Wait(1);
             }
         }
-
+                
         public async Task IOSUsersCanAccessTheFTUEHomePage()
         {
             for (int i = 0; ; i++)
@@ -302,28 +305,30 @@ namespace BrowserStackIntegration
             }
         }
 
-        public async Task IOSUsersCanAccessTheFTUETopicPickerPage()
-        {
-            for (int i = 0; ; i++)
-            {
-                if (i >= 3) Assert.Fail("FTUE Topic Picker page is not being displayed.");
-                try
-                {
-                    if (IsiOSElementPresent("component||non-module|ftue-topicPicker|||"))
-                    {
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    string message = $"FTUE Topic Picker page is not being displayed. {ex}";
-                    Debug.WriteLine(message);
-                    //Debug.ReadLine();
-                    Console.WriteLine(message);
-                }
-                Wait(1);
-            }
-        }
+        //Note: The Topic Picker Page was removed from the app
+
+        //public async Task IOSUsersCanAccessTheFTUETopicPickerPage()
+        //{
+        //    for (int i = 0; ; i++)
+        //    {
+        //        if (i >= 3) Assert.Fail("FTUE Topic Picker page is not being displayed.");
+        //        try
+        //        {
+        //            if (IsiOSElementPresent("component||non-module|ftue-topicPicker|||"))
+        //            {
+        //                return;
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            string message = $"FTUE Topic Picker page is not being displayed. {ex}";
+        //            Debug.WriteLine(message);
+        //            //Debug.ReadLine();
+        //            Console.WriteLine(message);
+        //        }
+        //        Wait(1);
+        //    }
+        //}
 
         public async Task IOSUsersCanAccessTheFTUELocationPage()
         {

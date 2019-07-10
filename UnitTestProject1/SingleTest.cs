@@ -12,7 +12,8 @@ namespace MobileAppTests
 {
     //[TestFixture("single", "galaxy-s9")]
     [TestFixture("single", "iphone-8")]
-    public class SingleTest : GlobalMethods
+
+    public class SingleTest : HomePage
     {
 
         public SingleTest(string profile, string device) : base(profile, device) { }
@@ -44,13 +45,38 @@ namespace MobileAppTests
             //Assert.IsTrue(viewElements.Any());
                         
         }
+
         [Test]
         public async Task SimpleTestIOS()
         {
-            var viewElements = iosDriver.FindElements(By.ClassName("XCUIElementTypeApplication"));
-            await ApproveiOSAlerts();
-            Thread.Sleep(TimeSpan.FromSeconds(3));
-            Assert.IsTrue(viewElements.Any());
+            await IOSUsersCanAccessTheFTUE();
+        }
+
+        //[Test]
+        public async Task AndroidPushNotificationPresentTest()
+        {
+            await AndroidUsersCanAccessTheFTUE();
+            await AndroidCloseApp();
+            if (IsAndroidElementPresent("page||ftue||||"))
+            {
+                Assert.Fail("App did not close.");
+            }
+            else
+            {
+                dynamic response = await SendToNativeAppAlertQueueFront
+                ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
+                Console.Write(response);
+            }
+            await OpenAndroidNotificationGrid();
+            Wait(30);
+        }
+
+        //[Test]
+        public async Task SendNotificationTest()
+        {
+            dynamic response = await SendToNativeAppAlertQueueFront
+                ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
+            Console.Write(response);
         }
 
     }

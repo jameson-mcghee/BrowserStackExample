@@ -18,8 +18,10 @@ namespace BrowserStackIntegration
                 if (i >= 15) Assert.Fail("Intro Banner is not being displayed.");
                     try
                     {
-                        var dayPartingScreenElement = androidDriver.FindElementByAccessibilityId("non-module|-4|ad|advertisementModule|0|manually placed in splash-screen|");
-                        break;
+                        if (IsAndroidElementPresent("ad|-4|non-module|advertisementModule|0|manually placed in splash-screen|"))
+                        {
+                            break;
+                        }
                     }
                     catch (Exception ex)
                     {

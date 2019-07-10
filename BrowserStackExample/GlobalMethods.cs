@@ -70,6 +70,11 @@ namespace BrowserStackIntegration
             }
         }
 
+        public async Task IOSCloseApp()
+        {
+            iosDriver.CloseApp();
+        }
+
         //Gestures
         public async Task ScrollDownOnIOS()
         {
@@ -117,6 +122,19 @@ namespace BrowserStackIntegration
             action.Press(screenWidth * 0.2, screenHeight * 0.5)
             .Wait(1000)
             .MoveTo(screenWidth * 0.8, screenHeight * 0.5)
+            .Release()
+            .Perform();
+            Wait(1);
+        }
+        public async Task OpenIOSNotificationGrid()
+        {
+            int screenHeight = iosDriver.Manage().Window.Size.Height;
+            int screenWidth = iosDriver.Manage().Window.Size.Width;
+
+            TouchAction action = new TouchAction(iosDriver);
+            action.Press(screenWidth * 0.5, screenHeight * 0.01)
+            .Wait(1000)
+            .MoveTo(screenWidth * 0.5, screenHeight * 0.65)
             .Release()
             .Perform();
             Wait(1);
@@ -180,6 +198,11 @@ namespace BrowserStackIntegration
             }
         }
 
+        public async Task AndroidCloseApp()
+        {
+            androidDriver.CloseApp();
+        }
+
         //Gestures
         public async Task ScrollDownOnAndroid()
         {
@@ -227,6 +250,19 @@ namespace BrowserStackIntegration
             action.Press(screenWidth * 0.2, screenHeight * 0.5)
             .Wait(1000)
             .MoveTo(screenWidth * 0.8, screenHeight * 0.5)
+            .Release()
+            .Perform();
+            Wait(1);
+        }
+        public async Task OpenAndroidNotificationGrid()
+        {
+            int screenHeight = androidDriver.Manage().Window.Size.Height;
+            int screenWidth = androidDriver.Manage().Window.Size.Width;
+
+            TouchAction action = new TouchAction(androidDriver);
+            action.Press(screenWidth * 0.5, screenHeight * 0.01)
+            .Wait(1000)
+            .MoveTo(screenWidth * 0.5, screenHeight * 0.65)
             .Release()
             .Perform();
             Wait(1);

@@ -15,7 +15,7 @@ using RestSharp;
 
 namespace BrowserStackIntegration
 {
-    public class HomePage : GlobalMethods
+    public class HomePage : PushNotifications
     {
         public HomePage(string profile, string device) : base(profile, device){}
 
@@ -140,13 +140,20 @@ namespace BrowserStackIntegration
 
         public async Task AndroidHomePageIsPresent()
         {
+
             for (int i = 0; ; i++)
             {
                 if (i >= 20) Assert.Fail("The Home page is not present.");
                 try
                 {
                     if (IsAndroidElementPresent("page||home-wrapper||||"))
+                    {
                         break;
+                    }
+                    if (IsAndroidElementPresent("page||ftue||||"))
+                    {
+                        await AndroidClickFTUECloseButton();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -207,7 +214,13 @@ namespace BrowserStackIntegration
                 try
                 {
                     if (IsiOSElementPresent("page||home-wrapper||||"))
+                    {
                         break;
+                    }
+                    if (IsiOSElementPresent("page||ftue||||"))
+                    {
+                        await IOSClickFTUECloseButton();
+                    }
                 }
                 catch (Exception ex)
                 {
