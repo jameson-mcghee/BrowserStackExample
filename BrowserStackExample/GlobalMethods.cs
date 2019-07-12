@@ -1,5 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 using System;
 using System.Drawing.Imaging;
@@ -12,7 +14,8 @@ namespace BrowserStackIntegration
     {
         public GlobalMethods(string profile, string device) : base(profile, device){}
 
-        //IOS ONLY
+        #region iOS COMMANDS
+        
         public bool IsiOSElementPresent(string by)
         {
             try
@@ -36,10 +39,17 @@ namespace BrowserStackIntegration
             iosDriver.FindElementByName(by).SendKeys(text);
             return;
         }
-        public async Task IOSAssertText(string by, string text)
+        public async Task IOSAssertText(string by, string text, string message)
         {
-            Assert.AreEqual(text, iosDriver.FindElementByName(by).Text);
-            return;
+            var elementText = iosDriver.FindElementByName(by).Text;
+            if (text == elementText)
+            {
+                return;
+            }
+            else
+            {
+                Assert.Fail(message);
+            }
         }
         public async Task ApproveiOSAlerts()
         {
@@ -69,13 +79,16 @@ namespace BrowserStackIntegration
                 Assert.Fail("Screenshot creation failed with Exception: " + ex);
             }
         }
-
         public async Task IOSCloseApp()
         {
             iosDriver.CloseApp();
+            return;
         }
 
-        //Gestures
+        #endregion
+
+        #region iOS GESTURE COMMANDS
+
         public async Task ScrollDownOnIOS()
         {
             int screenHeight = iosDriver.Manage().Window.Size.Height;
@@ -126,7 +139,7 @@ namespace BrowserStackIntegration
             .Perform();
             Wait(1);
         }
-        public async Task OpenIOSNotificationGrid()
+        public async Task OpenIOSNotificationPane()
         {
             int screenHeight = iosDriver.Manage().Window.Size.Height;
             int screenWidth = iosDriver.Manage().Window.Size.Width;
@@ -138,9 +151,13 @@ namespace BrowserStackIntegration
             .Release()
             .Perform();
             Wait(1);
+            return;
         }
 
-        //ANDROID ONLY
+        #endregion
+        
+        #region ANDROID COMMANDS
+
         public bool IsAndroidElementPresent(string by)
         {
             try
@@ -158,16 +175,28 @@ namespace BrowserStackIntegration
             androidDriver.FindElementByAccessibilityId(by).Click();
             return;
         }
+        public async Task AndroidBackButton()
+        {
+            androidDriver.PressKeyCode(AndroidKeyCode.Back);
+            return;
+        }
         public async Task AndroidTypeTextCommand(string by, string text)
         {
             androidDriver.FindElementByAccessibilityId(by).Clear();
             androidDriver.FindElementByAccessibilityId(by).SendKeys(text);
             return;
         }
-        public async Task AndroidAssertText(string by, string text)
+        public async Task AndroidAssertText(string by, string text, string message)
         {
-            Assert.AreEqual(text, androidDriver.FindElementByAccessibilityId(by).Text);
-            return;
+            var elementText = androidDriver.FindElementByAccessibilityId(by).Text;
+            if (text == elementText)
+            {
+                return;
+            }
+            else
+            {
+                Assert.Fail(message);
+            }
         }
         public async Task ApproveAndroidAlerts()
         {
@@ -197,13 +226,16 @@ namespace BrowserStackIntegration
                 Assert.Fail("Screenshot creation failed with Exception: " + ex);
             }
         }
-
         public async Task AndroidCloseApp()
         {
             androidDriver.CloseApp();
+            return;
         }
 
-        //Gestures
+        #endregion
+
+        #region ANDROID GESTURE COMMANDS
+
         public async Task ScrollDownOnAndroid()
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
@@ -254,27 +286,21 @@ namespace BrowserStackIntegration
             .Perform();
             Wait(1);
         }
-        public async Task OpenAndroidNotificationGrid()
+        public async Task OpenAndroidNotificationPane()
         {
-            int screenHeight = androidDriver.Manage().Window.Size.Height;
-            int screenWidth = androidDriver.Manage().Window.Size.Width;
-
-            TouchAction action = new TouchAction(androidDriver);
-            action.Press(screenWidth * 0.5, screenHeight * 0.01)
-            .Wait(1000)
-            .MoveTo(screenWidth * 0.5, screenHeight * 0.65)
-            .Release()
-            .Perform();
-            Wait(1);
+            androidDriver.OpenNotifications();
+            return;
         }
 
-        //Universal Commands
+        #endregion
+        
+        #region UNIVERSAL COMMANDS
+
         public void Wait(int waitTime)
         {
             Thread.Sleep(TimeSpan.FromSeconds(waitTime));
         }
 
-        //
-
+        #endregion 
     }
 }

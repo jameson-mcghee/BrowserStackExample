@@ -10,8 +10,8 @@ using System.Diagnostics;
 
 namespace MobileAppTests
 {
-    //[TestFixture("single", "galaxy-s9")]
-    [TestFixture("single", "iphone-8")]
+    [TestFixture("single", "galaxy-s9")]
+    //[TestFixture("single", "iphone-8")]
 
     public class SingleTest : HomePage
     {
@@ -19,17 +19,33 @@ namespace MobileAppTests
         public SingleTest(string profile, string device) : base(profile, device) { }
 
         //[Test]
-        public void SimpleTestAndroid()
+        public async Task SimpleTestAndroid()
         {
+            await AndroidHomePageIsPresent();
+            await AndroidBackButton();
+        }
 
+        //[Test]
+        public async Task SimpleTestIOS()
+        {
+            await IOSUsersCanAccessTheFTUE();
+        }
+
+        [Test]
+        public async Task AndroidPushNotificationPresentTest()
+        {
+            await AndroidUsersCanAccessTheFTUE();
+            await AndroidClickFTUECloseButton();
             for (int i = 0; ; i++)
             {
-                if (i >= 15) Assert.Fail("Assert Fail Message.");
+                if (i >= 2) Assert.Fail("The Home Page is not present after closing the FTUE.");
                 try
                 {
-                    var viewElements = androidDriver.FindElements(By.ClassName("android.widget.FrameLayout"));
-                    Assert.IsTrue(viewElements.Any());
-                    break;
+                    if (IsAndroidElementPresent("page||home-wrapper||||"))
+                    {
+                        //await AndroidCloseApp();
+                        break;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -39,36 +55,20 @@ namespace MobileAppTests
                     Console.WriteLine(message);
                 }
                 Wait(1);
-            }
-            //var viewElements = androidDriver.FindElements(By.Id("android:id/content"));
-            //Thread.Sleep(TimeSpan.FromSeconds(3));
-            //Assert.IsTrue(viewElements.Any());
-                        
-        }
+                }
 
-        [Test]
-        public async Task SimpleTestIOS()
-        {
-            await IOSUsersCanAccessTheFTUE();
-        }
-
-        //[Test]
-        public async Task AndroidPushNotificationPresentTest()
-        {
-            await AndroidUsersCanAccessTheFTUE();
-            await AndroidCloseApp();
-            if (IsAndroidElementPresent("page||ftue||||"))
-            {
-                Assert.Fail("App did not close.");
-            }
-            else
-            {
+            //if (IsAndroidElementPresent("page||home-wrapper||||"))
+            //{
+            //    Assert.Fail("App did not close.");
+            //}
+            //else
+            //{
                 dynamic response = await SendToNativeAppAlertQueueFront
                 ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
                 Console.Write(response);
-            }
-            await OpenAndroidNotificationGrid();
-            Wait(30);
+            //}
+            await OpenAndroidNotificationPane();
+            Wait(30);            
         }
 
         //[Test]
