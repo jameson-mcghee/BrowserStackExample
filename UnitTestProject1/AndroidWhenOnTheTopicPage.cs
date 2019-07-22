@@ -15,9 +15,7 @@ namespace MobileAppTests
     //[TestFixture("parallel", "galaxy-note8")]
     //[TestFixture("parallel", "galaxy-note9")]
     //[TestFixture("parallel", "galaxy-note4")]
-    ////[TestFixture("parallel", "galaxy-s6")] //App or one of the otherApps cannot be run on version 5.0.
-    ////[TestFixture("parallel", "nexus-9")] //tablet
-    ////[TestFixture("parallel", "galaxy-tabs4")] //tablet
+    //[TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenOnTheTopicPage : HomePage
     {
@@ -34,7 +32,7 @@ namespace MobileAppTests
             }
             else
             {
-                Assert.Fail("The Hamburger Icon (Topic Page) button is not present. ");
+                Assert.Fail("The Star Icon (Topic Page) button is not present. ");
             }
 
             for (int i = 0; ; i++)

@@ -5,6 +5,7 @@ using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 using System;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -67,11 +68,13 @@ namespace BrowserStackIntegration
         {
             string userName = Environment.UserName;
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string screenShotDirectory = @"C:/Users/" + userName + "/Desktop/Screenshots/iOS/";
 
+            Directory.CreateDirectory(screenShotDirectory);
             try
             {
                 Screenshot image = ((ITakesScreenshot)iosDriver).GetScreenshot();
-                image.SaveAsFile("C:/Users/" + userName + "/Desktop/Screenshots/iOS Screenshot " + unixTimestamp + ".png", ImageFormat.Png);
+                image.SaveAsFile("C:/Users/" + userName + "/Desktop/Screenshots/iOS/Auto-Screenshot " + unixTimestamp + ".png", ImageFormat.Png);
             }
             catch (Exception ex)
             {
@@ -214,11 +217,13 @@ namespace BrowserStackIntegration
         {
             string userName = Environment.UserName;
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string screenShotDirectory = @"C:/Users/" + userName + "/Desktop/Screenshots/Android/";
 
+            Directory.CreateDirectory(screenShotDirectory);
             try
             {
-                Screenshot image = ((ITakesScreenshot)androidDriver).GetScreenshot();
-                image.SaveAsFile("C:/Users/" + userName + "/Desktop/Screenshots/Android Screenshot " + unixTimestamp + ".png", ImageFormat.Png);
+               Screenshot image = ((ITakesScreenshot)androidDriver).GetScreenshot();
+               image.SaveAsFile("C:/Users/" + userName + "/Desktop/Screenshots/Android/Auto-Screenshot " + unixTimestamp + ".png", ImageFormat.Png);
             }
             catch (Exception ex)
             {

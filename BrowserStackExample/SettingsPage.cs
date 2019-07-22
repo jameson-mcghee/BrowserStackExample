@@ -74,7 +74,7 @@ namespace BrowserStackIntegration
 
         public async Task NotificationsNotificationSettings()
         {
-            //TODO: Add teps to click the 'Notification Settings' link
+            //TODO: Add steps to click the 'Notification Settings' link
         }
     }
 }

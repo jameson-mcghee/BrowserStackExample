@@ -76,7 +76,7 @@ namespace MobileAppTests
                 if (i >= 30) Assert.Fail("The Front push notification was not received.");
                 try
                 {
-                    //TODO: Insert Element ID
+                    //TODO: Insert Push Notification Element ID
                     if (IsAndroidElementPresent(""))
                     {
                         await AndroidClickCommand("");
@@ -165,7 +165,7 @@ namespace MobileAppTests
                 if (i >= 30) Assert.Fail("The Front push notification was not received.");
                 try
                 {
-                    //TODO: Insert Element ID
+                    //TODO: Insert Push Notification Element ID
                     if (IsAndroidElementPresent(""))
                     {
                         await AndroidClickCommand("");
@@ -259,7 +259,7 @@ namespace MobileAppTests
                 if (i >= 30) Assert.Fail("The Front push notification was not received.");
                 try
                 {
-                    //TODO: Insert Element ID
+                    //TODO: Insert Push Notification Element ID
                     if (IsAndroidElementPresent(""))
                     {
                         await AndroidClickCommand("");
@@ -343,7 +343,7 @@ namespace MobileAppTests
                 if (i >= 30) Assert.Fail("The Front push notification was not received.");
                 try
                 {
-                    //TODO: Insert Element ID
+                    //TODO: Insert Push Notification Element ID
                     if (IsAndroidElementPresent(""))
                     {
                         await AndroidClickCommand("");
@@ -436,7 +436,7 @@ namespace MobileAppTests
                 if (i >= 30) Assert.Fail("The Front push notification was not received.");
                 try
                 {
-                    //TODO: Insert Element ID
+                    //TODO: Insert Push Notification Element ID
                     if (IsAndroidElementPresent(""))
                     {
                         await AndroidClickCommand("");
