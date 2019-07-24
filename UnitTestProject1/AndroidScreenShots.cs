@@ -1,10 +1,8 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
 using BrowserStackIntegration;
-using System.Linq;
 using System.Diagnostics;
 using System;
-using System.Threading;
 
 namespace MobileAppTests
 {
@@ -16,7 +14,6 @@ namespace MobileAppTests
     //[TestFixture("parallel", "galaxy-s9")]
     //[TestFixture("parallel", "galaxy-note8")]
     //[TestFixture("parallel", "galaxy-note9")]
-    //[TestFixture("parallel", "galaxy-note4")]
     [TestFixture("parallel", "galaxy-tabs3")] //Tablet
     [TestFixture("parallel", "galaxy-tabs4")] //Tablet
     [TestFixture("parallel", "galaxy-tabs5e")] //Tablet
@@ -26,7 +23,7 @@ namespace MobileAppTests
         public AndroidScreenShots(string profile, string device) : base(profile, device) { }
 
         [Test]
-        public async Task CaptureScreeShotsOnAndroid()
+        public async Task CaptureScreenShotsOnAndroid()
         {
             //Home Page
             await AndroidHomePageIsPresent();
@@ -110,55 +107,6 @@ namespace MobileAppTests
                 Wait(1);
             }
             Wait(5);
-            await AndroidCaptureScreenShot();
-        }
-
-        //[Test]
-        public async Task WeatherPageScreenShot()
-        {
-            await AndroidWeatherPageIsPresent();
-            await AndroidCaptureScreenShot();
-        }
-
-        //[Test]
-        public async Task WatchPageScreenShot()
-        {
-            await AndroidWatchPageIsPresent();
-            await AndroidCaptureScreenShot();
-        }
-
-        //[Test]
-        public async Task TopicPageScreenShot()
-        {
-            await AndroidHomePageIsPresent();
-
-            if (IsAndroidElementPresent("button|||hamburger||manually placed on top of screen|"))
-            {
-                await AndroidClickCommand("button|||hamburger||manually placed on top of screen|");
-            }
-            else
-            {
-                Assert.Fail("The Star Icon (Topic Page) button is not present. ");
-            }
-
-            for (int i = 0; ; i++)
-            {
-                if (i >= 2) Assert.Fail("The Topic Page back button is not present. ");
-                try
-                {
-                    if (IsAndroidElementPresent("button|||back||manually placed on top of screen|"))
-                        break;
-                }
-                catch (Exception ex)
-                {
-                    string message = $"The Topic Page back button is not present. {ex}";
-                    Debug.WriteLine(message);
-                    //Debug.ReadLine();
-                    Console.WriteLine(message);
-                }
-                Wait(1);
-            }
-
             await AndroidCaptureScreenShot();
         }
     }

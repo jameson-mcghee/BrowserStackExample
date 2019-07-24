@@ -104,8 +104,9 @@
     <Compile Include="AndroidWhenOnTheTopicPage.cs" />
     <Compile Include="AndroidWhenOpeningPushNotifications.cs" />
     <Compile Include="AndroidWhenUsingTheNavigationPanel.cs" />
-    <Compile Include="BrowserStackcURLCommands.cs" />
+    <Compile Include="UploadAppFilesAndUpdateConfig.cs" />
     <Compile Include="Headspring\Enumeration.cs" />
+    <Compile Include="IOSScreenShots.cs" />
     <Compile Include="IOSWhenInTheFTUE.cs" />
     <Compile Include="IOSWhenOnTheSettingsScreen.cs" />
     <Compile Include="IOSWhenOnTheTopicPage.cs" />

@@ -1,11 +1,8 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
 using BrowserStackIntegration;
-using System.Linq;
 using System;
 using System.Diagnostics;
-using OpenQA.Selenium;
-using System.Threading;
 using OpenQA.Selenium.Appium.MultiTouch;
 
 namespace MobileAppTests

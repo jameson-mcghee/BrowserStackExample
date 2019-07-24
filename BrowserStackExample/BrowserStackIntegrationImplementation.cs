@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
-using System.Threading.Tasks;
 using BrowserStack;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -65,7 +64,7 @@ namespace BrowserStackIntegration
             capability.SetCapability("browserstack.deviceLogs", true);
             capability.SetCapability("browserstack.appiumLogs", true);
             capability.SetCapability("waitForQuiescence", false);
-            capability.SetCapability("browserstack.resignApp", false);
+            //capability.SetCapability("browserstack.resignApp", false);
 
             var appId = Environment.GetEnvironmentVariable("BROWSERSTACK_APP_ID");
             if (appId != null)

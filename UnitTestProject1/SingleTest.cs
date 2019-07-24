@@ -1,12 +1,8 @@
 ﻿using System;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using System.Threading;
-using System.Linq;
 using BrowserStackIntegration;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace MobileAppTests
 {

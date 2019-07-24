@@ -16,9 +16,6 @@ namespace MobileAppTests
     [TestFixture("parallel", "galaxy-s9")]
     //[TestFixture("parallel", "galaxy-note8")]
     //[TestFixture("parallel", "galaxy-note9")]
-    //[TestFixture("parallel", "galaxy-note4")]
-    ////[TestFixture("parallel", "galaxy-s6")] //App or one of the otherApps cannot be run on version 5.0.
-    ////[TestFixture("parallel", "nexus-9")] //Tablet
     ////[TestFixture("parallel", "galaxy-tabs4")] //Tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenLaunchingTheApp : DayPartingScreen

@@ -1,17 +1,9 @@
 ﻿using NUnit.Framework;
 using BrowserStackIntegration;
 using System.Threading.Tasks;
-using FluentAssertions;
-using Newtonsoft.Json;
-using System.Net.Http;
 using System;
 using System.Diagnostics;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
-using System.Drawing.Imaging;
 using OpenQA.Selenium.Appium.MultiTouch;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace MobileAppTests
 {
@@ -23,8 +15,6 @@ namespace MobileAppTests
     [TestFixture("parallel", "galaxy-s9")]
     [TestFixture("parallel", "galaxy-note8")]
     [TestFixture("parallel", "galaxy-note9")]
-    [TestFixture("parallel", "galaxy-note4")]
-    [TestFixture("parallel", "nexus-9")] //tablet
     [TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenInTheFTUE : FirstTimeUserExperience

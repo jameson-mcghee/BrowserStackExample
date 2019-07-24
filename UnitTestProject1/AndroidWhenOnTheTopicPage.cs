@@ -14,7 +14,6 @@ namespace MobileAppTests
     [TestFixture("parallel", "galaxy-s9")]
     //[TestFixture("parallel", "galaxy-note8")]
     //[TestFixture("parallel", "galaxy-note9")]
-    //[TestFixture("parallel", "galaxy-note4")]
     //[TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenOnTheTopicPage : HomePage

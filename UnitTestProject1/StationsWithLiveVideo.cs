@@ -6,33 +6,10 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace MobileAppTests
+namespace NonMobileAppTests
 {
     public class StationsWithLiveVideo
     {
-        public static async Task<dynamic> GetStationsWithCurrentLiveVideo(string url)
-        {
-            try
-            {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
-
-                    var response = await httpClient.GetAsync(url).ConfigureAwait(false);
-                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject(responseString);
-                }
-            }
-            catch (Exception ex)
-            {
-                string message = $"GetResponseAsync - Error getting response from {url}.Ex: {ex}";
-                Debug.WriteLine(message);
-                //Debug.ReadLine();
-                Console.WriteLine(message);
-                throw;
-            }
-        }
-
         [Test]
         public async Task WhichStationsArePlayingLiveVideo()
         {
@@ -65,13 +42,36 @@ namespace MobileAppTests
                 }
                 if (response.isLiveNow == "false")
                 {
-                    
+
                 }
             }
 
             if (trueCount == 0)
             {
                 Console.WriteLine("No stations are Streaming Live Video right now.");
+            }
+        }
+
+        public static async Task<dynamic> GetStationsWithCurrentLiveVideo(string url)
+        {
+            try
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
+
+                    var response = await httpClient.GetAsync(url).ConfigureAwait(false);
+                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    return JsonConvert.DeserializeObject(responseString);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = $"GetResponseAsync - Error getting response from {url}.Ex: {ex}";
+                Debug.WriteLine(message);
+                //Debug.ReadLine();
+                Console.WriteLine(message);
+                throw;
             }
         }
     }

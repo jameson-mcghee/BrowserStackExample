@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.MultiTouch;
 using System;
@@ -68,18 +67,18 @@ namespace BrowserStackIntegration
         {
             string userName = Environment.UserName;
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-            string screenShotDirectory = @"C:/Users/" + userName + "/Desktop/Screenshots/iOS/";
+            string screenShotDirectory = $@"C:/Users/{userName}/Desktop/Screenshots/iOS/";
 
             Directory.CreateDirectory(screenShotDirectory);
             try
             {
                 Screenshot image = ((ITakesScreenshot)iosDriver).GetScreenshot();
-                image.SaveAsFile("C:/Users/" + userName + "/Desktop/Screenshots/iOS/Auto-Screenshot " + unixTimestamp + ".png", ImageFormat.Png);
+                image.SaveAsFile($@"C:/Users/{userName}/Desktop/Screenshots/iOS/Auto-Screenshot {unixTimestamp}.png", ImageFormat.Png);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                Assert.Fail("Screenshot creation failed with Exception: " + ex);
+                Assert.Fail($"Screenshot creation failed with Exception: {ex}");
             }
         }
         public async Task IOSCloseApp()
