@@ -4,14 +4,19 @@ using System.Threading.Tasks;
 using System;
 using System.Diagnostics;
 
-namespace MobileAppTests
+namespace SettingsPageTests
 {
-    //[TestFixture("parallel", "iphone-8")]
-    //[TestFixture("parallel", "iphone-8-plus")]
-    //[TestFixture("parallel", "iphone-se")]
-    [TestFixture("parallel", "iphone-xs")]
-    //[TestFixture("parallel", "ipad-pro")]
-    //[TestFixture("parallel", "ipad-5th")]
+    [TestFixture("parallel", "pixel")]
+    [TestFixture("parallel", "pixel-2")]
+    [TestFixture("parallel", "pixel-3")]
+    //[TestFixture("parallel", "nexus-9")]
+    [TestFixture("parallel", "galaxy-s8")]
+    [TestFixture("parallel", "galaxy-s9")]
+    [TestFixture("parallel", "galaxy-note8")]
+    [TestFixture("parallel", "galaxy-note9")]
+    [TestFixture("parallel", "galaxy-tabs3")] //tablet
+    [TestFixture("parallel", "galaxy-tabs4")] //tablet
+    [TestFixture("parallel", "galaxy-tabs5e")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenOnTheSettingsScreen : HomePage
     {
@@ -49,8 +54,6 @@ namespace MobileAppTests
                 Wait(1);
             }
         }
-
-
 
     }
 }

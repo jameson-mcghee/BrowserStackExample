@@ -6,20 +6,23 @@ using System.Diagnostics;
 
 namespace MobileAppTests
 {
-    //[TestFixture("parallel", "pixel")]
-    //[TestFixture("parallel", "pixel-2")]
+    [TestFixture("parallel", "pixel")]
+    [TestFixture("parallel", "pixel-2")]
     [TestFixture("parallel", "pixel-3")]
-    //[TestFixture("parallel", "galaxy-s8")]
-    //[TestFixture("parallel", "galaxy-s9")]
-    //[TestFixture("parallel", "galaxy-note8")]
-    //[TestFixture("parallel", "galaxy-note9")]
-    ////[TestFixture("parallel", "galaxy-tabs4")] //tablet
+    //[TestFixture("parallel", "nexus-9")]
+    [TestFixture("parallel", "galaxy-s8")]
+    [TestFixture("parallel", "galaxy-s9")]
+    [TestFixture("parallel", "galaxy-note8")]
+    [TestFixture("parallel", "galaxy-note9")]
+    [TestFixture("parallel", "galaxy-tabs3")] //tablet
+    [TestFixture("parallel", "galaxy-tabs4")] //tablet
+    [TestFixture("parallel", "galaxy-tabs5e")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenOpeningPushNotifications : WatchPage
     {
         public AndroidWhenOpeningPushNotifications(string profile, string device) : base(profile, device) { }
 
-        [Test]
+        //[Test]
         public async Task ToAFront()
         {
             await AndroidUsersCanAccessTheFTUE();
@@ -108,7 +111,7 @@ namespace MobileAppTests
             }
         }
 
-        [Test]
+        //[Test]
         public async Task ToATopicPage()
         {
             await AndroidUsersCanAccessTheFTUE();
@@ -202,7 +205,7 @@ namespace MobileAppTests
             }
         }
 
-        [Test]
+        //[Test]
         public async Task ToAWebView()
         {
             await AndroidUsersCanAccessTheFTUE();
@@ -286,7 +289,7 @@ namespace MobileAppTests
             }
         }
 
-        [Test]
+        //[Test]
         public async Task ToAContentPage()
         {
             await AndroidUsersCanAccessTheFTUE();
@@ -379,7 +382,7 @@ namespace MobileAppTests
             }
         }
 
-        [Test]
+        //[Test]
         public async Task OnlySubscribersReceiveTheNotifications()
         {
             await AndroidUsersCanAccessTheFTUE();

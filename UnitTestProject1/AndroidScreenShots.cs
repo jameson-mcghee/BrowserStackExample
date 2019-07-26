@@ -4,19 +4,10 @@ using BrowserStackIntegration;
 using System.Diagnostics;
 using System;
 
-namespace MobileAppTests
+namespace ScreenShotTests
 {
-    //[TestFixture("parallel", "pixel")]
-    //[TestFixture("parallel", "pixel-2")]
-    //[TestFixture("parallel", "pixel-3")]
-    //[TestFixture("parallel", "galaxy-s7")]
-    //[TestFixture("parallel", "galaxy-s8")]
-    //[TestFixture("parallel", "galaxy-s9")]
-    //[TestFixture("parallel", "galaxy-note8")]
-    //[TestFixture("parallel", "galaxy-note9")]
-    [TestFixture("parallel", "galaxy-tabs3")] //Tablet
-    [TestFixture("parallel", "galaxy-tabs4")] //Tablet
-    [TestFixture("parallel", "galaxy-tabs5e")] //Tablet
+    [TestFixture("parallel", "pixel")]
+    //[TestFixture("parallel", "nexus-9")] //Tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidScreenShots : WatchPage
     {
@@ -25,12 +16,15 @@ namespace MobileAppTests
         [Test]
         public async Task CaptureScreenShotsOnAndroid()
         {
-            //Home Page
+            #region Home Page
+
             await AndroidHomePageIsPresent();
             Wait(5);
             await AndroidCaptureScreenShot();
+            #endregion
 
-            //Weather Page
+            #region Weather Page
+
             for (int i = 0; ; i++)
             {
                 await SwipeRightToLeftOnAndroid();
@@ -52,8 +46,10 @@ namespace MobileAppTests
             }
             Wait(5);
             await AndroidCaptureScreenShot();
+            #endregion
 
-            //Watch Page
+            #region Watch Page
+
             for (int i = 0; ; i++)
             {
                 await ScrollDownOnAndroid();
@@ -78,8 +74,10 @@ namespace MobileAppTests
             }
             Wait(5);
             await AndroidCaptureScreenShot();
+            #endregion
 
-            //Topic Page
+            #region Topic Page
+
             if (IsAndroidElementPresent("button|||hamburger||manually placed on top of screen|"))
             {
                 await AndroidClickCommand("button|||hamburger||manually placed on top of screen|");
@@ -108,6 +106,7 @@ namespace MobileAppTests
             }
             Wait(5);
             await AndroidCaptureScreenShot();
+            #endregion
         }
     }
 }

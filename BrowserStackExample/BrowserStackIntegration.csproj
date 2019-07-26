@@ -107,7 +107,6 @@
     <Compile Include="PushNotifications.cs" />
     <Compile Include="RadarScreen.cs" />
     <Compile Include="SettingsPage.cs" />
-    <Compile Include="StoreScreenshotCapture.cs" />
     <Compile Include="TopicAlertsAndNotificationsPage.cs" />
     <Compile Include="TopicsPage.cs" />
     <Compile Include="WatchPage.cs" />

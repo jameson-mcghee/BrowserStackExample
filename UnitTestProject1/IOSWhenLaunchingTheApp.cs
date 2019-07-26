@@ -8,12 +8,14 @@ using System.Threading;
 
 namespace MobileAppTests
 {
-    //[TestFixture("parallel", "iphone-8")]
-    //[TestFixture("parallel", "iphone-8-plus")]
-    //[TestFixture("parallel", "iphone-se")]
+    [TestFixture("parallel", "iphone-7")]
+    [TestFixture("parallel", "iphone-8")]
+    [TestFixture("parallel", "iphone-8-plus")]
+    [TestFixture("parallel", "iphone-se")]
     [TestFixture("parallel", "iphone-xs")]
-    //[TestFixture("parallel", "ipad-pro")]
-    //[TestFixture("parallel", "ipad-5th")]
+    [TestFixture("parallel", "iphone-xsmax")]
+    [TestFixture("parallel", "ipad-pro")] //Tablet
+    [TestFixture("parallel", "ipad-5th")] //Tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class IOSWhenLaunchingTheApp : DayPartingScreen
     {
@@ -42,7 +44,7 @@ namespace MobileAppTests
             Assert.IsTrue(sponsoredByElement.Contains("Sponsored By"), sponsoredByElement + "'Sponsored by' message does not contain 'Sponsored By'.");
         }
 
-        [Test]
+        //[Test]
         public async Task TheDayPartingScreenAdIsPresent()
         {            
             for (int i = 0; ; i++)

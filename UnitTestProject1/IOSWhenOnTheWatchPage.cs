@@ -6,18 +6,20 @@ using System.Diagnostics;
 
 namespace MobileAppTests
 {
-    //[TestFixture("parallel", "iphone-8")]
-    //[TestFixture("parallel", "iphone-8-plus")]
-    //[TestFixture("parallel", "iphone-se")]
+    [TestFixture("parallel", "iphone-7")]
+    [TestFixture("parallel", "iphone-8")]
+    [TestFixture("parallel", "iphone-8-plus")]
+    [TestFixture("parallel", "iphone-se")]
     [TestFixture("parallel", "iphone-xs")]
-    //[TestFixture("parallel", "ipad-pro")]
-    //[TestFixture("parallel", "ipad-5th")]
+    [TestFixture("parallel", "iphone-xsmax")]
+    [TestFixture("parallel", "ipad-pro")] //Tablet
+    [TestFixture("parallel", "ipad-5th")] //Tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class IOSWhenOnTheWatchPage : WatchPage
     {
         public IOSWhenOnTheWatchPage(string profile, string device) : base(profile, device) { }
 
-        [Test]
+        //[Test]
         public async Task TheWatchPageIsPresent()
         {
             await IOSWeatherPageIsPresent();
@@ -47,7 +49,7 @@ namespace MobileAppTests
             }
         }
 
-        [Test]
+        //[Test]
         public async Task TheWatchPageBannerAdIsPresent()
         {
             await IOSWatchPageIsPresent();
@@ -70,7 +72,7 @@ namespace MobileAppTests
             }
         }
 
-        [Test]
+        //[Test]
         public async Task ConfirmAdModulesArePresentAndCount()
         {
             await IOSWatchPageIsPresent();

@@ -2,14 +2,11 @@
 using System.Threading.Tasks;
 using BrowserStackIntegration;
 
-namespace MobileAppTests
+namespace ScreenShotTests
 {
-    //[TestFixture("parallel", "iphone-8")]
-    //[TestFixture("parallel", "iphone-8-plus")]
-    //[TestFixture("parallel", "iphone-se")]
-    [TestFixture("parallel", "iphone-xs")]
-    //[TestFixture("parallel", "ipad-pro")] //Tablet
-    //[TestFixture("parallel", "ipad-5th")] //Tablet
+    [TestFixture("parallel", "iphone-8-plus")]
+    [TestFixture("parallel", "iphone-xsmax")]
+    [TestFixture("parallel", "ipad-pro")] //Tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class IOSScreenShots : WatchPage
     {
@@ -21,6 +18,7 @@ namespace MobileAppTests
             #region Home Page
             //await IOSHomePageIsPresent();
             Wait(15);
+            await ApproveiOSAlerts();
             await IOSCaptureScreenShot();
             #endregion
 

@@ -5,17 +5,19 @@ using System;
 using System.Diagnostics;
 using OpenQA.Selenium.Appium.MultiTouch;
 
-namespace MobileAppTests
+namespace FTUETests
 {
     [TestFixture("parallel", "pixel")]
     [TestFixture("parallel", "pixel-2")]
     [TestFixture("parallel", "pixel-3")]
-    [TestFixture("parallel", "galaxy-s7")]
+    //[TestFixture("parallel", "nexus-9")]
     [TestFixture("parallel", "galaxy-s8")]
     [TestFixture("parallel", "galaxy-s9")]
     [TestFixture("parallel", "galaxy-note8")]
     [TestFixture("parallel", "galaxy-note9")]
+    [TestFixture("parallel", "galaxy-tabs3")] //tablet
     [TestFixture("parallel", "galaxy-tabs4")] //tablet
+    [TestFixture("parallel", "galaxy-tabs5e")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenInTheFTUE : FirstTimeUserExperience
     {
@@ -58,7 +60,8 @@ namespace MobileAppTests
             await AndroidClickFTUEPreviousButton();
             await AndroidUsersCanAccessTheFTUELocationPage();
             await AndroidClickFTUENextButton();
-            await AndroidClickFTUEGetStartedButton();
+            //await AndroidClickFTUECloseButton();
+            await AndroidClickFTUENextButton();
         }
 
         [Test]
@@ -66,12 +69,30 @@ namespace MobileAppTests
         {
             await AndroidUsersCanAccessTheFTUEHomePage();
             await SwipeRightToLeftOnAndroid();
-            await AndroidUsersCanAccessTheFTUETopicFollowPage();
+            //await AndroidUsersCanAccessTheFTUETopicFollowPage();
             await SwipeRightToLeftOnAndroid();
             await AndroidUsersCanAccessTheFTUELocationPage();
-            await SwipeRightToLeftOnIOS();
-            await AndroidUsersCanAccessTheFTUETopicFollowPage();
-            await AndroidClickFTUECloseButton();
+            await SwipeRightToLeftOnAndroid();
+            for (int i = 0; ; i++)
+            {
+                if (i >= 3) Assert.Fail("FTUE Get Started Button is not being displayed.");
+                try
+                {
+                    if (IsAndroidElementPresent("component||non-module|ftue-end|||"))
+                    {
+                        break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string message = $"FTUE Get Started Button is not being displayed. {ex}";
+                    Debug.WriteLine(message);
+                    //Debug.ReadLine();
+                    Console.WriteLine(message);
+                }
+                Wait(1);
+            }
+            await AndroidClickFTUEGetStartedButton();
         }
 
         //[Test]
@@ -93,7 +114,7 @@ namespace MobileAppTests
             int textFieldXCoord = textFieldLocation.X;
 
             TouchAction action = new TouchAction(androidDriver);
-            action.Press ((textFieldXCoord + textFieldSizeWidth) * 0.5, (textFieldYCoord - textFieldSizeHeight) - 10)
+            action.Press((textFieldXCoord + textFieldSizeWidth) * 0.5, (textFieldYCoord - textFieldSizeHeight) - 10)
             .Wait(500)
             .Release()
             .Perform();

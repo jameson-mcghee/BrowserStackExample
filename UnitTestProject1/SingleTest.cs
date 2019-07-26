@@ -26,7 +26,7 @@ namespace MobileAppTests
             await IOSUsersCanAccessTheFTUE();
         }
 
-        [Test]
+        //[Test]
         public async Task AndroidPushNotificationPresentTest()
         {
             await AndroidUsersCanAccessTheFTUE();

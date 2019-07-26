@@ -55,15 +55,19 @@ namespace BrowserStackIntegration
             var accessKey = Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY") ??
                             ConfigurationManager.AppSettings.Get("key");
 
-            capability.SetCapability("browserstack.user", userName);
-            capability.SetCapability("browserstack.key", accessKey);
+
+
             capability.SetCapability("autoGrantPermissions", true);
             capability.SetCapability("autoAcceptAlerts", true);
+            capability.SetCapability("real_mobile", true); //TODO: Remove if unnessesary
+            capability.SetCapability("waitForQuiescence", false);
+            capability.SetCapability("browserstack.user", userName);
+            capability.SetCapability("browserstack.key", accessKey);
             capability.SetCapability("browserstack.networkLogs", true);
             capability.SetCapability("browserstack.seleniumLogs", true);
             capability.SetCapability("browserstack.deviceLogs", true);
             capability.SetCapability("browserstack.appiumLogs", true);
-            capability.SetCapability("waitForQuiescence", false);
+            capability.SetCapability("browserstack.debug", true);
             //capability.SetCapability("browserstack.resignApp", false);
 
             var appId = Environment.GetEnvironmentVariable("BROWSERSTACK_APP_ID");

@@ -4,17 +4,19 @@ using System.Threading.Tasks;
 using System;
 using System.Diagnostics;
 
-namespace MobileAppTests
+namespace ArticlePageTests
 {
-    //[TestFixture("parallel", "pixel")]
-    //[TestFixture("parallel", "pixel-2")]
-    //[TestFixture("parallel", "pixel-3")]
-    //[TestFixture("parallel", "galaxy-s7")]
-    //[TestFixture("parallel", "galaxy-s8")]
+    [TestFixture("parallel", "pixel")]
+    [TestFixture("parallel", "pixel-2")]
+    [TestFixture("parallel", "pixel-3")]
+    //[TestFixture("parallel", "nexus-9")]
+    [TestFixture("parallel", "galaxy-s8")]
     [TestFixture("parallel", "galaxy-s9")]
-    //[TestFixture("parallel", "galaxy-note8")]
-    //[TestFixture("parallel", "galaxy-note9")]
-    ////[TestFixture("parallel", "galaxy-tabs4")] //tablet
+    [TestFixture("parallel", "galaxy-note8")]
+    [TestFixture("parallel", "galaxy-note9")]
+    [TestFixture("parallel", "galaxy-tabs3")] //tablet
+    [TestFixture("parallel", "galaxy-tabs4")] //tablet
+    [TestFixture("parallel", "galaxy-tabs5e")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenOpeningAnArticlePage : ArticlePage
     {
