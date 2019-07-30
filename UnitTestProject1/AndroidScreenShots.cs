@@ -7,7 +7,7 @@ using System;
 namespace ScreenShotTests
 {
     [TestFixture("parallel", "pixel")]
-    //[TestFixture("parallel", "nexus-9")] //Tablet
+    [TestFixture("parallel", "galaxy-tabs4")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidScreenShots : WatchPage
     {
@@ -19,8 +19,8 @@ namespace ScreenShotTests
             #region Home Page
 
             await AndroidHomePageIsPresent();
-            Wait(5);
-            await AndroidCaptureScreenShot();
+            await Wait(5);
+            await AndroidCaptureScreenShot(this.device);
             #endregion
 
             #region Weather Page
@@ -44,8 +44,8 @@ namespace ScreenShotTests
                 }
                 Wait(1);
             }
-            Wait(5);
-            await AndroidCaptureScreenShot();
+            await Wait(5);
+            await AndroidCaptureScreenShot(this.device);
             #endregion
 
             #region Watch Page
@@ -72,8 +72,8 @@ namespace ScreenShotTests
                     Console.WriteLine(message);
                 }
             }
-            Wait(5);
-            await AndroidCaptureScreenShot();
+            await Wait(5);
+            await AndroidCaptureScreenShot(this.device);
             #endregion
 
             #region Topic Page
@@ -104,8 +104,8 @@ namespace ScreenShotTests
                 }
                 Wait(1);
             }
-            Wait(5);
-            await AndroidCaptureScreenShot();
+            await Wait(5);
+            await AndroidCaptureScreenShot(this.device);
             #endregion
         }
     }

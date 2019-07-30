@@ -9,7 +9,7 @@ namespace BrowserStackIntegration
     {
         public ArticlePage(string profile, string device) : base(profile, device) { }
 
-        //Android
+        #region ANDROID
         public async Task AndroidArticlePageIsPresent()
         {
             await AndroidHomePageIsPresent();
@@ -44,8 +44,9 @@ namespace BrowserStackIntegration
         }
 
         //TODO: Create an ArticlePageScreenConfigRequest() method for Android and iOS
-        
-        //iOS
+        #endregion
+
+        #region iOS
         public async Task IOSArticlePageIsPresent()
         {
             await IOSHomePageIsPresent();
@@ -78,6 +79,6 @@ namespace BrowserStackIntegration
                 Wait(1);
             }
         }
-
+        #endregion
     }
 }

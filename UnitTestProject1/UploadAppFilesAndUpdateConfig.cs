@@ -44,7 +44,7 @@ namespace NonMobileAppTests
                 }
                 else
                 {
-                    Console.Write($@"File is not an Android or iOS application file.{Environment.NewLine}{fileInFolder}");
+                    Console.Write($@"File is not an Android or iOS application file.{Environment.NewLine}{fileInFolder}{Environment.NewLine}");
                 }
             }
         }
@@ -62,9 +62,6 @@ namespace NonMobileAppTests
                         var base64authorization = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{UserName}:{AccessKey}"));
                         request.Headers.TryAddWithoutValidation("Authorization", $"Basic {base64authorization}");
 
-                        //TODO: Delete this section if the other code below works
-                        //var multipartContent = new MultipartFormDataContent();
-                        //multipartContent.Add(new ByteArrayContent(File.ReadAllBytes(file)), "file", Path.GetFileName(file));
                         var multipartContent = new MultipartFormDataContent
                         {
                             { new ByteArrayContent(File.ReadAllBytes(file)), "file", Path.GetFileName(file) }
@@ -97,12 +94,14 @@ namespace NonMobileAppTests
         {
             #region Variables
             string userName = Environment.UserName;
-            string fileName = file.Remove(0, 41);
+            string fileName = file.Remove(0, 53);
+            string stationID = fileName.Remove(fileName.Length - 4);
             string browserStackExampleDLL = $@"C:/Users/{userName}/source/repos/BrowserStackExample/BrowserStackExample/bin/Debug/BrowserStackExample.dll";
             string unitTestProject1DLL = $@"C:/Users/{userName}/source/repos/BrowserStackExample/UnitTestProject1/bin/Debug/UnitTestProject1.dll";
             string appConfigBrowserStackIntegration = $@"C:\Users\{userName}\source\repos\BrowserStackExample\BrowserStackExample\app";
             string appConfigMobileAppTests = $@"C:\Users\{userName}\source\repos\BrowserStackExample\UnitTestProject1\app";
             string uploadedAppKeys = $@"C:\Users\{userName}\Documents\UploadedAppKeys.txt";
+            string stationFile = $@"C:\Users\{userName}\Documents\StationID.txt";
             #endregion
 
             try
@@ -115,6 +114,8 @@ namespace NonMobileAppTests
                 {
                     Assert.Fail("UnitTestProject1.dll.config file does not exist.");
                 }
+                
+                File.WriteAllText(stationFile, $@"Station Info: {stationID}");
 
                 if (fileType == 1)
                 {

@@ -14,7 +14,7 @@ namespace SettingsPageTests
     [TestFixture("parallel", "galaxy-s9")]
     [TestFixture("parallel", "galaxy-note8")]
     [TestFixture("parallel", "galaxy-note9")]
-    [TestFixture("parallel", "galaxy-tabs3")] //tablet
+    //[TestFixture("parallel", "galaxy-tabs3")] //tablet
     [TestFixture("parallel", "galaxy-tabs4")] //tablet
     [TestFixture("parallel", "galaxy-tabs5e")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]

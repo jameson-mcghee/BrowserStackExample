@@ -15,7 +15,7 @@ namespace FTUETests
     [TestFixture("parallel", "galaxy-s9")]
     [TestFixture("parallel", "galaxy-note8")]
     [TestFixture("parallel", "galaxy-note9")]
-    [TestFixture("parallel", "galaxy-tabs3")] //tablet
+    //[TestFixture("parallel", "galaxy-tabs3")] //tablet
     [TestFixture("parallel", "galaxy-tabs4")] //tablet
     [TestFixture("parallel", "galaxy-tabs5e")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
@@ -105,22 +105,26 @@ namespace FTUETests
             await AndroidUsersCanAccessTheFTUELocationPage();
             await AndroidTypeTextCommand("input||non-module|ftue-location|||", "Oak Ridge");
 
-            //TODO: Confirm if this will work on Android
-            var textFieldLocation = androidDriver.FindElementByAccessibilityId("input||non-module|ftue-location|||").Location;
-            var textFieldSize = androidDriver.FindElementByAccessibilityId("input||non-module|ftue-location|||").Size;
-            int textFieldSizeWidth = textFieldSize.Width;
-            int textFieldSizeHeight = textFieldSize.Height;
-            int textFieldYCoord = textFieldLocation.Y;
-            int textFieldXCoord = textFieldLocation.X;
+            //TODO: Add functionality to click the first option of Oak Ridge
 
-            TouchAction action = new TouchAction(androidDriver);
-            action.Press((textFieldXCoord + textFieldSizeWidth) * 0.5, (textFieldYCoord - textFieldSizeHeight) - 10)
-            .Wait(500)
-            .Release()
-            .Perform();
+            ////TODO: Confirm if this will work on Android
+            //var textFieldLocation = androidDriver.FindElementByAccessibilityId("input||non-module|ftue-location|||").Location;
+            //var textFieldSize = androidDriver.FindElementByAccessibilityId("input||non-module|ftue-location|||").Size;
+            //int textFieldSizeWidth = textFieldSize.Width;
+            //int textFieldSizeHeight = textFieldSize.Height;
+            //int textFieldYCoord = textFieldLocation.Y;
+            //int textFieldXCoord = textFieldLocation.X;
+
+            //TouchAction action = new TouchAction(androidDriver);
+            //action.Press((textFieldXCoord + textFieldSizeWidth) * 0.5, (textFieldYCoord - textFieldSizeHeight) - 10)
+            //.Wait(500)
+            //.Release()
+            //.Perform();
 
             await AndroidClickFTUENextButton();
             await AndroidClickFTUEGetStartedButton();
+
+            //TODO: Add functionality to verify that the location was set to the default location
         }
     }
 }

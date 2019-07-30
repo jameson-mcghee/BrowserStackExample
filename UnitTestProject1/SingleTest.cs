@@ -6,7 +6,8 @@ using System.Diagnostics;
 
 namespace MobileAppTests
 {
-    [TestFixture("single", "galaxy-s9")]
+    //[TestFixture("single", "galaxy-s9")]
+    [TestFixture("single", "galaxy-tabs4")] //tablet
     //[TestFixture("single", "iphone-8")]
 
     public class SingleTest : LiveVideo
@@ -30,7 +31,7 @@ namespace MobileAppTests
         public async Task AndroidPushNotificationPresentTest()
         {
             await AndroidUsersCanAccessTheFTUE();
-            await AndroidCaptureScreenShot();
+            await AndroidCaptureScreenShot(this.device);
             await AndroidClickFTUECloseButton();
             for (int i = 0; ; i++)
             {
@@ -39,7 +40,7 @@ namespace MobileAppTests
                 {
                     if (IsAndroidElementPresent("page||home-wrapper||||"))
                     {
-                        await AndroidCaptureScreenShot();
+                        await AndroidCaptureScreenShot(this.device);
                         await AndroidCloseApp();
                         break;
                     }
@@ -52,7 +53,7 @@ namespace MobileAppTests
                     Console.WriteLine(message);
                 }
                 Wait(1);
-                }
+            }
 
             if (IsAndroidElementPresent("page||home-wrapper||||"))
             {
@@ -60,13 +61,13 @@ namespace MobileAppTests
             }
             else
             {
-                await AndroidCaptureScreenShot();
+                await AndroidCaptureScreenShot(this.device);
                 dynamic response = await SendToNativeAppAlertQueueFront
                 ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
                 Console.Write(response);
             }
             await OpenAndroidNotificationPane();
-            Wait(30);            
+            Wait(30);
         }
 
         //[Test]
@@ -77,6 +78,5 @@ namespace MobileAppTests
             Console.Write(response);
         }
 
-        
     }
 }
