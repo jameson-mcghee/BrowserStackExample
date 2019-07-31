@@ -223,7 +223,7 @@ namespace BrowserStackIntegration
             string userName = Environment.UserName;
             string fullStationVersion = File.ReadAllText($@"C:\Users\{userName}\Documents\StationID.txt");
             string stationVersion = fullStationVersion.Remove(0, 14);
-            string screenShotDirectory = $@"C:/Users/{userName}/Desktop/Screenshots/{stationVersion}/Apple/{device}/";
+            string screenShotDirectory = $@"C:/Users/{userName}/Desktop/Screenshots/{stationVersion}/Android/{device}/";
             Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
             Directory.CreateDirectory(screenShotDirectory);
@@ -235,7 +235,7 @@ namespace BrowserStackIntegration
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
-                Assert.Fail("Screenshot creation failed with Exception: " + ex);
+                Assert.Fail($"Screenshot creation failed with Exception:{Environment.NewLine}{ex}");
             }
         }
         public async Task AndroidCloseApp()

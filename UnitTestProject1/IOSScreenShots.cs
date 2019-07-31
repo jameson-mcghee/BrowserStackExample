@@ -57,6 +57,5 @@ namespace ScreenShotTests
             await IOSCaptureScreenShot(this.device);
             #endregion
         }
-
     }
 }
