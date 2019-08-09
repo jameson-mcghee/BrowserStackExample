@@ -19,42 +19,30 @@ namespace ScreenShotTests
         {
             #region Home Page
 
-            await Wait(15);
-
-            //TODO: Remove this section once a screenshot Android build is available
-            #region FTUE Close Button
-            try
-            {
-                await AndroidClickFTUECloseButton();
-            }
-            catch (Exception ex)
-            {
-                string message = $"Could not click the FTUE button:{Environment.NewLine}{ex}";
-                Debug.WriteLine(message);
-                Console.WriteLine(message);
-                throw;
-            }
-            #endregion
-
-            await Wait(5);
-            await AndroidCaptureScreenShot(this.device);
+            await Wait(60);
+            //await ScrollUpOnAndroid();
+            //await Wait(10);
+            await AndroidCaptureScreenShotForStore(this.device);
             #endregion
 
             #region Weather Page
 
             await SwipeRightToLeftOnAndroid();
             await Wait(5);
-            await AndroidCaptureScreenShot(this.device);
+            //await ScrollUpOnAndroid();
+            //await Wait(10);
+            await AndroidCaptureScreenShotForStore(this.device);
             #endregion
 
             #region Watch Page
 
-            await ScrollDownOnAndroid();
-            await Wait(1);
-            await SwipeRightToLeftOnAndroid();
+            //await ScrollDownOnAndroid();
+            //await Wait(1);
+            //await SwipeRightToLeftOnAndroid();
+            //await SwipeRightToLeftOnAndroid();
             await SwipeRightToLeftOnAndroid();
             await Wait(5);
-            await AndroidCaptureScreenShot(this.device);
+            await AndroidCaptureScreenShotForStore(this.device);
             #endregion
 
             #region Topic Page
@@ -69,7 +57,7 @@ namespace ScreenShotTests
             .Perform();
 
             await Wait(5);
-            await AndroidCaptureScreenShot(this.device);
+            await AndroidCaptureScreenShotForStore(this.device);
             #endregion
         }
     }

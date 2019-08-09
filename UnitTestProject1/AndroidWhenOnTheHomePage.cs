@@ -135,7 +135,7 @@ namespace HomePageTests
         public async Task TheGoogleAnalyticsCallsAreCorrect()
         {
             await AndroidHomePageIsPresent();
-            await GetNetworkLogs();
+            //await GetNetworkLogs(1);
             //Figure out how to pass the network logs from the GetNetworkLogs() method into this method
             //Stub out the comparison of the network logs to URL1-4
             //var doesUrlExist = failingUrl.Contains(URL1);

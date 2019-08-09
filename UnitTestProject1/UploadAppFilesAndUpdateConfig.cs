@@ -2,11 +2,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Newtonsoft.Json.Linq;
+using RestSharp;
 
 namespace NonMobileAppTests
 {
@@ -42,7 +41,7 @@ namespace NonMobileAppTests
                     int fileType = 2;
                     await UploadAppFiles("https://api-cloud.browserstack.com/app-automate/upload", fileInFolder, fileType);
                 }
-                else
+                if (extension.Contains(".apk") == false && extension.Contains(".ipa") == false)
                 {
                     Console.Write($@"File is not an Android or iOS application file.{Environment.NewLine}{fileInFolder}{Environment.NewLine}");
                 }
@@ -55,33 +54,21 @@ namespace NonMobileAppTests
 
             try
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    using (HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("POST"), url))
-                    {
-                        var base64authorization = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{UserName}:{AccessKey}"));
-                        request.Headers.TryAddWithoutValidation("Authorization", $"Basic {base64authorization}");
-
-                        var multipartContent = new MultipartFormDataContent
-                        {
-                            { new ByteArrayContent(File.ReadAllBytes(file)), "file", Path.GetFileName(file) }
-                        };
-                        request.Content = multipartContent;
-
-                        var response = await httpClient.SendAsync(request);
-                        var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                        dynamic apiResponse = JObject.Parse(responseString);
-                        appUrl = apiResponse.app_url.ToString();
-                        Console.WriteLine(appUrl);
-                    }
-                }
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Authorization", "Basic amFtZXNvbm1jZ2hlZTI6UXN4VjNyS3p5ZmZldFlCOGpocHg=");
+                request.AddHeader("Content-Type", "multipart/form-data");
+                request.AddFile("file", file);
+                IRestResponse response = client.Execute(request);
+                var responseString = response.Content;
+                dynamic apiResponse = JObject.Parse(responseString);
+                appUrl = apiResponse.app_url.ToString();
+                Console.WriteLine(appUrl);
             }
             catch (Exception ex)
             {
                 string message = $"PostResponseAsync - Error getting response from {url}.Ex: {ex}";
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }
@@ -101,7 +88,9 @@ namespace NonMobileAppTests
             string appConfigBrowserStackIntegration = $@"C:\Users\{userName}\source\repos\BrowserStackExample\BrowserStackExample\app";
             string appConfigMobileAppTests = $@"C:\Users\{userName}\source\repos\BrowserStackExample\UnitTestProject1\app";
             string uploadedAppKeys = $@"C:\Users\{userName}\Documents\UploadedAppKeys.txt";
-            string stationFile = $@"C:\Users\{userName}\Documents\StationID.txt";
+            string androidStationFile = $@"C:\Users\{userName}\Documents\Android StationID.txt";
+            string iosStationFile = $@"C:\Users\{userName}\Documents\Apple StationID.txt";
+
             #endregion
 
             try
@@ -115,15 +104,15 @@ namespace NonMobileAppTests
                     Assert.Fail("UnitTestProject1.dll.config file does not exist.");
                 }
                 
-                File.WriteAllText(stationFile, $@"Station Info: {stationID}");
-
                 if (fileType == 1)
                 {
                     File.AppendAllText(uploadedAppKeys, $@"Android App : {fileName} : {appUrl} : {DateTime.Now:yyyy-MM-dd_hh-mm-ss}{Environment.NewLine}");
+                    File.WriteAllText(androidStationFile, $@"Station Info: {stationID}");
                 }
                 if (fileType == 2)
                 {
                     File.AppendAllText(uploadedAppKeys, $@"iOS App : {fileName} : {appUrl} : {DateTime.Now:yyyy-MM-dd_hh-mm-ss}{Environment.NewLine}");
+                    File.WriteAllText(iosStationFile, $@"Station Info: {stationID}");
                 }
 
                 #region XML Strings
@@ -221,7 +210,6 @@ namespace NonMobileAppTests
             {
                 string message = $"App.Config update failed: {ex}";
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }

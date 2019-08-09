@@ -87,7 +87,7 @@ namespace DayPartingScreenTests
         public async Task TheGoogleAnalyticsCallsArePresent()
         {
             await TheDayPartingScreenAdIsPresent();
-            await GetNetworkLogs();
+            //await GetNetworkLogs(1);
 
         }
     }

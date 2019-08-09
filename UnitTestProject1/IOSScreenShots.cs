@@ -22,24 +22,26 @@ namespace ScreenShotTests
 
             await Wait(15);
             await ApproveiOSAlerts();
-            await IOSCaptureScreenShot(this.device);
+            await IOSCaptureScreenShotForStore(this.device);
             #endregion
 
             #region Weather Page
 
             await SwipeRightToLeftOnIOS();
             await Wait(5);
-            await IOSCaptureScreenShot(this.device);
+            await IOSCaptureScreenShotForStore(this.device);
             #endregion
 
             #region Watch Page
 
-            await ScrollDownOnIOS();
-            await Wait(1);
-            await SwipeRightToLeftOnIOS();
+            //await ScrollDownOnIOS();
+            //await Wait(1);
+            //await SwipeRightToLeftOnIOS();
+            //await SwipeRightToLeftOnIOS();
+            //await SwipeRightToLeftOnIOS();
             await SwipeRightToLeftOnIOS();
             await Wait(5);
-            await IOSCaptureScreenShot(this.device);
+            await IOSCaptureScreenShotForStore(this.device);
             #endregion
 
             #region Topic Page
@@ -54,7 +56,7 @@ namespace ScreenShotTests
             .Perform();
 
             await Wait(5);
-            await IOSCaptureScreenShot(this.device);
+            await IOSCaptureScreenShotForStore(this.device);
             #endregion
         }
     }

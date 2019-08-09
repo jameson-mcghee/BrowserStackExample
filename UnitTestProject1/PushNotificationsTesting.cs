@@ -1,0 +1,247 @@
+﻿using NUnit.Framework;
+using RestSharp;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+
+namespace NonMobileAppTests
+{
+    public class PushNotificationsTesting
+    {
+        public string url = "https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueueTest/?subscription-key=fdd842925eb6445f85adb84b30d22838";
+
+        [Test]
+        public async Task FrontAlert()
+        {
+            dynamic response = await SendToNativeAppAlertQueueFront(url);
+        }
+        [Test]
+        public async Task ArticleAlert()
+        {
+            dynamic response = await SendToNativeAppAlertQueueArticle(url);
+        }
+        [Test]
+        public async Task PromoItemAlert()
+        {
+            dynamic response = await SendToNativeAppAlertQueuePromoItem(url);
+        }
+        [Test]
+        public async Task VideoContentAlert()
+        {
+            dynamic response = await SendToNativeAppAlertQueueVideoContent(url);
+        }
+        [Test]
+        public async Task TopicPageAlert()
+        {
+            dynamic response = await SendToNativeAppAlertQueueTopicPage(url);
+        }
+        [Test]
+        public async Task WebViewAlert()
+        {
+            dynamic response = await SendToNativeAppAlertQueueWebView(url);
+        }
+        [Test]
+        public async Task SpecificSubscribersAlert()
+        {
+            dynamic response = await SendToNativeAppAlertQueueSpecificSubscribers(url);
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueueFront(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"front\"," +
+                    "\r\n  \"siteId\": \"51\",\r\n  \"front\": \"weather\", \r\n  \"alertGroupsToTarget\": []," +
+                    "\r\n  \"alertTitle\": \"Test Alert Destination - Weather Front 1\"," +
+                    "\r\n  \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
+                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\"," +
+                    "\r\n  \"alertDurationInSeconds\": 7200,\r\n  \"alertProminence\": \"withSound\"," +
+                    "\r\n  \"sentBy\":\"jmcghee@tegna.com\",\r\n  \"sentById\": \"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $@"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueueTopicPage(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"topicPage\"," +
+                    "\r\n  \"siteId\": \"51\",\r\n  \"topicPageClassification\": { \r\n    \"section\": \"news\"," +
+                    "\r\n    \"subsection\": \"local\",\r\n    \"topic\": \"\",\r\n    \"subtopic\": \"\"\r\n  }," +
+                    "\r\n  \"alertGroupsToTarget\": [ \r\n    \"sports\",\r\n    \"local\"\r\n  ]," +
+                    "\r\n  \"alertTitle\": \"Test Alert Dest - Topic Page Local News1\"," +
+                    "\r\n  \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz " +
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\"," +
+                    "\r\n  \"alertDurationInSeconds\": 3600," +
+                    "\r\n  \"alertProminence\": \"withSound\",\r\n  \"sentBy\":\"jmcghee@tegna.com\"," +
+                    "\r\n  \"sentById\": \"12345\"\r\n}\r\n", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $@"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueueWebView(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"webview\",\r\n  \"siteId\": \"51\"," +
+                    "\r\n  \"webview\": \"weather alerts webview\",\r\n  \"alertGroupsToTarget\": []," +
+                    "\r\n  \"alertTitle\": \"Test Alert Destination - Web View Page 1\"," +
+                    "\r\n  \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
+                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\"," +
+                    "\r\n  \"alertDurationInSeconds\": 7200,\r\n  \"alertProminence\": \"withSound\"," +
+                    "\r\n  \"sentBy\":\"jmcghee@tegna.com\",\r\n  \"sentById\": \"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueueArticle(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n    \"destinationType\": \"content\"," +
+                    "\r\n    \"siteId\": \"51\",\r\n    \"alertGroupsToTarget\": []," +
+                    "\r\n    \"alertTitle\": \"Test Alert Destination - Content Page 12\"," +
+                    "\r\n    \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
+                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n    \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\"," +
+                    "\r\n    \"alertDurationInSeconds\": 7200,\r\n    \"alertProminence\": \"withSound\"," +
+                    "\r\n    \"contentId\": \"cb682041-1646-41e3-a394-3b85da28e95c\"," +
+                    "\r\n    \"contentSiteId\": \"51\",\r\n    \"contentType\": \"text\"," +
+                    "\r\n    \"sentBy\": \"jmcghee@tegna.com\",\r\n    \"sentById\":\"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueueSpecificSubscribers(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"front\",\r\n  \"siteId\": \"51\"," +
+                    "\r\n  \"front\": \"weather\", \r\n  \"alertGroupsToTarget\": [\"entertainment\"]," +
+                    "\r\n  \"alertTitle\": \"Entertainment Subs Only Test – Weather 1\"," +
+                    "\r\n  \"alertText\": \"Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
+                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>1234\"," +
+                    "\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\"," +
+                    "\r\n  \"alertDurationInSeconds\": 3600,\r\n  \"alertProminence\": \"withSound\"," +
+                    "\r\n  \"sentBy\":\"jmcghee@tegna.com\",\r\n  \"sentById\": \"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueuePromoItem(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n    \"destinationType\": \"content\"," +
+                    "\r\n    \"siteId\": \"51\",\r\n    \"alertGroupsToTarget\": []," +
+                    "\r\n    \"alertTitle\": \"Test Alert Destination - Promo Item Page\"," +
+                    "\r\n    \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
+                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n    \"imageUrl\": \"https://s3.amazonaws.com/tgna-assets/stage/WBIR/images/b6bafee3-7efe-4b50-896d-11f050a4466f/b6bafee3-7efe-4b50-896d-11f050a4466f_750x422.jpg?q=2009886291\"," +
+                    "\r\n    \"alertDurationInSeconds\": 7200,\r\n    \"alertProminence\": \"withSound\"," +
+                    "\r\n    \"contentId\": \"c42089cd-ee13-4b31-b59c-2e19f7b72b63\"," +
+                    "\r\n    \"contentSiteId\": \"51\",\r\n    \"contentType\": \"text\"," +
+                    "\r\n    \"sentBy\": \"jmcghee@tegna.com\",\r\n    \"sentById\":\"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueueVideoContent(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n    \"destinationType\": \"content\"," +
+                    "\r\n    \"siteId\": \"51\",\r\n    \"alertGroupsToTarget\": []," +
+                    "\r\n    \"alertTitle\": \"Test Alert Destination - Video Content12\"," +
+                    "\r\n    \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
+                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n    \"imageUrl\": \"https://media.11alive.com/assets/WXIA/images/9bb8e450-bd37-4dd3-8694-d7a127ceb612/9bb8e450-bd37-4dd3-8694-d7a127ceb612_360x203.jpg\"," +
+                    "\r\n    \"alertDurationInSeconds\": 7200,\r\n    \"alertProminence\": \"withSound\"," +
+                    "\r\n    \"contentId\": \"988df2e8-4df0-47fc-a86d-8ed08bed8cdd\"," +
+                    "\r\n    \"contentSiteId\": \"51\",\r\n    \"contentType\": \"text\"," +
+                    "\r\n    \"sentBy\": \"jmcghee@tegna.com\",\r\n    \"sentById\":\"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+    }
+}

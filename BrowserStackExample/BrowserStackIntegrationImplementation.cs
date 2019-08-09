@@ -11,7 +11,7 @@ using OpenQA.Selenium.Remote;
 
 namespace BrowserStackIntegration
 {
-    public class BrowserStackIntegrationImplementation
+    public class BrowserStackIntegrationImplementation : GoogleAnalytics
     {
         public IOSDriver<IOSElement> iosDriver;
         public AndroidDriver<AndroidElement> androidDriver;
@@ -55,11 +55,8 @@ namespace BrowserStackIntegration
             var accessKey = Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY") ??
                             ConfigurationManager.AppSettings.Get("key");
 
-
-
             capability.SetCapability("autoGrantPermissions", true);
             capability.SetCapability("autoAcceptAlerts", true);
-            capability.SetCapability("real_mobile", true); //TODO: Remove if unnessesary
             capability.SetCapability("waitForQuiescence", false);
             capability.SetCapability("browserstack.user", userName);
             capability.SetCapability("browserstack.key", accessKey);
@@ -68,7 +65,8 @@ namespace BrowserStackIntegration
             capability.SetCapability("browserstack.deviceLogs", true);
             capability.SetCapability("browserstack.appiumLogs", true);
             capability.SetCapability("browserstack.debug", true);
-            //capability.SetCapability("browserstack.resignApp", false);
+            //capability.SetCapability("browserstack.resignApp", false); //This is only for when testing push notification on iOS with a Enterprise signed cert app
+            //capability.SetCapability("browserstack.local", "true"); //This is only for when testing push notifications
 
             var appId = Environment.GetEnvironmentVariable("BROWSERSTACK_APP_ID");
             if (appId != null)

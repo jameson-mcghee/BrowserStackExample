@@ -6,8 +6,8 @@ using System.Diagnostics;
 
 namespace MobileAppTests
 {
-    //[TestFixture("single", "galaxy-s9")]
-    [TestFixture("single", "galaxy-tabs4")] //tablet
+    [TestFixture("single", "galaxy-s9")]
+    //[TestFixture("single", "galaxy-tabs4")] //tablet
     //[TestFixture("single", "iphone-8")]
 
     public class SingleTest : LiveVideo
@@ -27,11 +27,11 @@ namespace MobileAppTests
             await IOSUsersCanAccessTheFTUE();
         }
 
-        //[Test]
+        [Test]
         public async Task AndroidPushNotificationPresentTest()
         {
             await AndroidUsersCanAccessTheFTUE();
-            await AndroidCaptureScreenShot(this.device);
+            //await AndroidCaptureScreenShot(this.device);
             await AndroidClickFTUECloseButton();
             for (int i = 0; ; i++)
             {
@@ -40,7 +40,7 @@ namespace MobileAppTests
                 {
                     if (IsAndroidElementPresent("page||home-wrapper||||"))
                     {
-                        await AndroidCaptureScreenShot(this.device);
+                        //await AndroidCaptureScreenShot(this.device);
                         await AndroidCloseApp();
                         break;
                     }
@@ -61,13 +61,13 @@ namespace MobileAppTests
             }
             else
             {
-                await AndroidCaptureScreenShot(this.device);
+                await AndroidCaptureScreenShotForStore(this.device);
                 dynamic response = await SendToNativeAppAlertQueueFront
                 ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
                 Console.Write(response);
             }
             await OpenAndroidNotificationPane();
-            Wait(30);
+            Wait(60);
         }
 
         //[Test]
@@ -77,6 +77,5 @@ namespace MobileAppTests
                 ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
             Console.Write(response);
         }
-
     }
 }

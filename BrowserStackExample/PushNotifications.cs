@@ -1,237 +1,124 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Text;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
+using RestSharp;
+using NUnit.Framework;
 
 namespace BrowserStackIntegration
 {
     public class PushNotifications : FirstTimeUserExperience
     {
         public PushNotifications(string profile, string device) : base(profile, device) { }
+        public string url = "https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueueTest/?subscription-key=fdd842925eb6445f85adb84b30d22838";
 
         public static async Task<dynamic> SendToNativeAppAlertQueueFront(string url)
         {
             try
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
-                    dynamic newPostBody = new JObject();
-                    newPostBody.destinationType = "front";
-                    newPostBody.siteId = "51";
-                    newPostBody.front = "weather";
-                    //List<string> alertGroupsToTarget = new List<string> {"local"};
-                    //newPostBody.alertGroupsToTarget = JArray.FromObject(alertGroupsToTarget);
-                    newPostBody.alertGroupsToTarget = new JArray();
-                    newPostBody.alertTitle = "Alert Destination - Weather Front 123456";
-                    newPostBody.alertText = 
-                        "Alert Text - 1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>1234";
-                    newPostBody.imageUrl = "https://url-goes-here.com";
-                    List<string> alertDurationInSeconds = new List<string> {"3600"};
-                    newPostBody.alertDurationInSeconds = JArray.FromObject(alertDurationInSeconds);
-                    newPostBody.alertProminence = "withSound";
-                    newPostBody.sentBy = "jmcghee@tegna.com";
-                    newPostBody.sentById = "12345";
-                                        
-                    var content = new StringContent(JsonConvert.SerializeObject(newPostBody), Encoding.UTF8, "application/json");
-                    var response = await httpClient.PostAsync(url, content);
-                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject(responseString);
-                }
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"front\",\r\n  \"siteId\": \"51\",\r\n  \"front\": \"weather\", \r\n  \"alertGroupsToTarget\": [],\r\n  \"alertTitle\": \"Test Alert Destination - Weather Front 1\",\r\n  \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\",\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\",\r\n  \"alertDurationInSeconds\": 7200,\r\n  \"alertProminence\": \"withSound\",\r\n  \"sentBy\":\"jmcghee@tegna.com\",\r\n  \"sentById\": \"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
             }
             catch (Exception ex)
             {
-                string message = $"PostResponseAsync - Error getting response from " + url + ".Ex: " + ex;
+                string message = $@"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }
-
         }
 
         public static async Task<dynamic> SendToNativeAppAlertQueueTopicPage(string url)
         {
             try
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
-
-                    dynamic newPostBody = new JObject();
-                    newPostBody.destinationType = "topicPage";
-                    newPostBody.siteId = "51";
-
-                    dynamic topicPageClassification = new JObject();
-                    topicPageClassification.section = "news";
-                    topicPageClassification.topic = "";
-                    topicPageClassification.subtopic = "";
-
-                    newPostBody.topicPageClassification = topicPageClassification;
-
-                    List<string> alertGroupsToTarget = new List<string> { "sports", "local" };
-                    newPostBody.alertGroupsToTarget = JArray.FromObject(alertGroupsToTarget);
-                    //newPostBody.alertGroupsToTarget = new JArray();
-                    newPostBody.alertTitle = "Alert Destination - 'News' Topic Page123";
-                    newPostBody.alertText =
-                        "Alert Text - 1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>1234";
-                    newPostBody.imageUrl = "https://url-goes-here.com";
-
-                    List<string> alertDurationInSeconds = new List<string> { "3600" };
-                    newPostBody.alertDurationInSeconds = JArray.FromObject(alertDurationInSeconds);
-                    newPostBody.alertProminence = "withoutSound";
-                    newPostBody.sentBy = "jmcghee@tegna.com";
-                    newPostBody.sentById = "12345";
-
-                    var content = new StringContent(JsonConvert.SerializeObject(newPostBody), Encoding.UTF8, "application/json");
-                    var response = await httpClient.PostAsync(url, content);
-                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject(responseString);
-                }
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"topicPage\"," +
+                    "\r\n  \"siteId\": \"51\",\r\n  \"topicPageClassification\": { \r\n    \"section\": \"news\"," +
+                    "\r\n    \"subsection\": \"local\",\r\n    \"topic\": \"\",\r\n    \"subtopic\": \"\"\r\n  }," +
+                    "\r\n  \"alertGroupsToTarget\": [ \r\n    \"sports\",\r\n    \"local\"\r\n  ]," +
+                    "\r\n  \"alertTitle\": \"Test Alert Dest - Topic Page Local News1\"," +
+                    "\r\n  \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz " +
+                    "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\"," +
+                    "\r\n  \"alertDurationInSeconds\": 3600," +
+                    "\r\n  \"alertProminence\": \"withSound\",\r\n  \"sentBy\":\"jmcghee@tegna.com\"," +
+                    "\r\n  \"sentById\": \"12345\"\r\n}\r\n", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
             }
             catch (Exception ex)
             {
-                string message = $"PostResponseAsync - Error getting response from " + url + ".Ex: " + ex;
+                string message = $@"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }
-
         }
 
         public static async Task<dynamic> SendToNativeAppAlertQueueWebView(string url)
         {
             try
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
-
-                    dynamic newPostBody = new JObject();
-                    newPostBody.destinationType = "webview";
-                    newPostBody.siteId = "51";
-                    newPostBody.webview = "weather alerts webview";
-                    //List<string> alertGroupsToTarget = new List<string> { "sports", "local" };
-                    //newPostBody.alertGroupsToTarget = JArray.FromObject(alertGroupsToTarget);
-                    newPostBody.alertGroupsToTarget = new JArray();
-                    newPostBody.alertTitle = "Alert Destination - WebView 1234567890 A";
-                    newPostBody.alertText =
-                        "Alert Text - 1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>1234";
-                    newPostBody.imageUrl = "https://url-goes-here.com";
-
-                    List<string> alertDurationInSeconds = new List<string> { "3600" };
-                    newPostBody.alertDurationInSeconds = JArray.FromObject(alertDurationInSeconds);
-                    newPostBody.alertProminence = "withSound";
-                    newPostBody.sentBy = "jmcghee@tegna.com";
-                    newPostBody.sentById = "12345";
-
-                    var content = new StringContent(JsonConvert.SerializeObject(newPostBody), Encoding.UTF8, "application/json");
-                    var response = await httpClient.PostAsync(url, content);
-                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject(responseString);
-                }
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"webview\",\r\n  \"siteId\": \"51\",\r\n  \"webview\": \"weather alerts webview\",\r\n  \"alertGroupsToTarget\": [],\r\n  \"alertTitle\": \"Test Alert Destination - Web View Page 1\",\r\n  \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\",\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\",\r\n  \"alertDurationInSeconds\": 7200,\r\n  \"alertProminence\": \"withSound\",\r\n  \"sentBy\":\"jmcghee@tegna.com\",\r\n  \"sentById\": \"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
             }
             catch (Exception ex)
             {
-                string message = $"PostResponseAsync - Error getting response from " + url + ".Ex: " + ex;
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }
-
         }
 
         public static async Task<dynamic> SendToNativeAppAlertQueueContent(string url)
         {
             try
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
-
-                    dynamic newPostBody = new JObject();
-                    newPostBody.destinationType = "content";
-                    newPostBody.siteId = "51";
-                    //List<string> alertGroupsToTarget = new List<string> { "sports", "local" };
-                    //newPostBody.alertGroupsToTarget = JArray.FromObject(alertGroupsToTarget);
-                    newPostBody.alertGroupsToTarget = new JArray();
-                    newPostBody.alertTitle = "Alert Destination - Content Page 1234567";
-                    newPostBody.alertText =
-                        "Alert Text - 1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>1234";
-                    newPostBody.imageUrl =
-                        "https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg";
-
-                    List<string> alertDurationInSeconds = new List<string> { "7200" };
-                    newPostBody.alertDurationInSeconds = JArray.FromObject(alertDurationInSeconds);
-                    newPostBody.alertProminence = "withSound";
-                    newPostBody.contentId = "c3c9dd9d-9bcd-4945-b25f-792321f7abd8";
-                    newPostBody.contentSiteId = "51";
-                    newPostBody.contentType = "text";
-                    newPostBody.sentBy = "jmcghee@tegna.com";
-                    newPostBody.sentById = "12345";
-
-                    var content = new StringContent(JsonConvert.SerializeObject(newPostBody), Encoding.UTF8, "application/json");
-                    var response = await httpClient.PostAsync(url, content);
-                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject(responseString);
-                }
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n    \"destinationType\": \"content\",\r\n    \"siteId\": \"51\",\r\n    \"alertGroupsToTarget\": [],\r\n    \"alertTitle\": \"Test Alert Destination - Content Page 12\",\r\n    \"alertText\": \"Test Alert Text - ManualPost !@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\",\r\n    \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\",\r\n    \"alertDurationInSeconds\": 7200,\r\n    \"alertProminence\": \"withSound\",\r\n    \"contentId\": \"cb682041-1646-41e3-a394-3b85da28e95c\",\r\n    \"contentSiteId\": \"51\",\r\n    \"contentType\": \"text\",\r\n    \"sentBy\": \"jmcghee@tegna.com\",\r\n    \"sentById\":\"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
             }
             catch (Exception ex)
             {
-                string message = $"PostResponseAsync - Error getting response from " + url + ".Ex: " + ex;
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }
-
         }
         
         public static async Task<dynamic> SendToNativeAppAlertSpecificSubscribers(string url)
         {
             try
             {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
-                    dynamic newPostBody = new JObject();
-                    newPostBody.destinationType = "front";
-                    newPostBody.siteId = "51";
-                    newPostBody.front = "weather";
-                    List<string> alertGroupsToTarget = new List<string> {"entertainment"};
-                    newPostBody.alertGroupsToTarget = JArray.FromObject(alertGroupsToTarget);
-                    //newPostBody.alertGroupsToTarget = new JArray();
-                    newPostBody.alertTitle = "Entertainment Subscribers Only - Weather";
-                    newPostBody.alertText =
-                        "Alert Text - 1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>1234";
-                    newPostBody.imageUrl = "https://url-goes-here.com";
-                    List<string> alertDurationInSeconds = new List<string> { "3600" };
-                    newPostBody.alertDurationInSeconds = JArray.FromObject(alertDurationInSeconds);
-                    newPostBody.alertProminence = "withSound";
-                    newPostBody.sentBy = "jmcghee@tegna.com";
-                    newPostBody.sentById = "12345";
-
-                    var content = new StringContent(JsonConvert.SerializeObject(newPostBody), Encoding.UTF8, "application/json");
-                    var response = await httpClient.PostAsync(url, content);
-                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject(responseString);
-                }
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"front\",\r\n  \"siteId\": \"51\",\r\n  \"front\": \"weather\", \r\n  \"alertGroupsToTarget\": [\"entertainment\"],\r\n  \"alertTitle\": \"Entertainment Subs Only Test – Weather 1\",\r\n  \"alertText\": \"Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<>1234\",\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\",\r\n  \"alertDurationInSeconds\": 3600,\r\n  \"alertProminence\": \"withSound\",\r\n  \"sentBy\":\"jmcghee@tegna.com\",\r\n  \"sentById\": \"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
             }
             catch (Exception ex)
             {
-                string message = $"PostResponseAsync - Error getting response from " + url + ".Ex: " + ex;
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }
-
         }
     }
 }
