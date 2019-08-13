@@ -89,6 +89,12 @@ namespace BrowserStackIntegration
             iosDriver.CloseApp();
             return;
         }
+        public async Task IOSLaunchApp()
+        {
+            iosDriver.LaunchApp();
+            return;
+        }
+
 
         #endregion
 
@@ -131,7 +137,7 @@ namespace BrowserStackIntegration
             .MoveTo(screenWidth * 0.01, screenHeight * 0.2)
             .Release()
             .Perform();
-            Wait(1);
+            await Wait(1);
         }
         public async Task SwipeLeftToRightOnIOS()
         {
@@ -144,7 +150,7 @@ namespace BrowserStackIntegration
             .MoveTo(screenWidth * 0.8, screenHeight * 0.5)
             .Release()
             .Perform();
-            Wait(1);
+            await Wait(1);
         }
         public async Task OpenIOSNotificationPane()
         {
@@ -157,7 +163,7 @@ namespace BrowserStackIntegration
             .MoveTo(screenWidth * 0.5, screenHeight * 0.65)
             .Release()
             .Perform();
-            Wait(1);
+            await Wait(1);
             return;
         }
 
@@ -242,6 +248,11 @@ namespace BrowserStackIntegration
             androidDriver.CloseApp();
             return;
         }
+        public async Task AndroidLaunchApp()
+        {
+            androidDriver.LaunchApp();
+            return;
+        }
 
         #endregion
 
@@ -284,7 +295,7 @@ namespace BrowserStackIntegration
             .MoveTo(screenWidth * 0.01, screenHeight * 0.2)
             .Release()
             .Perform();
-            Wait(1);
+            await Wait(1);
         }
         public async Task SwipeLeftToRightOnAndroid()
         {
@@ -297,7 +308,7 @@ namespace BrowserStackIntegration
             .MoveTo(screenWidth * 0.8, screenHeight * 0.5)
             .Release()
             .Perform();
-            Wait(1);
+            await Wait(1);
         }
         public async Task OpenAndroidNotificationPane()
         {

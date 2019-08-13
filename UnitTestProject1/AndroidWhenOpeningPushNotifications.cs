@@ -45,7 +45,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
             
             if (IsAndroidElementPresent("page||home-wrapper||||"))
@@ -80,7 +80,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             for (int i = 0; ; i++)
@@ -98,7 +98,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
@@ -134,7 +134,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             if (IsAndroidElementPresent("page||home-wrapper||||"))
@@ -169,7 +169,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             for (int i = 0; ; i++)
@@ -192,7 +192,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
@@ -228,7 +228,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             if (IsAndroidElementPresent("page||home-wrapper||||"))
@@ -263,7 +263,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             for (int i = 0; ; i++)
@@ -285,7 +285,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
         }
 
@@ -312,7 +312,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             if (IsAndroidElementPresent("page||home-wrapper||||"))
@@ -321,7 +321,7 @@ namespace MobileAppTests
             }
             else
             {
-                dynamic response = await SendToNativeAppAlertQueueContent
+                dynamic response = await SendToNativeAppAlertQueueArticle
                 ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
                 Console.Write(response);
             }
@@ -347,7 +347,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             for (int i = 0; ; i++)
@@ -369,7 +369,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
@@ -405,7 +405,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             if (IsAndroidElementPresent("page||home-wrapper||||"))
@@ -414,7 +414,7 @@ namespace MobileAppTests
             }
             else
             {
-                dynamic response = await SendToNativeAppAlertSpecificSubscribers
+                dynamic response = await SendToNativeAppAlertQueueSpecificSubscribers
                 ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
                 Console.Write(response);
             }
@@ -440,7 +440,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             for (int i = 0; ; i++)
@@ -458,7 +458,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))

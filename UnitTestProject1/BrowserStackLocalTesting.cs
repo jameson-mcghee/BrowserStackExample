@@ -15,7 +15,7 @@ namespace NonMobileAppTests
         public async Task BSLocalTesting()
         {
             string userName = Environment.UserName;
-            System.Diagnostics.Process.Start($@"C:/Users/{userName}/Downloads/BrowserStackLocal-win32/BrowserStackLocal.exe", "--key QsxV3rKzyffetYB8jhpx");
+            System.Diagnostics.Process.Start($@"C:/Users/{userName}/Downloads/BrowserStackLocal-win32/BrowserStackLocal.exe", "--key QsxV3rKzyffetYB8jhpx --force-local");
         }
     }
 }

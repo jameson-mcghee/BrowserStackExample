@@ -51,7 +51,7 @@ namespace RadarPageTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
         }
 
@@ -74,7 +74,7 @@ namespace RadarPageTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
         }
     }

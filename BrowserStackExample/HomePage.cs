@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using RestSharp;
 
 namespace BrowserStackIntegration
 {
@@ -15,8 +16,7 @@ namespace BrowserStackIntegration
 
 
         //ANDROID
-
-            //Obtain the Page Config ID
+        //Obtain the Page Config ID
         public static async Task<dynamic> StationAppConfigRequest(string url)
         {
             try
@@ -40,7 +40,7 @@ namespace BrowserStackIntegration
             }
         }
         
-        public async Task GetPageConfigID()
+        public static async Task GetPageConfigID()
         {
             dynamic responseStationAppConfig = await StationAppConfigRequest
                 ("https://api-stage.tegna-tv.com/mobile/configuration-ro/getStationAppConfig/51/mobile?subscription-key=fdd842925eb6445f85adb84b30d22838");
@@ -77,50 +77,15 @@ namespace BrowserStackIntegration
             Assert.IsNotNull(pageNames);
         }
 
-        public static async Task<dynamic> HomePageScreenConfigRequest(string url)
+        public static async Task<dynamic> GetHomePageScreenConfig()
         {
-            
-            try
-            {
-                using (HttpClient httpClient = new HttpClient())
-                {
-                    httpClient.Timeout = new TimeSpan(0, 0, 0, 0, 20000);
-                    //TODO: Home Page: Come up with a way to pass the pageConfigId from the GetPageConfigID() method
-                    var postBody = new Dictionary<string, string>
-                    {
-                        { "siteId", "51"},
-                        { "deviceId", "12345" },
-                        { "applicationId", "67890" },
-                        { "pageConfigId", "23cf3231-ec01-48df-b6c6-9dcd4fd336e8" }
-                    };
-                    var content = new StringContent(JsonConvert.SerializeObject(postBody), Encoding.UTF8, "application/json");
-                    var response = await httpClient.PostAsync(url, content);
-                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    return JsonConvert.DeserializeObject(responseString);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                string message = $"PostResponseAsync - Error getting response from " + url + ".Ex: " + ex;
-                Debug.WriteLine(message);
-                //Debug.ReadLine();
-                Console.WriteLine(message);
-                throw;
-            }
-            
-        }
-
-        public async Task GetHomePageScreenConfig()
-        {
-            dynamic responseScreenConfig = await HomePageScreenConfigRequest
-                ("https://api-stage.tegna-tv.com/mobile/configuration-ro/getScreenConfig?subscription-key=fdd842925eb6445f85adb84b30d22838");
+            int adCount = 0;
+            dynamic responseScreenConfig = await GetScreenConfigRequestByPageName("home");
 
             Assert.IsNotNull(responseScreenConfig, "No screen config information in the API response. ");
 
             dynamic pageConfigList = responseScreenConfig.modules;
 
-            int adCount = 0;
             foreach (dynamic item in pageConfigList)
             {
                 if (item.name?.ToString() == "advertisementModule")
@@ -129,7 +94,8 @@ namespace BrowserStackIntegration
                 }
             }
             Assert.IsNotNull(adCount, "Advertisement Module count in the screen config is null. ");
-            Console.WriteLine("The screen config ad module count is: " + adCount);
+            Console.WriteLine($"Number of ad modules in the Home Page screen config: {adCount}{Environment.NewLine}");
+            return adCount;
         }
 
         public async Task AndroidHomePageIsPresent()
@@ -156,7 +122,7 @@ namespace BrowserStackIntegration
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
 
@@ -223,7 +189,7 @@ namespace BrowserStackIntegration
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
     }

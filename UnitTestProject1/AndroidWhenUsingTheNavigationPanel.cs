@@ -51,7 +51,7 @@ namespace NavigationPaneTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
         }
 
@@ -84,7 +84,7 @@ namespace NavigationPaneTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
         }
 
@@ -117,7 +117,7 @@ namespace NavigationPaneTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
         }
     }

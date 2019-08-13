@@ -9,6 +9,27 @@ namespace BrowserStackIntegration
     {
         public WeatherPage(string profile, string device) : base(profile, device){}
 
+        public static async Task<dynamic> GetWeatherPageScreenConfig()
+        {
+            int adCount = 0;
+            dynamic responseScreenConfig = await GetScreenConfigRequestByPageName("weather");
+
+            Assert.IsNotNull(responseScreenConfig, "No screen config information in the API response. ");
+
+            dynamic pageConfigList = responseScreenConfig.modules;
+
+            foreach (dynamic item in pageConfigList)
+            {
+                if (item.name?.ToString() == "advertisementModule")
+                {
+                    adCount++;
+                }
+            }
+            Assert.IsNotNull(adCount, "Advertisement Module count in the screen config is null. ");
+            Console.WriteLine($"Number of ad modules in the Weather Page screen config: {adCount}{Environment.NewLine}");
+            return adCount;
+        }
+
         //Android
         public async Task AndroidWeatherPageIsPresent()
         {
@@ -31,7 +52,7 @@ namespace BrowserStackIntegration
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
 
@@ -59,7 +80,7 @@ namespace BrowserStackIntegration
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
 

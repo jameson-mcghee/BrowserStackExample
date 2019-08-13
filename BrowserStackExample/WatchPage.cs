@@ -9,6 +9,27 @@ namespace BrowserStackIntegration
     {
         public WatchPage(string profile, string device) : base(profile, device){}
 
+        public static async Task<dynamic> GetWatchPageScreenConfig()
+        {
+            int adCount = 0;
+            dynamic responseScreenConfig = await GetScreenConfigRequestByPageName("watch");
+
+            Assert.IsNotNull(responseScreenConfig, "No screen config information in the API response. ");
+
+            dynamic pageConfigList = responseScreenConfig.modules;
+
+            foreach (dynamic item in pageConfigList)
+            {
+                if (item.name?.ToString() == "advertisementModule")
+                {
+                    adCount++;
+                }
+            }
+            Assert.IsNotNull(adCount, "Advertisement Module count in the screen config is null. ");
+            Console.WriteLine($"Number of ad modules in the Watch Page screen config: {adCount}{Environment.NewLine}");
+            return adCount;
+        }
+
         //Android
         public async Task AndroidWatchPageIsPresent()
         {
@@ -17,7 +38,7 @@ namespace BrowserStackIntegration
             for (int i = 0; ; i++)
             {
                 await ScrollDownOnAndroid();
-                Wait(1);
+                await Wait(1);
                 await SwipeRightToLeftOnAndroid();
 
                 if (i >= 5) Assert.Fail("The Watch Page is not present.");
@@ -32,14 +53,14 @@ namespace BrowserStackIntegration
                 {
                     string message = $"The Watch Page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
 
             }
         }
 
-        //TODO: Create WatchPageScreenConfigRequest() method for Android and iOS
+
 
         //iOS
         public async Task IOSWatchPageIsPresent()
@@ -49,7 +70,7 @@ namespace BrowserStackIntegration
             for (int i = 0; ; i++)
             {
                 await ScrollDownOnIOS();
-                Wait(1);
+                await Wait(1);
                 await SwipeRightToLeftOnIOS();
 
                 if (i >= 5) Assert.Fail("The Watch Page is not present.");
@@ -70,5 +91,6 @@ namespace BrowserStackIntegration
 
             }
         }
+
     }
 }

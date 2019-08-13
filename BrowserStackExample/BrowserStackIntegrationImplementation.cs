@@ -65,8 +65,9 @@ namespace BrowserStackIntegration
             capability.SetCapability("browserstack.deviceLogs", true);
             capability.SetCapability("browserstack.appiumLogs", true);
             capability.SetCapability("browserstack.debug", true);
-            //capability.SetCapability("browserstack.resignApp", false); //This is only for when testing push notification on iOS with a Enterprise signed cert app
             //capability.SetCapability("browserstack.local", "true"); //This is only for when testing push notifications
+            //capability.SetCapability("browserstack.gpsLocation", "35.962639,-83.916718"); //This can be used to set the GPS coords for the device. Used for testing severe weather alerts
+            //capability.SetCapability("browserstack.resignApp", false); //This is only for when testing push notification on iOS with a Enterprise signed cert app
 
             var appId = Environment.GetEnvironmentVariable("BROWSERSTACK_APP_ID");
             if (appId != null)

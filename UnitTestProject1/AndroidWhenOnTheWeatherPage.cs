@@ -7,22 +7,22 @@ using System.Diagnostics;
 namespace WeatherPageTests
 {
     [TestFixture("parallel", "pixel")]
-    [TestFixture("parallel", "pixel-2")]
-    [TestFixture("parallel", "pixel-3")]
-    //[TestFixture("parallel", "nexus-9")]
-    [TestFixture("parallel", "galaxy-s8")]
-    [TestFixture("parallel", "galaxy-s9")]
-    [TestFixture("parallel", "galaxy-note8")]
-    [TestFixture("parallel", "galaxy-note9")]
-    //[TestFixture("parallel", "galaxy-tabs3")] //tablet
-    [TestFixture("parallel", "galaxy-tabs4")] //tablet
-    [TestFixture("parallel", "galaxy-tabs5e")] //tablet
+    //[TestFixture("parallel", "pixel-2")]
+    //[TestFixture("parallel", "pixel-3")]
+    ////[TestFixture("parallel", "nexus-9")]
+    //[TestFixture("parallel", "galaxy-s8")]
+    //[TestFixture("parallel", "galaxy-s9")]
+    //[TestFixture("parallel", "galaxy-note8")]
+    //[TestFixture("parallel", "galaxy-note9")]
+    ////[TestFixture("parallel", "galaxy-tabs3")] //tablet
+    //[TestFixture("parallel", "galaxy-tabs4")] //tablet
+    //[TestFixture("parallel", "galaxy-tabs5e")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidWhenOnTheWeatherPage : WeatherPage
     {
         public AndroidWhenOnTheWeatherPage(string profile, string device) : base(profile, device) { }
 
-        [Test]
+        //[Test]
         public async Task TheWeatherPageIsPresent()
         {
             await AndroidHomePageIsPresent();
@@ -44,7 +44,7 @@ namespace WeatherPageTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
         }
@@ -68,23 +68,24 @@ namespace WeatherPageTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
         }
 
         [Test]
-        public async Task ConfirmAdModulesArePresentAndCount()
+        public async Task CompareAdModuleCountOnPageToScreenConfig()
         {
-            await AndroidWeatherPageIsPresent();
-
             int adModuleCount = 0;
 
+            await AndroidWeatherPageIsPresent();
+            await Wait(5);
             for (int i = 0; ; i++)
             {
-                if (i >= 90) Assert.Fail("Could not find the last element on the Weather Page prior to time out.");
+                if (i >= 260) Assert.Fail("Could not find the last element on the Weather Page prior to time out.");
                 try
                 {
                     await ScrollDownOnAndroid();
+                    await Wait(3);
 
                     if (IsAndroidElementPresent("module|advertisement"))
                     {
@@ -99,13 +100,13 @@ namespace WeatherPageTests
                 {
                     string message = $"Could not find the last element on the Weather Page. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
             }
-
-            Console.Write("Number of ad modules on the Weather Page: " + adModuleCount);
+            Console.Write($"Number of ad modules on the Weather Page: {adModuleCount}{Environment.NewLine}");
+            dynamic pageAdCount = await GetWeatherPageScreenConfig();
+            Assert.GreaterOrEqual(adModuleCount, pageAdCount,
+                $"The screen config ad module count '{pageAdCount}' is greater than the number of ad modules found on the page '{adModuleCount}'.");
         }
 
         //TODO: Weather Page: Compare the screenConfig modules from the AndroidWeatherPageScreenConfigRequest() method to those on the Weather Page

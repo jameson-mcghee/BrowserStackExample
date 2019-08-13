@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using BrowserStackExample;
+using NUnit.Framework;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BrowserStackIntegration
 {
-    public class DayPartingScreen : GlobalMethods
+    public class DayPartingScreen : GetScreenandPageConfigs
     {
         public DayPartingScreen(string profile, string device) : base(profile, device){}
 
@@ -30,7 +31,7 @@ namespace BrowserStackIntegration
                         //Debug.ReadLine();
                         Console.WriteLine(message);
                     }
-                Wait(1);
+                await Wait(1);
             }
         }
         public async Task AndroidDayPartingBannerIsGenerated()
@@ -52,7 +53,7 @@ namespace BrowserStackIntegration
                         //Debug.ReadLine();
                         Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
         public async Task AndroidDayPartingScreenAdIsPresent()
@@ -73,7 +74,7 @@ namespace BrowserStackIntegration
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
 
@@ -98,7 +99,7 @@ namespace BrowserStackIntegration
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
         public async Task IOSDayPartingBannerIsGenerated()
@@ -121,7 +122,7 @@ namespace BrowserStackIntegration
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
     }

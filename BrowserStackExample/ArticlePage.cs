@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BrowserStackIntegration
 {
-    public class ArticlePage : HomePage
+    public class ArticlePage : SettingsPage
     {
         public ArticlePage(string profile, string device) : base(profile, device) { }
 
@@ -34,12 +34,11 @@ namespace BrowserStackIntegration
                 }
                 catch (Exception ex)
                 {
-                    string message = $"The Article Page is not present. {ex}";
+                    string message = $"The Article Page is not present.{Environment.NewLine}{ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
 
@@ -76,7 +75,7 @@ namespace BrowserStackIntegration
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
         #endregion

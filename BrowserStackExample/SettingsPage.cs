@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BrowserStackIntegration
 {
-    public class SettingsPage : WatchPage
+    public class SettingsPage : TopicsPage
     {
         public SettingsPage(string profile, string device) : base(profile, device) { }
 

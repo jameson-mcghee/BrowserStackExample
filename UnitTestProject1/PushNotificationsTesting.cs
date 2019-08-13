@@ -13,37 +13,42 @@ namespace NonMobileAppTests
         [Test]
         public async Task FrontAlert()
         {
-            dynamic response = await SendToNativeAppAlertQueueFront(url);
+            await SendToNativeAppAlertQueueFront(url);
         }
         [Test]
         public async Task ArticleAlert()
         {
-            dynamic response = await SendToNativeAppAlertQueueArticle(url);
+            await SendToNativeAppAlertQueueArticle(url);
         }
         [Test]
         public async Task PromoItemAlert()
         {
-            dynamic response = await SendToNativeAppAlertQueuePromoItem(url);
+            await SendToNativeAppAlertQueuePromoItem(url);
         }
         [Test]
         public async Task VideoContentAlert()
         {
-            dynamic response = await SendToNativeAppAlertQueueVideoContent(url);
+            await SendToNativeAppAlertQueueVideoContent(url);
+        }
+        //[Test]
+        public async Task GalleryContentAlert()
+        {
+            await SendToNativeAppAlertQueueGalleryContent(url);
         }
         [Test]
         public async Task TopicPageAlert()
         {
-            dynamic response = await SendToNativeAppAlertQueueTopicPage(url);
+            await SendToNativeAppAlertQueueTopicPage(url);
         }
         [Test]
         public async Task WebViewAlert()
         {
-            dynamic response = await SendToNativeAppAlertQueueWebView(url);
+            await SendToNativeAppAlertQueueWebView(url);
         }
         [Test]
         public async Task SpecificSubscribersAlert()
         {
-            dynamic response = await SendToNativeAppAlertQueueSpecificSubscribers(url);
+            await SendToNativeAppAlertQueueSpecificSubscribers(url);
         }
 
         public static async Task<dynamic> SendToNativeAppAlertQueueFront(string url)
@@ -198,7 +203,7 @@ namespace NonMobileAppTests
                     "\r\n    \"alertTitle\": \"Test Alert Destination - Promo Item Page\"," +
                     "\r\n    \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
                     "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
-                    "\r\n    \"imageUrl\": \"https://s3.amazonaws.com/tgna-assets/stage/WBIR/images/b6bafee3-7efe-4b50-896d-11f050a4466f/b6bafee3-7efe-4b50-896d-11f050a4466f_750x422.jpg?q=2009886291\"," +
+                    "\r\n    \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/abeb2040-9e92-4ce3-bf1b-31701db32136/abeb2040-9e92-4ce3-bf1b-31701db32136_750x422.jpg\"," +
                     "\r\n    \"alertDurationInSeconds\": 7200,\r\n    \"alertProminence\": \"withSound\"," +
                     "\r\n    \"contentId\": \"c42089cd-ee13-4b31-b59c-2e19f7b72b63\"," +
                     "\r\n    \"contentSiteId\": \"51\",\r\n    \"contentType\": \"text\"," +
@@ -227,9 +232,38 @@ namespace NonMobileAppTests
                     "\r\n    \"alertTitle\": \"Test Alert Destination - Video Content12\"," +
                     "\r\n    \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
                     "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
-                    "\r\n    \"imageUrl\": \"https://media.11alive.com/assets/WXIA/images/9bb8e450-bd37-4dd3-8694-d7a127ceb612/9bb8e450-bd37-4dd3-8694-d7a127ceb612_360x203.jpg\"," +
+                    "\r\n    \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/17b430cb-180a-4a55-8549-fd52d468b4b7/17b430cb-180a-4a55-8549-fd52d468b4b7_360x203.jpg\"," +
                     "\r\n    \"alertDurationInSeconds\": 7200,\r\n    \"alertProminence\": \"withSound\"," +
-                    "\r\n    \"contentId\": \"988df2e8-4df0-47fc-a86d-8ed08bed8cdd\"," +
+                    "\r\n    \"contentId\": \"c5821ce8-a588-4cd5-aade-d1cbb33c44f9\"," +
+                    "\r\n    \"contentSiteId\": \"51\",\r\n    \"contentType\": \"video\"," +
+                    "\r\n    \"sentBy\": \"jmcghee@tegna.com\",\r\n    \"sentById\":\"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueueGalleryContent(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n    \"destinationType\": \"content\"," +
+                    "\r\n    \"siteId\": \"51\",\r\n    \"alertGroupsToTarget\": []," +
+                    "\r\n    \"alertTitle\": \"Test Alert Destination - Gallery Content\"," +
+                    "\r\n    \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
+                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n    \"imageUrl\": \"https://media.wbir.com/assets/WBIR/images/54827918/54827918_360x203.jpg\"," +
+                    "\r\n    \"alertDurationInSeconds\": 7200,\r\n    \"alertProminence\": \"withSound\"," +
+                    "\r\n    \"contentId\": \"54815325\"," +
                     "\r\n    \"contentSiteId\": \"51\",\r\n    \"contentType\": \"text\"," +
                     "\r\n    \"sentBy\": \"jmcghee@tegna.com\",\r\n    \"sentById\":\"12345\"\r\n}", ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);

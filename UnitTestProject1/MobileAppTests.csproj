@@ -102,12 +102,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidWhenInteractingWithTheRatingSystem.cs" />
     <Compile Include="AndroidWhenInTheFTUE.cs" />
     <Compile Include="AndroidWhenOnTheSettingsScreen.cs" />
     <Compile Include="AndroidWhenOnTheTopicPage.cs" />
     <Compile Include="AndroidWhenOpeningPushNotifications.cs" />
     <Compile Include="AndroidWhenUsingTheNavigationPanel.cs" />
     <Compile Include="BrowserStackLocalTesting.cs" />
+    <Compile Include="IOSWhenInteractingWithTheRatingSystem.cs" />
     <Compile Include="PushNotificationsTesting.cs" />
     <Compile Include="UploadAppFilesAndUpdateConfig.cs" />
     <Compile Include="Headspring\Enumeration.cs" />

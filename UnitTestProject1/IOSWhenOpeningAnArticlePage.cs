@@ -49,7 +49,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
 
@@ -72,7 +72,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
 
@@ -106,7 +106,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
 
             Console.Write("Number of ad modules on the Watch Page: " + adModuleCount);

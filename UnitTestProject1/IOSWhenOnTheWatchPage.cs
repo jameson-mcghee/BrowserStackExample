@@ -27,7 +27,7 @@ namespace MobileAppTests
             for (int i = 0; ; i++)
             {
                 await ScrollDownOnIOS();
-                Wait(1);
+               await Wait(1);
                 await SwipeRightToLeftOnIOS();
 
                 if (i >= 5) Assert.Fail("The Watch Page is not present.");
@@ -68,7 +68,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
         }
 
@@ -102,7 +102,7 @@ namespace MobileAppTests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+               await Wait(1);
             }
 
             Console.Write("Number of ad modules on the Watch Page: " + adModuleCount);

@@ -14,7 +14,7 @@ namespace MobileAppTests
     {
         public SingleTest(string profile, string device) : base(profile, device) { }
 
-        //[Test]
+        [Test]
         public async Task SimpleTestAndroid()
         {
             await AndroidHomePageIsPresent();
@@ -31,8 +31,8 @@ namespace MobileAppTests
         public async Task AndroidPushNotificationPresentTest()
         {
             await AndroidUsersCanAccessTheFTUE();
-            //await AndroidCaptureScreenShot(this.device);
             await AndroidClickFTUECloseButton();
+            dynamic response;
             for (int i = 0; ; i++)
             {
                 if (i >= 2) Assert.Fail("The Home Page is not present after closing the FTUE.");
@@ -40,8 +40,10 @@ namespace MobileAppTests
                 {
                     if (IsAndroidElementPresent("page||home-wrapper||||"))
                     {
+                        response = await SendToNativeAppAlertQueueFront
+                            ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueueTest/?subscription-key=fdd842925eb6445f85adb84b30d22838");
                         //await AndroidCaptureScreenShot(this.device);
-                        await AndroidCloseApp();
+                        //await AndroidCloseApp();
                         break;
                     }
                 }
@@ -49,33 +51,19 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
 
-            if (IsAndroidElementPresent("page||home-wrapper||||"))
-            {
-                Assert.Fail("App did not close.");
-            }
-            else
-            {
-                await AndroidCaptureScreenShotForStore(this.device);
-                dynamic response = await SendToNativeAppAlertQueueFront
-                ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
-                Console.Write(response);
-            }
-            await OpenAndroidNotificationPane();
-            Wait(60);
-        }
-
-        //[Test]
-        public async Task SendNotificationTest()
-        {
-            dynamic response = await SendToNativeAppAlertQueueFront
-                ("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueue/?subscription-key=fdd842925eb6445f85adb84b30d22838");
+            //await AndroidLaunchApp();
+            //await AndroidHomePageIsPresent();
+            //dynamic response = await SendToNativeAppAlertQueueFront
+            //("https://api-stage.tegna-tv.com/mobile/configuration-rw/SendToNativeAppAlertQueueTest/?subscription-key=fdd842925eb6445f85adb84b30d22838");
             Console.Write(response);
+            //await OpenAndroidNotificationPane();
+            await Wait(60);
         }
+
     }
 }

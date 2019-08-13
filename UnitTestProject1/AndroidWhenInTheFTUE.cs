@@ -41,10 +41,9 @@ namespace FTUETests
                 {
                     string message = $"FTUE is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
         }
 
@@ -90,7 +89,7 @@ namespace FTUETests
                     //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
-                Wait(1);
+                await Wait(1);
             }
             await AndroidClickFTUEGetStartedButton();
         }
