@@ -42,7 +42,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -77,7 +76,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -95,17 +93,13 @@ namespace MobileAppTests
                 {
                     string message = $"The Weather Page is not present after opening the Front push notification. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
             }
 
-            if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
-            {
-                //
-            }
-            else
+            dynamic adModuleElement = IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|");
+            if (adModuleElement == false)
             {
                 Assert.Fail("The banner ad is not present.");
             }
@@ -131,7 +125,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -166,7 +159,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -189,17 +181,13 @@ namespace MobileAppTests
                 {
                     string message = $"The app was not opened to a topic page when opened from a push notification. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
             }
 
-            if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
-            {
-                //
-            }
-            else
+            dynamic adModuleElement = IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|");
+            if (adModuleElement == false)
             {
                 Assert.Fail("The banner ad is not present.");
             }
@@ -225,7 +213,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -260,7 +247,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -282,7 +268,6 @@ namespace MobileAppTests
                 {
                     string message = $"The app was not opened to a webview page when opened from a push notification. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -309,7 +294,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -344,7 +328,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -366,17 +349,13 @@ namespace MobileAppTests
                 {
                     string message = $"The app was not opened to a content page when opened from a push notification. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
             }
 
-            if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
-            {
-                //
-            }
-            else
+            dynamic adModuleElement = IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|");
+            if (adModuleElement == false)
             {
                 Assert.Fail("The banner ad is not present.");
             }
@@ -402,7 +381,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -437,7 +415,6 @@ namespace MobileAppTests
                 {
                     string message = $"Try/Catch Message. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -455,17 +432,13 @@ namespace MobileAppTests
                 {
                     string message = $"The Weather Page is not present after opening the Front push notification. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
             }
 
-            if (IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|"))
-            {
-                //
-            }
-            else
+            dynamic adModuleElement = IsAndroidElementPresent("ad|-3|non-module|advertisementModule|0|manually placed in page-wrapper|");
+            if (adModuleElement == false)
             {
                 Assert.Fail("The banner ad is not present.");
             }

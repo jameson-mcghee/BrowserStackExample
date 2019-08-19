@@ -49,7 +49,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"The Weather Page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -77,7 +76,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"The Weather Page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);

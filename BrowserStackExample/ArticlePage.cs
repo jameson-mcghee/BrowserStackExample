@@ -72,7 +72,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"The Article Page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);

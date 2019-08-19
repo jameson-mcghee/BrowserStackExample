@@ -27,7 +27,6 @@ namespace BrowserStackIntegration
             {
                 string message = $"GetResponseAsync - Error getting response from {url}.Ex: {ex}";
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }

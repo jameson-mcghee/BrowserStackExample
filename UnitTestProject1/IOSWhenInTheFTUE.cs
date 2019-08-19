@@ -38,7 +38,7 @@ namespace MobileAppTests
                 {
                     string message = $"FTUE is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                await Wait(1);

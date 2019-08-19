@@ -41,7 +41,6 @@ namespace WeatherPageTests
                 {
                     string message = $"The Weather Page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -65,7 +64,6 @@ namespace WeatherPageTests
                 {
                     string message = $"The Weather Page banner ad is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);

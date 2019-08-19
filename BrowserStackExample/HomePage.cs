@@ -34,7 +34,6 @@ namespace BrowserStackIntegration
             {
                 string message = $"GetResponseAsync - Error getting response from " + url + ".Ex: " + ex;
                 Debug.WriteLine(message);
-                //Debug.ReadLine();
                 Console.WriteLine(message);
                 throw;
             }
@@ -119,7 +118,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"The Home page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -155,7 +153,6 @@ namespace BrowserStackIntegration
         //        {
         //            string message = $"The Home Page module ads are not present. {ex}";
         //            Debug.WriteLine(message);
-        //            //Debug.ReadLine();
         //            Console.WriteLine(message);
         //        }
         //        Wait(1);
@@ -186,7 +183,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"The Home page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);

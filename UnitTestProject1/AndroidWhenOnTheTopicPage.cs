@@ -48,7 +48,6 @@ namespace TopicPageTests
                 {
                     string message = $"The Topic Page back button is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);

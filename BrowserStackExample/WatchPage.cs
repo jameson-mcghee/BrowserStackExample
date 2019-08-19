@@ -85,7 +85,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"The Watch Page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
 

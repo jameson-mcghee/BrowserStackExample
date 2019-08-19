@@ -35,7 +35,7 @@ namespace MobileAppTests
                 {
                     string message = $"The Home page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -59,7 +59,7 @@ namespace MobileAppTests
                 {
                     string message = $"The Home Page banner ad is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -93,7 +93,7 @@ namespace MobileAppTests
                 {
                     string message = $"Could not find the last element on the Home Page. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                await Wait(1);

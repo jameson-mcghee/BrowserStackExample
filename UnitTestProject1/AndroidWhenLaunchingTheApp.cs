@@ -39,7 +39,6 @@ namespace DayPartingScreenTests
                 {
                     string message = $"Day Parting Screen is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -76,7 +75,6 @@ namespace DayPartingScreenTests
                 {
                     string message = $"The Day Parting Screen Ad is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);

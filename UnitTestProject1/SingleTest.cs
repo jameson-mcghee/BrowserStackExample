@@ -65,5 +65,19 @@ namespace MobileAppTests
             await Wait(60);
         }
 
+        [Test]
+        public async Task ElementPresentTest()
+        {
+            await AndroidHomePageIsPresent();
+            dynamic elementPresent = IsAndroidElementPresent("spakle");
+            if (elementPresent == true)
+            {
+                Assert.Pass("Returned True");
+            }
+            if (elementPresent == false)
+            {
+                Assert.Pass("Returned False");
+            }
+        }
     }
 }

@@ -111,6 +111,7 @@
     <Compile Include="BrowserStackLocalTesting.cs" />
     <Compile Include="IOSWhenInteractingWithTheRatingSystem.cs" />
     <Compile Include="PushNotificationsTesting.cs" />
+    <Compile Include="SevereWeatherAlertTesting.cs" />
     <Compile Include="UploadAppFilesAndUpdateConfig.cs" />
     <Compile Include="Headspring\Enumeration.cs" />
     <Compile Include="IOSScreenShots.cs" />

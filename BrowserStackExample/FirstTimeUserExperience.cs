@@ -28,7 +28,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -52,7 +51,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Home page is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -75,7 +73,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Topic Follow page is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -100,7 +97,6 @@ namespace BrowserStackIntegration
         //        {
         //            string message = $"FTUE Topic Picker page is not being displayed. {ex}";
         //            Debug.WriteLine(message);
-        //            //Debug.ReadLine();
         //            Console.WriteLine(message);
         //        }
         //        Wait(1);
@@ -130,7 +126,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Location page is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -154,7 +149,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Get Started Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -178,7 +172,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Next Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -202,7 +195,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Previous Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -226,7 +218,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Close Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -252,7 +243,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -275,7 +265,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Home page is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -298,7 +287,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Topic Follow page is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -323,7 +311,6 @@ namespace BrowserStackIntegration
         //        {
         //            string message = $"FTUE Topic Picker page is not being displayed. {ex}";
         //            Debug.WriteLine(message);
-        //            //Debug.ReadLine();
         //            Console.WriteLine(message);
         //        }
         //        Wait(1);
@@ -347,7 +334,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Location page is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -371,7 +357,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Get Started Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -395,7 +380,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Next Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -419,7 +403,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Previous Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -443,7 +426,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"FTUE Close Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);

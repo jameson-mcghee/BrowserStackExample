@@ -49,7 +49,6 @@ namespace ArticlePageTests
                 {
                     string message = $"The Article Page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -72,7 +71,6 @@ namespace ArticlePageTests
                 {
                     string message = $"The Article Page banner ad is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -106,7 +104,6 @@ namespace ArticlePageTests
                 {
                     string message = $"Could not find the last element on the Watch Page. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);

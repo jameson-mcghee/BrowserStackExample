@@ -86,7 +86,6 @@ namespace FTUETests
                 {
                     string message = $"FTUE Get Started Button is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);

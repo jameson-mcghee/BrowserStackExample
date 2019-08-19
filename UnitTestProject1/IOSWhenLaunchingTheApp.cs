@@ -60,7 +60,7 @@ namespace MobileAppTests
                 {
                     string message = $"The Day Parting Screen Ad is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                 Thread.Sleep(TimeSpan.FromMilliseconds(250));

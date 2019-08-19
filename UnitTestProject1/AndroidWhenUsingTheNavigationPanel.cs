@@ -48,7 +48,7 @@ namespace NavigationPaneTests
                 {
                     string message = $"The Weather page is not present after navigating to it from the navigation bar. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -81,7 +81,7 @@ namespace NavigationPaneTests
                 {
                     string message = $"The Watch page is not present after navigating to it from the navigation bar. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                await Wait(1);
@@ -114,7 +114,7 @@ namespace NavigationPaneTests
                 {
                     string message = $"The Home page is not present after navigating to it from the navigation bar. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                await Wait(1);

@@ -28,7 +28,6 @@ namespace BrowserStackIntegration
                     {
                         string message = $"Splashscreen is not being displayed. {ex}";
                         Debug.WriteLine(message);
-                        //Debug.ReadLine();
                         Console.WriteLine(message);
                     }
                 await Wait(1);
@@ -50,7 +49,6 @@ namespace BrowserStackIntegration
                 {
                         string message = $"Day Parting Banner and/or 'Sponsored by' messages are not being displayed. {ex}";
                         Debug.WriteLine(message);
-                        //Debug.ReadLine();
                         Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -71,7 +69,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"The Day Parting Screen Ad is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -96,7 +93,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"Splashscreen is not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -119,7 +115,6 @@ namespace BrowserStackIntegration
                 {
                     string message = $"Day Parting Banner and/or 'Sponsored by' messages are not being displayed. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);

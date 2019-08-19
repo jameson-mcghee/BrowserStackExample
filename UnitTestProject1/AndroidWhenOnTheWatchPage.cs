@@ -45,7 +45,6 @@ namespace WatchPageTests
                 {
                     string message = $"The Watch Page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 
@@ -68,7 +67,6 @@ namespace WatchPageTests
                 {
                     string message = $"The Watch Page banner ad is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                await Wait(1);

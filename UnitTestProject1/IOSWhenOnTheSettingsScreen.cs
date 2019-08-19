@@ -45,7 +45,7 @@ namespace MobileAppTests
                 {
                     string message = $"The Settings Screen back button is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
+
                     Console.WriteLine(message);
                 }
                await Wait(1);

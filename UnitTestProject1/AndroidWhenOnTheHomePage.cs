@@ -48,7 +48,6 @@ namespace HomePageTests
                 {
                     string message = $"The Home page is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
@@ -71,7 +70,6 @@ namespace HomePageTests
                 {
                     string message = $"The Home Page banner ad is not present. {ex}";
                     Debug.WriteLine(message);
-                    //Debug.ReadLine();
                     Console.WriteLine(message);
                 }
                 await Wait(1);
