@@ -53,7 +53,7 @@ namespace NonMobileAppTests
                     "\n        \"StateName\": \"Washington\",\n        \"CountyName\": \"Spokane\",\n        \"Title\": \"Spokane County, Washington\"," +
                     "\n        \"DateAdded\": \"8/9/2019 5:08:55 PM\",\n        \"CityId\": null,\n        \"Locations\": [\n            {" +
                     "\n                \"Latitude\": 35.9606,\n                \"Longitude\": -83.9207\n            }" +
-                    "\n        ],\n        \"key\": \"TestSpokane_WA_Air Quality Alert_" + unixTimestamp + "\"\n    }", ParameterType.RequestBody);
+                    "\n        ],\n        \"key\": \"manual_test_" + unixTimestamp + "\"\n    }", ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
                 return response;
             }
@@ -70,7 +70,8 @@ namespace NonMobileAppTests
         {
             Int32 unixTimestamp = (Int32)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             DateTime dt = DateTime.Now;
-            string expireTime = dt.AddHours(3).AddSeconds(30).ToString("G");
+            string expireTime = dt.AddHours(4).AddSeconds(30).ToString("G");
+            //string expireTime = dt.AddHours(4).AddMinutes(3).ToString("G");
 
             try
             {

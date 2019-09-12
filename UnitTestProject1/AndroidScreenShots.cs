@@ -1,14 +1,12 @@
 ﻿using NUnit.Framework;
 using System.Threading.Tasks;
 using BrowserStackIntegration;
-using System.Diagnostics;
-using System;
 using OpenQA.Selenium.Appium.MultiTouch;
 
 namespace ScreenShotTests
 {
-    [TestFixture("parallel", "pixel")]
-    [TestFixture("parallel", "galaxy-tabs4")] //tablet
+    [TestFixture("parallel", "pixel-2")]
+    [TestFixture("parallel", "galaxy-tabs3")] //tablet
     [Parallelizable(ParallelScope.Fixtures)]
     public class AndroidScreenShots : WatchPage
     {
