@@ -73,8 +73,8 @@ namespace NonMobileAppTests
                 throw;
             }
 
-            await UpdateAppConfigFiles(file, fileType, appUrl);
             await BackupDLLFiles();
+            await UpdateAppConfigFiles(file, fileType, appUrl);
         }
 
         public static async Task UpdateAppConfigFiles(string file, int fileType, string appUrl)
