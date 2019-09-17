@@ -28,6 +28,7 @@ namespace NonMobileAppTests
                 Assert.Pass("There are no files in the TempDownloads folder.");
             }
 
+            await BackupDLLFiles();
             foreach (dynamic fileInFolder in filesInFolder)
             {
                 string extension = Path.GetExtension(fileInFolder);
@@ -73,7 +74,6 @@ namespace NonMobileAppTests
                 throw;
             }
 
-            await BackupDLLFiles();
             await UpdateAppConfigFiles(file, fileType, appUrl);
         }
 
