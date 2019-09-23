@@ -128,8 +128,8 @@ namespace BrowserStackIntegration
         {
             int screenHeight = iosDriver.Manage().Window.Size.Height;
             int screenWidth = iosDriver.Manage().Window.Size.Width;
-            Console.WriteLine(screenHeight);
-            Console.WriteLine(screenWidth);
+            Console.WriteLine($"Screen resolution height: {screenHeight}");
+            Console.WriteLine($"Screen resolution width: {screenWidth}");
 
             TouchAction action = new TouchAction(iosDriver);
             action.Press(screenWidth * 0.99, screenHeight * 0.2)
@@ -143,6 +143,8 @@ namespace BrowserStackIntegration
         {
             int screenHeight = iosDriver.Manage().Window.Size.Height;
             int screenWidth = iosDriver.Manage().Window.Size.Width;
+            Console.WriteLine($"Screen resolution height: {screenHeight}");
+            Console.WriteLine($"Screen resolution width: {screenWidth}");
 
             TouchAction action = new TouchAction(iosDriver);
             action.Press(screenWidth * 0.2, screenHeight * 0.5)
@@ -286,8 +288,8 @@ namespace BrowserStackIntegration
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;
-            Console.WriteLine(screenHeight);
-            Console.WriteLine(screenWidth);
+            Console.WriteLine($"Screen resolution height: {screenHeight}");
+            Console.WriteLine($"Screen resolution width: {screenWidth}");
 
             TouchAction action = new TouchAction(androidDriver);
             action.Press(screenWidth * 0.99, screenHeight * 0.2)
@@ -301,6 +303,8 @@ namespace BrowserStackIntegration
         {
             int screenHeight = androidDriver.Manage().Window.Size.Height;
             int screenWidth = androidDriver.Manage().Window.Size.Width;
+            Console.WriteLine($"Screen resolution height: {screenHeight}");
+            Console.WriteLine($"Screen resolution width: {screenWidth}");
 
             TouchAction action = new TouchAction(androidDriver);
             action.Press(screenWidth * 0.2, screenHeight * 0.5)

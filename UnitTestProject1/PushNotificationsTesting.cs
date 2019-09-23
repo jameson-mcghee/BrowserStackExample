@@ -31,25 +31,26 @@ namespace NonMobileAppTests
         {
             await SendToNativeAppAlertQueueVideoContent(url);
         }
-        //[Test]
-        public async Task GalleryContentAlert()
-        {
-            await SendToNativeAppAlertQueueGalleryContent(url);
-        }
         [Test]
         public async Task TopicPageAlert()
         {
             await SendToNativeAppAlertQueueTopicPage(url);
         }
         [Test]
+        public async Task SpecificSubscribersAlert()
+        {
+            await SendToNativeAppAlertQueueSpecificSubscribers(url);
+        }
+        [Test]
         public async Task WebViewAlert()
         {
             await SendToNativeAppAlertQueueWebView(url);
         }
-        [Test]
-        public async Task SpecificSubscribersAlert()
+        
+        //[Test]  //This is not a valid alert at present
+        public async Task GalleryContentAlert()
         {
-            await SendToNativeAppAlertQueueSpecificSubscribers(url);
+            await SendToNativeAppAlertQueueGalleryContent(url);
         }
 
         public static async Task<dynamic> SendToNativeAppAlertQueueFront(string url)
@@ -109,35 +110,7 @@ namespace NonMobileAppTests
                 throw;
             }
         }
-
-        public static async Task<dynamic> SendToNativeAppAlertQueueWebView(string url)
-        {
-            try
-            {
-                var client = new RestClient(url);
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Content-Type", "application/json");
-                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"webview\",\r\n  \"siteId\": \"51\"," +
-                    "\r\n  \"webview\": \"weather alerts webview\",\r\n  \"alertGroupsToTarget\": []," +
-                    "\r\n  \"alertTitle\": \"Test Alert - Destination: Web View Page1\"," +
-                    "\r\n  \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
-                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
-                    "\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-" +
-                    "638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\"," +
-                    "\r\n  \"alertDurationInSeconds\": 7200,\r\n  \"alertProminence\": \"withSound\"," +
-                    "\r\n  \"sentBy\":\"jmcghee@tegna.com\",\r\n  \"sentById\": \"12345\"\r\n}", ParameterType.RequestBody);
-                IRestResponse response = client.Execute(request);
-                return response;
-            }
-            catch (Exception ex)
-            {
-                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
-                Debug.WriteLine(message);
-                Console.WriteLine(message);
-                throw;
-            }
-        }
-
+                
         public static async Task<dynamic> SendToNativeAppAlertQueueArticle(string url)
         {
             try
@@ -245,6 +218,34 @@ namespace NonMobileAppTests
                     "\r\n    \"contentId\": \"c5821ce8-a588-4cd5-aade-d1cbb33c44f9\"," +
                     "\r\n    \"contentSiteId\": \"51\",\r\n    \"contentType\": \"video\"," +
                     "\r\n    \"sentBy\": \"jmcghee@tegna.com\",\r\n    \"sentById\":\"12345\"\r\n}", ParameterType.RequestBody);
+                IRestResponse response = client.Execute(request);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                string message = $"PostResponseAsync - Error getting response from {url}.Ex:{Environment.NewLine}{ex}";
+                Debug.WriteLine(message);
+                Console.WriteLine(message);
+                throw;
+            }
+        }
+
+        public static async Task<dynamic> SendToNativeAppAlertQueueWebView(string url)
+        {
+            try
+            {
+                var client = new RestClient(url);
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("Content-Type", "application/json");
+                request.AddParameter("undefined", "{\r\n  \"destinationType\": \"webview\",\r\n  \"siteId\": \"51\"," +
+                    "\r\n  \"webview\": \"weather alerts webview\",\r\n  \"alertGroupsToTarget\": []," +
+                    "\r\n  \"alertTitle\": \"Test Alert - Destination: Web View Page1\"," +
+                    "\r\n  \"alertText\": \"Test Alert Text - Automation !@#$%^&*()_+`-=[]{}|;':,./<>? " +
+                    "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890~!@#$%^&*()_+`-=[]{}|;':,./<\"," +
+                    "\r\n  \"imageUrl\": \"https://media.wbir.com/assets/stage/WBIR/images/e179b83b-1a74-425a-a912-" +
+                    "638883633c55/e179b83b-1a74-425a-a912-638883633c55_360x203.jpg\"," +
+                    "\r\n  \"alertDurationInSeconds\": 7200,\r\n  \"alertProminence\": \"withSound\"," +
+                    "\r\n  \"sentBy\":\"jmcghee@tegna.com\",\r\n  \"sentById\": \"12345\"\r\n}", ParameterType.RequestBody);
                 IRestResponse response = client.Execute(request);
                 return response;
             }
